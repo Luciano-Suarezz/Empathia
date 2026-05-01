@@ -19,10 +19,29 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ selectedLang
   const otherLanguages = [
     OutputLanguage.IT,
     OutputLanguage.DE,
+    OutputLanguage.NL,
+    OutputLanguage.RO,
+    OutputLanguage.EL,
+    OutputLanguage.PL,
+    OutputLanguage.CS,
+    OutputLanguage.SV,
+    OutputLanguage.DA,
+    OutputLanguage.FI,
+    OutputLanguage.HU,
+    OutputLanguage.BG,
+    OutputLanguage.NO,
+    OutputLanguage.SK,
+    OutputLanguage.HR,
+    OutputLanguage.SR,
+    OutputLanguage.UK,
+    OutputLanguage.LT,
+    OutputLanguage.LV,
+    OutputLanguage.ET,
+    OutputLanguage.SL,
     OutputLanguage.RU,
     OutputLanguage.ZH,
     OutputLanguage.JA
-  ];
+  ].sort();
 
   return (
     <div className="relative inline-block w-full sm:w-auto">

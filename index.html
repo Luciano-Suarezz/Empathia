@@ -37,7 +37,7 @@
         }
       }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;600&family=Nunito:wght@400;600;700&family=Space+Grotesk:wght@400;600;700&family=Space+Mono:wght@400;700&family=Bebas+Neue&family=Georgia&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Orbitron:wght@400;500;700;900&family=Press+Start+2P&family=Fredoka:wght@400;500;600&family=Baloo+2:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
       body {
         font-family: 'Inter', sans-serif;
@@ -86,6 +86,647 @@
       .dark ::-webkit-scrollbar-thumb:hover {
         background: #334155;
       }
+
+      /* =========================================
+         CUSTOM THEMES
+         ========================================= */
+
+      /* 1. GLASSMORPHISM */
+      body[data-theme="glassmorphism"] {
+        font-family: 'Poppins', sans-serif !important;
+        background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop') center/cover fixed !important;
+        background-color: transparent !important;
+      }
+      /* 1. GLASSMORPHISM */
+      body[data-theme="glassmorphism"] {
+        font-family: 'Poppins', sans-serif !important;
+        background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop') center/cover fixed !important;
+        background-color: transparent !important;
+        color: #1e293b !important;
+      }
+      body[data-theme="glassmorphism"]::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.1);
+        z-index: -1;
+      }
+      html.dark body[data-theme="glassmorphism"] {
+        background: url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2564&auto=format&fit=crop') center/cover fixed !important;
+        color: #f8fafc !important;
+      }
+      html.dark body[data-theme="glassmorphism"]::before {
+        background: rgba(0, 0, 0, 0.5);
+      }
+      body[data-theme="glassmorphism"] .theme-panel,
+      body[data-theme="glassmorphism"] .glass,
+      body[data-theme="glassmorphism"] header {
+        background: rgba(255, 255, 255, 0.15) !important;
+        backdrop-filter: blur(16px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.1) !important;
+      }
+      html.dark body[data-theme="glassmorphism"] .theme-panel,
+      html.dark body[data-theme="glassmorphism"] .glass,
+      html.dark body[data-theme="glassmorphism"] header {
+        background: rgba(15, 23, 42, 0.25) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
+      }
+      body[data-theme="glassmorphism"] textarea,
+      body[data-theme="glassmorphism"] input {
+        background: rgba(255, 255, 255, 0.25) !important;
+        backdrop-filter: blur(16px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.5) !important;
+        color: #1e293b !important;
+      }
+      html.dark body[data-theme="glassmorphism"] textarea,
+      html.dark body[data-theme="glassmorphism"] input {
+        background: rgba(15, 23, 42, 0.35) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        color: #f8fafc !important;
+      }
+      body[data-theme="glassmorphism"] button {
+        background: rgba(255, 255, 255, 0.3) !important;
+        backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.5) !important;
+        color: #1e293b !important;
+      }
+      html.dark body[data-theme="glassmorphism"] button {
+        background: rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        color: #f8fafc !important;
+      }
+      body[data-theme="glassmorphism"] .bg-dot-pattern { display: none !important; }
+      body[data-theme="glassmorphism"] .text-gray-400, 
+      body[data-theme="glassmorphism"] .text-slate-400 { color: inherit !important; opacity: 0.8 !important; }
+
+      /* 2. NEUMORPHISM */
+      body[data-theme="neumorphism"] {
+        font-family: 'Inter', sans-serif !important;
+        background-color: #e0e5ec !important;
+        color: #2d3748 !important;
+      }
+      html.dark body[data-theme="neumorphism"] {
+        background-color: #292d32 !important;
+        color: #e2e8f0 !important;
+      }
+      body[data-theme="neumorphism"] .theme-panel,
+      body[data-theme="neumorphism"] .glass,
+      body[data-theme="neumorphism"] header {
+        background-color: #e0e5ec !important;
+        border: none !important;
+        border-radius: 20px !important;
+        box-shadow: 9px 9px 16px rgba(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5) !important;
+        backdrop-filter: none !important;
+      }
+      html.dark body[data-theme="neumorphism"] .theme-panel,
+      html.dark body[data-theme="neumorphism"] .glass,
+      html.dark body[data-theme="neumorphism"] header {
+        background-color: #292d32 !important;
+        box-shadow: 7px 7px 15px #1e2125, -7px -7px 15px #34393f !important;
+      }
+      body[data-theme="neumorphism"] textarea,
+      body[data-theme="neumorphism"] input {
+        background-color: #e0e5ec !important;
+        border: none !important;
+        border-radius: 12px !important;
+        box-shadow: inset 6px 6px 10px 0 rgba(163,177,198,0.6), inset -6px -6px 10px 0 rgba(255,255,255,0.5) !important;
+        color: #2d3748 !important;
+      }
+      html.dark body[data-theme="neumorphism"] textarea,
+      html.dark body[data-theme="neumorphism"] input {
+        background-color: #292d32 !important;
+        box-shadow: inset 6px 6px 10px #1e2125, inset -6px -6px 10px #34393f !important;
+        color: #e2e8f0 !important;
+      }
+      body[data-theme="neumorphism"] button {
+        background-color: #e0e5ec !important;
+        border: none !important;
+        border-radius: 12px !important;
+        box-shadow: 6px 6px 10px 0 rgba(163,177,198,0.6), -6px -6px 10px 0 rgba(255,255,255,0.5) !important;
+        color: #4a5568 !important;
+      }
+      html.dark body[data-theme="neumorphism"] button {
+        background-color: #292d32 !important;
+        box-shadow: 6px 6px 10px #1e2125, -6px -6px 10px #34393f !important;
+        color: #cbd5e1 !important;
+      }
+      body[data-theme="neumorphism"] button:active {
+        box-shadow: inset 6px 6px 10px 0 rgba(163,177,198,0.6), inset -6px -6px 10px 0 rgba(255,255,255,0.5) !important;
+      }
+      html.dark body[data-theme="neumorphism"] button:active {
+        box-shadow: inset 6px 6px 10px #1e2125, inset -6px -6px 10px #34393f !important;
+      }
+      body[data-theme="neumorphism"] .bg-dot-pattern { display: none !important; }
+
+      /* 3. CLAYMORPHISM */
+      body[data-theme="claymorphism"] {
+        font-family: 'Nunito', sans-serif !important;
+        background-color: #f1f5f9 !important;
+        color: #334155 !important;
+      }
+      html.dark body[data-theme="claymorphism"] { 
+        background-color: #0f172a !important; 
+        color: #f1f5f9 !important;
+      }
+      body[data-theme="claymorphism"] .theme-panel,
+      body[data-theme="claymorphism"] .glass,
+      body[data-theme="claymorphism"] header {
+        border-radius: 35px !important;
+        background: #ffffff !important;
+        border: 2px solid #e2e8f0 !important;
+        box-shadow: inset -5px -5px 15px rgba(0,0,0,0.05), inset 5px 5px 15px rgba(255,255,255,0.8), 10px 10px 30px rgba(0,0,0,0.1) !important;
+        backdrop-filter: none !important;
+        transition: transform 0.2s ease !important;
+      }
+      html.dark body[data-theme="claymorphism"] .theme-panel,
+      html.dark body[data-theme="claymorphism"] .glass,
+      html.dark body[data-theme="claymorphism"] header {
+        background: #1e293b !important;
+        border: 2px solid #334155 !important;
+        box-shadow: inset -5px -5px 15px rgba(0,0,0,0.3), inset 5px 5px 15px rgba(255,255,255,0.05), 10px 10px 30px rgba(0,0,0,0.5) !important;
+      }
+      body[data-theme="claymorphism"] textarea,
+      body[data-theme="claymorphism"] input {
+        background-color: #f8fafc !important;
+        border-radius: 20px !important;
+        border: none !important;
+        box-shadow: inset 4px 4px 10px rgba(0,0,0,0.08), inset -4px -4px 10px rgba(255,255,255,0.8) !important;
+        color: #334155 !important;
+      }
+      html.dark body[data-theme="claymorphism"] textarea,
+      html.dark body[data-theme="claymorphism"] input {
+        background-color: #0f172a !important;
+        box-shadow: inset 4px 4px 10px rgba(0,0,0,0.4), inset -4px -4px 10px rgba(255,255,255,0.02) !important;
+        color: #f1f5f9 !important;
+      }
+      body[data-theme="claymorphism"] button {
+        background-color: #f1f5f9 !important;
+        border-radius: 25px !important;
+        border: none !important;
+        box-shadow: inset -4px -4px 10px rgba(0,0,0,0.05), inset 4px 4px 10px rgba(255,255,255,0.8), 4px 4px 15px rgba(0,0,0,0.08) !important;
+        color: #475569 !important;
+        transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+      }
+      html.dark body[data-theme="claymorphism"] button {
+        background-color: #334155 !important;
+        box-shadow: inset -4px -4px 10px rgba(0,0,0,0.3), inset 4px 4px 10px rgba(255,255,255,0.05), 4px 4px 15px rgba(0,0,0,0.4) !important;
+        color: #cbd5e1 !important;
+      }
+      body[data-theme="claymorphism"] button:hover {
+        transform: scale(0.97) !important;
+        box-shadow: inset -2px -2px 5px rgba(0,0,0,0.05), inset 2px 2px 5px rgba(255,255,255,0.8), 2px 2px 8px rgba(0,0,0,0.08) !important;
+      }
+      html.dark body[data-theme="claymorphism"] button:hover {
+        box-shadow: inset -2px -2px 5px rgba(0,0,0,0.3), inset 2px 2px 5px rgba(255,255,255,0.05), 2px 2px 8px rgba(0,0,0,0.4) !important;
+      }
+      body[data-theme="claymorphism"] .bg-dot-pattern { display: none !important; }
+
+      /* 4. AURORAMORPHISM */
+      @keyframes gradient-shift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      body[data-theme="auroramorphism"] {
+        font-family: 'Space Grotesk', sans-serif !important;
+        background: linear-gradient(-45deg, #FF9A9E, #FECFEF, #A1C4FD, #C2E9FB) fixed !important;
+        background-size: 400% 400% !important;
+        animation: gradient-shift 15s ease infinite !important;
+        color: #1e293b !important;
+      }
+      html.dark body[data-theme="auroramorphism"] {
+        background: linear-gradient(-45deg, #1A2980, #26D0CE, #8E2DE2, #4A00E0) fixed !important;
+        color: #ffffff !important;
+      }
+      body[data-theme="auroramorphism"] .text-gray-500,
+      body[data-theme="auroramorphism"] .text-slate-500,
+      body[data-theme="auroramorphism"] .text-gray-400 { color: inherit !important; opacity: 0.8 !important; }
+      body[data-theme="auroramorphism"] .theme-panel,
+      body[data-theme="auroramorphism"] .glass,
+      body[data-theme="auroramorphism"] header {
+        background: rgba(255, 255, 255, 0.4) !important;
+        backdrop-filter: blur(20px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.5) !important;
+        border-radius: 24px !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
+        color: #1e293b !important;
+      }
+      html.dark body[data-theme="auroramorphism"] .theme-panel,
+      html.dark body[data-theme="auroramorphism"] .glass,
+      html.dark body[data-theme="auroramorphism"] header {
+        background: rgba(0, 0, 0, 0.3) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        color: white !important;
+      }
+      body[data-theme="auroramorphism"] textarea,
+      body[data-theme="auroramorphism"] input,
+      body[data-theme="auroramorphism"] button {
+        background: rgba(255, 255, 255, 0.5) !important;
+        backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        color: inherit !important;
+      }
+      html.dark body[data-theme="auroramorphism"] textarea,
+      html.dark body[data-theme="auroramorphism"] input,
+      html.dark body[data-theme="auroramorphism"] button {
+        background: rgba(0, 0, 0, 0.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+      }
+      body[data-theme="auroramorphism"] .bg-dot-pattern { display: none !important; }
+
+      /* 5. NEO-BRUTALISM */
+      body[data-theme="neo-brutalism"] {
+        font-family: 'Space Mono', monospace !important;
+        background-color: #FFBE0B !important;
+        color: #000000 !important;
+      }
+      html.dark body[data-theme="neo-brutalism"] { 
+        background-color: #f72585 !important;
+        color: #000000 !important; 
+      }
+      body[data-theme="neo-brutalism"] .theme-panel,
+      body[data-theme="neo-brutalism"] .glass,
+      body[data-theme="neo-brutalism"] header,
+      body[data-theme="neo-brutalism"] button,
+      body[data-theme="neo-brutalism"] input,
+      body[data-theme="neo-brutalism"] textarea {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: 4px solid #000000 !important;
+        border-radius: 0 !important;
+        box-shadow: 6px 6px 0px #000000 !important;
+        backdrop-filter: none !important;
+        transition: transform 0.1s, box-shadow 0.1s !important;
+      }
+      html.dark body[data-theme="neo-brutalism"] .theme-panel,
+      html.dark body[data-theme="neo-brutalism"] .glass,
+      html.dark body[data-theme="neo-brutalism"] header,
+      html.dark body[data-theme="neo-brutalism"] button,
+      html.dark body[data-theme="neo-brutalism"] input,
+      html.dark body[data-theme="neo-brutalism"] textarea {
+        background: #FF006E !important; 
+        color: #ffffff !important;
+        border: 4px solid #000000 !important;
+      }
+      body[data-theme="neo-brutalism"] input,
+      body[data-theme="neo-brutalism"] textarea {
+        box-shadow: 4px 4px 0px #000000 !important;
+      }
+      body[data-theme="neo-brutalism"] textarea:focus,
+      body[data-theme="neo-brutalism"] input:focus {
+        outline: none !important;
+        background-color: #e0e0e0 !important;
+      }
+      html.dark body[data-theme="neo-brutalism"] textarea:focus,
+      html.dark body[data-theme="neo-brutalism"] input:focus {
+        background-color: #db005e !important;
+      }
+      body[data-theme="neo-brutalism"] button:active {
+        transform: translate(6px, 6px) !important;
+        box-shadow: 0px 0px 0px #000000 !important;
+      }
+      body[data-theme="neo-brutalism"] h1, 
+      body[data-theme="neo-brutalism"] h2, 
+      body[data-theme="neo-brutalism"] .font-display {
+        font-family: 'Bebas Neue', display !important;
+        letter-spacing: 2px !important;
+      }
+      body[data-theme="neo-brutalism"] .bg-dot-pattern { display: none !important; }
+
+      /* 6. BENTO GRID (Clean, structured, rounded) */
+      body[data-theme="bento-grid"] {
+        font-family: 'Inter', sans-serif !important;
+        background-color: #f5f5f7 !important;
+        color: #1d1d1f !important;
+      }
+      html.dark body[data-theme="bento-grid"] { 
+        background-color: #000000 !important; 
+        color: #f5f5f7 !important;
+      }
+      body[data-theme="bento-grid"] .theme-panel,
+      body[data-theme="bento-grid"] .glass,
+      body[data-theme="bento-grid"] header {
+        background: #ffffff !important;
+        border-radius: 20px !important;
+        border: 1px solid rgba(0,0,0,0.05) !important;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.04) !important;
+        backdrop-filter: none !important;
+      }
+      html.dark body[data-theme="bento-grid"] .theme-panel,
+      html.dark body[data-theme="bento-grid"] .glass,
+      html.dark body[data-theme="bento-grid"] header {
+        background: #1c1c1e !important;
+        border: 1px solid rgba(255,255,255,0.05) !important;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.4) !important;
+      }
+      body[data-theme="bento-grid"] textarea,
+      body[data-theme="bento-grid"] input,
+      body[data-theme="bento-grid"] button {
+        background-color: #f2f2f7 !important;
+        border-radius: 12px !important;
+        border: none !important;
+        color: #1d1d1f !important;
+      }
+      html.dark body[data-theme="bento-grid"] textarea,
+      html.dark body[data-theme="bento-grid"] input,
+      html.dark body[data-theme="bento-grid"] button {
+        background-color: #2c2c2e !important;
+        color: #f5f5f7 !important;
+      }
+      body[data-theme="bento-grid"] button:hover {
+        transform: translateY(-2px) !important;
+      }
+      body[data-theme="bento-grid"] .bg-dot-pattern { display: none !important; }
+
+      /* 7. SKEUOMORPHISM */
+      body[data-theme="skeuomorphism"] {
+        font-family: 'Georgia', serif !important;
+        background: url('https://www.transparenttextures.com/patterns/linen.png') #e8e2d2 !important;
+        color: #3b312b !important;
+      }
+      html.dark body[data-theme="skeuomorphism"] { 
+        background: url('https://www.transparenttextures.com/patterns/dark-leather.png') #2c2927 !important;
+        background-color: #2a2a2a !important; 
+        background-blend-mode: multiply;
+        color: #e0d9c8 !important;
+      }
+      body[data-theme="skeuomorphism"] .theme-panel,
+      body[data-theme="skeuomorphism"] .glass,
+      body[data-theme="skeuomorphism"] header {
+        background: linear-gradient(to bottom, #f4f0e6, #ded7c6) !important;
+        border: 1px solid #b8af9c !important;
+        border-radius: 12px !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.9), inset 0 -1px 0 rgba(0,0,0,0.1) !important;
+      }
+      html.dark body[data-theme="skeuomorphism"] .theme-panel,
+      html.dark body[data-theme="skeuomorphism"] .glass,
+      html.dark body[data-theme="skeuomorphism"] header {
+        background: linear-gradient(to bottom, #4a4542, #302d2b) !important;
+        border: 1px solid #1a1817 !important;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.4) !important;
+      }
+      body[data-theme="skeuomorphism"] textarea,
+      body[data-theme="skeuomorphism"] input {
+        background: #fffdf9 !important;
+        border: 1px solid #9e9584 !important;
+        border-top-color: #7d7568 !important;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.1) !important;
+        border-radius: 6px !important;
+        color: #3b312b !important;
+      }
+      html.dark body[data-theme="skeuomorphism"] textarea,
+      html.dark body[data-theme="skeuomorphism"] input {
+        background: #1f1d1c !important;
+        border: 1px solid #111 !important;
+        border-bottom-color: #333 !important;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.4) !important;
+        color: #e0d9c8 !important;
+      }
+      body[data-theme="skeuomorphism"] button {
+        background: linear-gradient(to bottom, #ffffff, #dcdcdc) !important;
+        border: 1px solid #aaa !important;
+        border-radius: 20px !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 #fff !important;
+        color: #333 !important;
+      }
+      html.dark body[data-theme="skeuomorphism"] button {
+        background: linear-gradient(to bottom, #5d5754, #3a3633) !important;
+        border: 1px solid #1a1817 !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2) !important;
+        color: #e0d9c8 !important;
+      }
+      body[data-theme="skeuomorphism"] .bg-dot-pattern { display: none !important; }
+
+      /* 8. RETRO/Y2K */
+      body[data-theme="y2k"] {
+        font-family: 'Orbitron', 'Press Start 2P', monospace !important;
+        background: #c0c0c0 !important;
+        color: #000080 !important;
+      }
+      html.dark body[data-theme="y2k"] {
+        background: #000000 !important;
+        background-image: linear-gradient(rgba(0, 255, 0, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 0, 0.15) 1px, transparent 1px) !important;
+        background-size: 30px 30px !important;
+        color: #00ff00 !important;
+      }
+      @keyframes glitch {
+        0% { transform: translate(0) }
+        20% { transform: translate(-2px, 2px) }
+        40% { transform: translate(-2px, -2px) }
+        60% { transform: translate(2px, 2px) }
+        80% { transform: translate(2px, -2px) }
+        100% { transform: translate(0) }
+      }
+      body[data-theme="y2k"] .theme-panel,
+      body[data-theme="y2k"] .glass,
+      body[data-theme="y2k"] header {
+        background: #dfdfdf !important;
+        border-top: 2px solid #ffffff !important;
+        border-left: 2px solid #ffffff !important;
+        border-right: 2px solid #808080 !important;
+        border-bottom: 2px solid #808080 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        color: #000080 !important;
+      }
+      html.dark body[data-theme="y2k"] .theme-panel,
+      html.dark body[data-theme="y2k"] .glass,
+      html.dark body[data-theme="y2k"] header {
+        background: rgba(0, 20, 0, 0.8) !important;
+        border: 2px solid #00ff00 !important;
+        box-shadow: 0 0 10px #00ff00, inset 0 0 10px #00ff00 !important;
+        color: #00ff00 !important;
+      }
+      body[data-theme="y2k"] textarea,
+      body[data-theme="y2k"] input {
+        background: #ffffff !important;
+        border-top: 2px solid #808080 !important;
+        border-left: 2px solid #808080 !important;
+        border-right: 2px solid #ffffff !important;
+        border-bottom: 2px solid #ffffff !important;
+        color: #000000 !important;
+        border-radius: 0 !important;
+      }
+      html.dark body[data-theme="y2k"] textarea,
+      html.dark body[data-theme="y2k"] input {
+        background: #000000 !important;
+        border: 1px solid #00ff00 !important;
+        color: #00ff00 !important;
+      }
+      body[data-theme="y2k"] button {
+        background: #c0c0c0 !important;
+        border-top: 2px solid #ffffff !important;
+        border-left: 2px solid #ffffff !important;
+        border-right: 2px solid #808080 !important;
+        border-bottom: 2px solid #808080 !important;
+        color: #000000 !important;
+        border-radius: 0 !important;
+      }
+      html.dark body[data-theme="y2k"] button {
+        background: #002200 !important;
+        border: 1px solid #00ff00 !important;
+        color: #00ff00 !important;
+      }
+      body[data-theme="y2k"] button:hover {
+        animation: glitch 0.3s infinite !important;
+        background: #000080 !important;
+        color: #ffffff !important;
+      }
+      html.dark body[data-theme="y2k"] button:hover {
+        animation: glitch 0.3s infinite !important;
+        background: #00ff00 !important;
+        color: #000 !important;
+        box-shadow: 0 0 15px #00ff00 !important;
+      }
+      body[data-theme="y2k"] .text-gray-500,
+      body[data-theme="y2k"] .text-slate-400 { color: inherit !important; }
+      body[data-theme="y2k"] h1 {
+        text-shadow: 2px 2px #ffffff !important;
+      }
+      html.dark body[data-theme="y2k"] h1 {
+        text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff !important;
+      }
+
+      /* 9. DOPAMINE DESIGN */
+      body[data-theme="dopamine"] {
+        font-family: 'Fredoka', sans-serif !important;
+        background-color: #FFF3E0 !important;
+        background-image: radial-gradient(#FFB7B2 3px, transparent 3px) !important;
+        background-size: 30px 30px !important;
+        color: #5D4037 !important;
+      }
+      html.dark body[data-theme="dopamine"] { 
+        background-color: #311B92 !important; 
+        background-image: radial-gradient(#7C4DFF 3px, transparent 3px) !important;
+        color: #FFFFFF !important;
+      }
+      body[data-theme="dopamine"] .theme-panel,
+      body[data-theme="dopamine"] .glass,
+      body[data-theme="dopamine"] header {
+        background: #FFFFFF !important;
+        border: 3px solid #FF8A65 !important;
+        border-radius: 40px !important;
+        box-shadow: 0 8px 0 #FF8A65 !important;
+      }
+      html.dark body[data-theme="dopamine"] .theme-panel,
+      html.dark body[data-theme="dopamine"] .glass,
+      html.dark body[data-theme="dopamine"] header {
+        background: #512DA8 !important;
+        border: 3px solid #B388FF !important;
+        box-shadow: 0 8px 0 #B388FF !important;
+        color: white !important;
+      }
+      body[data-theme="dopamine"] textarea,
+      body[data-theme="dopamine"] input {
+        background: #FFF8E1 !important;
+        border: 2px solid #FFD54F !important;
+        border-radius: 20px !important;
+        color: #5D4037 !important;
+      }
+      html.dark body[data-theme="dopamine"] textarea,
+      html.dark body[data-theme="dopamine"] input {
+        background: #4527A0 !important;
+        border: 2px solid #7C4DFF !important;
+        color: #FFFFFF !important;
+      }
+      body[data-theme="dopamine"] button {
+        background: #69F0AE !important;
+        border: 2px solid #00E676 !important;
+        border-radius: 20px !important;
+        color: #1B5E20 !important;
+        box-shadow: 0 4px 0 #00E676 !important;
+        transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s !important;
+      }
+      html.dark body[data-theme="dopamine"] button {
+        background: #FF4081 !important;
+        border: 2px solid #F50057 !important;
+        color: #FFFFFF !important;
+        box-shadow: 0 4px 0 #F50057 !important;
+      }
+      body[data-theme="dopamine"] button:hover {
+        transform: translateY(-2px) scale(1.05) rotate(2deg) !important;
+      }
+      body[data-theme="dopamine"] button:active {
+        transform: translateY(2px) scale(0.95) !important;
+        box-shadow: 0 0 0 transparent !important;
+      }
+      body[data-theme="dopamine"] .bg-dot-pattern { display: none !important; }
+
+      /* 10. OPENCODE */
+      body[data-theme="opencode"] {
+        font-family: 'JetBrains Mono', 'Fira Code', 'Menlo', 'Space Mono', monospace !important;
+        background-color: #FAFAFA !important;
+        color: #111111 !important;
+      }
+      html.dark body[data-theme="opencode"] { 
+        background-color: #0A0A0A !important; 
+        color: #EDEDED !important;
+      }
+      body[data-theme="opencode"] .theme-panel,
+      body[data-theme="opencode"] .glass,
+      body[data-theme="opencode"] header {
+        background: #FFFFFF !important;
+        border: 1px solid #EAEAEA !important;
+        border-radius: 8px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+        backdrop-filter: none !important;
+      }
+      html.dark body[data-theme="opencode"] .theme-panel,
+      html.dark body[data-theme="opencode"] .glass,
+      html.dark body[data-theme="opencode"] header {
+        background: #111111 !important;
+        border: 1px solid #333333 !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+      }
+      body[data-theme="opencode"] textarea,
+      body[data-theme="opencode"] input {
+        background: #F5F5F5 !important;
+        border: 1px solid #EAEAEA !important;
+        border-radius: 6px !important;
+        color: #111111 !important;
+      }
+      html.dark body[data-theme="opencode"] textarea,
+      html.dark body[data-theme="opencode"] input {
+        background: #000000 !important;
+        border: 1px solid #333333 !important;
+        color: #EDEDED !important;
+      }
+      body[data-theme="opencode"] textarea:focus,
+      body[data-theme="opencode"] input:focus {
+        border-color: #3B82F6 !important;
+        outline: none !important;
+        box-shadow: 0 0 0 1px #3B82F6 !important;
+      }
+      html.dark body[data-theme="opencode"] textarea:focus,
+      html.dark body[data-theme="opencode"] input:focus {
+        border-color: #3B82F6 !important;
+        box-shadow: 0 0 0 1px #3B82F6 !important;
+      }
+      body[data-theme="opencode"] button {
+        background: #000000 !important;
+        border: 1px solid #000000 !important;
+        border-radius: 6px !important;
+        color: #FFFFFF !important;
+        transition: background-color 0.2s, color 0.2s !important;
+      }
+      html.dark body[data-theme="opencode"] button {
+        background: #EDEDED !important;
+        border: 1px solid #EDEDED !important;
+        color: #000000 !important;
+      }
+      body[data-theme="opencode"] button:hover {
+        background: #333333 !important;
+      }
+      html.dark body[data-theme="opencode"] button:hover {
+        background: #A0A0A0 !important;
+        border-color: #A0A0A0 !important;
+      }
+      body[data-theme="opencode"] .bg-dot-pattern { display: none !important; }
+
     </style>
   <script type="importmap">
 {

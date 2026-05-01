@@ -1,6 +1,6 @@
 import React from 'react';
 import { ToneOption } from '../types';
-import { Heart, Briefcase, Zap, Shield, Repeat, HeartPulse } from 'lucide-react';
+import { Heart, Briefcase, Zap, Shield, Repeat, HeartPulse, Smile, ArrowRightCircle, Flame } from 'lucide-react';
 
 interface OptionButtonProps {
   option: ToneOption;
@@ -17,6 +17,9 @@ const getIcon = (option: ToneOption) => {
     case ToneOption.PROFESSIONAL: return <Briefcase className="w-3.5 h-3.5" />;
     case ToneOption.SIMPLIFY: return <Zap className="w-3.5 h-3.5" />;
     case ToneOption.ASSERTIVE: return <Shield className="w-3.5 h-3.5" />;
+    case ToneOption.FRIENDLY: return <Smile className="w-3.5 h-3.5" />;
+    case ToneOption.DIRECT: return <ArrowRightCircle className="w-3.5 h-3.5" />;
+    case ToneOption.URGENT: return <Flame className="w-3.5 h-3.5" />;
     default: return null;
   }
 };
@@ -27,6 +30,12 @@ const getColorClass = (option: ToneOption, isSelected: boolean) => {
   
   if (option === ToneOption.SUPER_EMPATHY) {
     return "bg-rose-50 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-700/50 ring-1 ring-rose-500/10 dark:ring-rose-500/20 shadow-sm";
+  }
+  if (option === ToneOption.URGENT) {
+    return "bg-orange-50 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-700/50 ring-1 ring-orange-500/10 dark:ring-orange-500/20 shadow-sm";
+  }
+  if (option === ToneOption.FRIENDLY) {
+    return "bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-700/50 ring-1 ring-emerald-500/10 dark:ring-emerald-500/20 shadow-sm";
   }
 
   return "bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-700/50 ring-1 ring-indigo-500/10 dark:ring-indigo-500/20 shadow-sm";

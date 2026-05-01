@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, MessageSquareText, Eraser, Moon, Sun, ArrowRight, PenLine, Flag, BookOpen, ShieldAlert, StickyNote, Wand2 } from 'lucide-react';
+import { Sparkles, MessageSquareText, Eraser, Moon, Sun, ArrowRight, PenLine, Flag, BookOpen, ShieldAlert, StickyNote, Wand2, Zap, Layers } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ToneOption, OutputLanguage, MacroType, LengthOption, PerspectiveOption, ModelOption } from './types';
 import { streamTransformText } from './services/geminiService';
@@ -14,7 +14,9 @@ import { Logo } from './components/Logo';
 import { InfoModal } from './components/InfoModal';
 import { InternalNotes } from './components/InternalNotes';
 
-type AppTab = 'transform' | 'notes';
+import { ThemeSelector } from './components/ThemeSelector';
+
+type AppTab = 'transform' | 'im' | 'notes';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<AppTab>('transform');
@@ -42,12 +44,12 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
-  // DARK MODE BY DEFAULT
+  // Theme Modes
   const [isDarkMode, setIsDarkMode] = useState(true);
 
-  // Check Local Storage for Disclaimer Acceptance and Dark Mode
+  // Check Local Storage for Disclaimer Acceptance and Theme Modes
   useEffect(() => {
-    // Theme check
+    // Theme check (Dark Mode)
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
     } else {
@@ -101,11 +103,12 @@ const App: React.FC = () => {
         macroType: selectedMacro,
         lengthOption: selectedLength,
         perspective: selectedPerspective,
-        model: selectedModel,
+        model: activeTab === 'im' ? ModelOption.LITE : selectedModel,
         issueTopic: issueTopic, 
         refinementInstruction: refinement,
         previousOutput: refinement ? outputText : undefined,
-        isClosingFinal: isClosingFinal
+        isClosingFinal: isClosingFinal,
+        isIMMode: activeTab === 'im'
       }, (chunk) => {
         setOutputText(chunk);
       });
@@ -228,6 +231,8 @@ const App: React.FC = () => {
               <ShieldAlert className="w-5 h-5" />
             </button>
 
+            <ThemeSelector />
+            
             <button
               onClick={() => setIsDarkMode(!isDarkMode)}
               className="p-2.5 rounded-full text-gray-500 dark:text-slate-300 hover:bg-gray-100/80 dark:hover:bg-slate-800/80 transition-all hover:scale-105 active:scale-95 bg-transparent dark:bg-slate-800/50"
@@ -249,8 +254,22 @@ const App: React.FC = () => {
               className={`relative z-10 flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-black transition-all duration-300 ${activeTab === 'transform' ? 'text-indigo-600 dark:text-indigo-300' : 'text-gray-500 dark:text-slate-400 hover:text-indigo-600'}`}
             >
               <Wand2 className="w-4 h-4" />
-              <span>Transformación</span>
+              <span>Transformación (Tickets)</span>
               {activeTab === 'transform' && (
+                <motion.div 
+                  layoutId="activeTab"
+                  className="absolute inset-0 bg-white dark:bg-slate-700 rounded-xl shadow-premium dark:shadow-premium-dark -z-10"
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.3 }}
+                />
+              )}
+            </button>
+            <button 
+              onClick={() => setActiveTab('im')}
+              className={`relative z-10 flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-black transition-all duration-300 ${activeTab === 'im' ? 'text-indigo-600 dark:text-indigo-300' : 'text-gray-500 dark:text-slate-400 hover:text-indigo-600'}`}
+            >
+              <Zap className="w-4 h-4" />
+              <span>IM (Chat en Vivo)</span>
+              {activeTab === 'im' && (
                 <motion.div 
                   layoutId="activeTab"
                   className="absolute inset-0 bg-white dark:bg-slate-700 rounded-xl shadow-premium dark:shadow-premium-dark -z-10"
@@ -276,158 +295,215 @@ const App: React.FC = () => {
         </div>
 
         <AnimatePresence mode="popLayout">
-          {activeTab === 'transform' ? (
+          {activeTab === 'transform' || activeTab === 'im' ? (
             <motion.div 
-              key="transform"
+              key={activeTab} // Use activeTab as key to re-animate on switch
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
               transition={{ duration: 0.12, ease: "easeOut" }}
               className="flex flex-col gap-8"
             >
-              {/* Controls Card */}
-              <div className="bg-white/80 dark:bg-slate-900/60 backdrop-blur-lg rounded-[2rem] p-8 shadow-premium dark:shadow-premium-dark border border-white/50 dark:border-slate-700/50 transition-colors duration-300">
-                <div className="flex flex-col lg:flex-row gap-10 lg:items-start justify-between">
-                  
-                  <div className="flex flex-col gap-6 flex-1 w-full">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
-                      <div className="flex flex-col gap-3">
-                        <span className="text-[10px] font-black text-gray-400 dark:text-slate-400 uppercase tracking-[0.2em] ml-1">Estructura</span>
-                        <MacroSelector 
-                          selectedMacro={selectedMacro} 
-                          onChange={setSelectedMacro} 
-                          disabled={isLoading} 
-                        />
-                      </div>
-                      <div className="flex flex-col gap-3">
-                        <span className="text-[10px] font-black text-gray-400 dark:text-slate-400 uppercase tracking-[0.2em] ml-1">Longitud</span>
-                        <LengthSelector
-                          selectedLength={selectedLength}
-                          onChange={setSelectedLength}
-                          disabled={isLoading}
-                        />
-                      </div>
-                    </div>
-
-                    <AnimatePresence mode="wait">
-                      {selectedMacro === MacroType.FIRST && (
-                        <motion.div 
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.05 }}
-                          className="bg-indigo-50/50 dark:bg-indigo-900/20 p-5 rounded-2xl border border-indigo-100/50 dark:border-indigo-800/30 flex flex-col sm:flex-row sm:items-center gap-4"
-                        >
-                          <label className="text-[10px] font-black text-indigo-500 dark:text-indigo-400 uppercase tracking-widest flex items-center gap-2 whitespace-nowrap">
-                            <PenLine className="w-4 h-4" />
-                            Tema del Problema
-                          </label>
-                          <input
-                            type="text"
-                            value={issueTopic}
-                            onChange={(e) => setIssueTopic(e.target.value)}
-                            placeholder="Ej: suscripción, pago rechazado..."
-                            className="flex-1 px-4 py-2.5 rounded-xl border border-indigo-200/50 dark:border-indigo-800/50 bg-white dark:bg-slate-900 dark:text-slate-200 text-sm font-medium focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-colors placeholder:text-gray-400 dark:placeholder:text-slate-500"
+              {/* Controls */}
+              {activeTab === 'transform' && (
+                <div className="theme-panel bg-white/80 dark:bg-slate-900/60 backdrop-blur-lg rounded-[2rem] p-8 shadow-premium dark:shadow-premium-dark border border-white/50 dark:border-slate-700/50 transition-colors duration-300">
+                  <div className="flex flex-col lg:flex-row gap-10 lg:items-start justify-between">
+                    <div className="flex flex-col gap-6 flex-1 w-full">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+                        <div className="flex flex-col gap-3">
+                          <span className="text-[10px] font-black text-gray-400 dark:text-slate-400 uppercase tracking-[0.2em] ml-1">Estructura</span>
+                          <MacroSelector 
+                            selectedMacro={selectedMacro} 
+                            onChange={setSelectedMacro} 
+                            disabled={isLoading} 
                           />
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  <div className="flex flex-col gap-3 w-full lg:w-auto">
-                      <span className="text-[10px] font-black text-gray-400 dark:text-slate-400 uppercase tracking-[0.2em] ml-1 lg:text-right">Configuración IA</span>
-                      <div className="flex flex-col sm:flex-row gap-3 lg:ml-auto">
-                        <ModelSelector 
-                            selectedModel={selectedModel}
-                            onChange={setSelectedModel}
+                        </div>
+                        <div className="flex flex-col gap-3">
+                          <span className="text-[10px] font-black text-gray-400 dark:text-slate-400 uppercase tracking-[0.2em] ml-1">Longitud</span>
+                          <LengthSelector
+                            selectedLength={selectedLength}
+                            onChange={setSelectedLength}
                             disabled={isLoading}
-                        />
-                        <LanguageSelector 
-                            selectedLanguage={selectedLanguage}
-                            onChange={setSelectedLanguage}
-                            disabled={isLoading}
-                        />
+                          />
+                        </div>
                       </div>
-                  </div>
-                </div>
 
-                <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-200 dark:via-slate-700 to-transparent my-8"></div>
+                      <AnimatePresence mode="wait">
+                        {selectedMacro === MacroType.FIRST && (
+                          <motion.div 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.05 }}
+                            className="bg-indigo-50/50 dark:bg-indigo-900/20 p-5 rounded-2xl border border-indigo-100/50 dark:border-indigo-800/30 flex flex-col sm:flex-row sm:items-center gap-4"
+                          >
+                            <label className="text-[10px] font-black text-indigo-500 dark:text-indigo-400 uppercase tracking-widest flex items-center gap-2 whitespace-nowrap">
+                              <PenLine className="w-4 h-4" />
+                              Tema del Problema
+                            </label>
+                            <input
+                              type="text"
+                              value={issueTopic}
+                              onChange={(e) => setIssueTopic(e.target.value)}
+                              placeholder="Ej: suscripción, pago rechazado..."
+                              className="flex-1 px-4 py-2.5 rounded-xl border border-indigo-200/50 dark:border-indigo-800/50 bg-white dark:bg-slate-900 dark:text-slate-200 text-sm font-medium focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-colors placeholder:text-gray-400 dark:placeholder:text-slate-500"
+                            />
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
 
-                <div className="flex flex-col xl:flex-row items-end justify-between gap-8">
-                  <div className="flex flex-col gap-3 w-full xl:w-auto">
-                    <span className="text-[10px] font-black text-gray-400 dark:text-slate-400 uppercase tracking-[0.2em] ml-1 text-center xl:text-left">Tonos Emocionales</span>
-                    <div className="flex flex-wrap justify-center xl:justify-start gap-2.5">
-                      {Object.values(ToneOption).map((tone) => (
-                        <OptionButton
-                          key={tone}
-                          option={tone}
-                          isSelected={selectedTones.includes(tone)}
-                          onClick={() => toggleTone(tone)}
-                          disabled={isLoading}
-                        />
-                      ))}
+                    <div className="flex flex-col gap-3 w-full lg:w-auto">
+                        <span className="text-[10px] font-black text-gray-400 dark:text-slate-400 uppercase tracking-[0.2em] ml-1 lg:text-right">
+                          Idiomas y Modelos
+                        </span>
+                        <div className="flex flex-col sm:flex-row gap-3 lg:ml-auto">
+                          <ModelSelector 
+                              selectedModel={selectedModel}
+                              onChange={setSelectedModel}
+                              disabled={isLoading}
+                          />
+                          <LanguageSelector 
+                              selectedLanguage={selectedLanguage}
+                              onChange={setSelectedLanguage}
+                              disabled={isLoading}
+                          />
+                        </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row items-center gap-5 w-full xl:w-auto justify-end mt-4 xl:mt-0">
-                    <div className="flex items-center gap-4 bg-gray-100/50 dark:bg-slate-800/50 p-1.5 rounded-2xl border border-gray-200/50 dark:border-slate-700/50">
-                        <PerspectiveSelector
-                            selectedPerspective={selectedPerspective}
-                            onChange={setSelectedPerspective}
+                  <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-200 dark:via-slate-700 to-transparent my-8"></div>
+
+                  <div className="flex flex-col xl:flex-row items-end justify-between gap-8">
+                    <div className="flex flex-col gap-3 w-full xl:w-auto">
+                      <span className="text-[10px] font-black text-gray-400 dark:text-slate-400 uppercase tracking-[0.2em] ml-1 text-center xl:text-left">Tonos Emocionales</span>
+                      <div className="flex flex-wrap justify-center xl:justify-start gap-2.5">
+                        {Object.values(ToneOption).map((tone) => (
+                          <OptionButton
+                            key={tone}
+                            option={tone}
+                            isSelected={selectedTones.includes(tone)}
+                            onClick={() => toggleTone(tone)}
                             disabled={isLoading}
-                        />
-                        <button
-                            onClick={() => setIsClosingFinal(!isClosingFinal)}
-                            disabled={isLoading}
-                            title="Activar para incluir mensaje de cierre con encuesta o despedida definitiva"
-                            className={`
-                                relative flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 border
-                                ${isClosingFinal 
-                                    ? 'bg-red-500 border-red-500 text-white shadow-lg shadow-red-500/30' 
-                                    : 'bg-white dark:bg-slate-900 text-gray-500 dark:text-slate-400 border-gray-200 dark:border-slate-800 hover:border-red-200 dark:hover:border-red-900/50'
-                                }
-                                ${isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
-                            `}
-                        >
-                            <Flag className={`w-3.5 h-3.5 ${isClosingFinal ? 'fill-current' : ''}`} />
-                            <span>Cierre Final</span>
-                        </button>
+                          />
+                        ))}
+                      </div>
                     </div>
 
-                    <button
-                      onClick={handleTransform}
-                      disabled={isLoading || !inputText.trim()}
-                      className={`
-                        group relative w-full sm:w-auto px-10 py-4 rounded-2xl flex items-center justify-center gap-3
-                        font-black text-sm uppercase tracking-widest text-white transition-all duration-500 shadow-xl
-                        overflow-hidden
-                        ${isLoading || !inputText.trim() 
-                          ? 'bg-slate-400 dark:bg-slate-600 cursor-not-allowed opacity-70 shadow-none' 
-                          : 'bg-gradient-to-br from-indigo-600 via-indigo-600 to-violet-700 hover:scale-[1.02] active:scale-[0.98] shadow-indigo-500/30 hover:shadow-indigo-500/50'}
-                      `}
-                    >
-                      {!isLoading && inputText.trim() && (
-                        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"></div>
-                      )}
-                      {isLoading ? (
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      ) : (
-                        <Sparkles className="w-5 h-5" />
-                      )}
-                      <span className="relative">{isLoading ? 'Procesando...' : 'Transformar'}</span>
-                      {!isLoading && <ArrowRight className="w-4 h-4 opacity-80 relative group-hover:translate-x-1 transition-transform" />}
-                    </button>
+                    <div className="flex flex-col sm:flex-row items-center gap-5 w-full xl:w-auto justify-end mt-4 xl:mt-0">
+                      <div className="flex items-center gap-4 bg-gray-100/50 dark:bg-slate-800/50 p-1.5 rounded-2xl border border-gray-200/50 dark:border-slate-700/50">
+                          <PerspectiveSelector
+                              selectedPerspective={selectedPerspective}
+                              onChange={setSelectedPerspective}
+                              disabled={isLoading}
+                          />
+                          <button
+                              onClick={() => setIsClosingFinal(!isClosingFinal)}
+                              disabled={isLoading}
+                              title="Activar para incluir mensaje de cierre con encuesta o despedida definitiva"
+                              className={`
+                                  relative flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 border
+                                  ${isClosingFinal 
+                                      ? 'bg-red-500 border-red-500 text-white shadow-lg shadow-red-500/30' 
+                                      : 'bg-white dark:bg-slate-900 text-gray-500 dark:text-slate-400 border-gray-200 dark:border-slate-800 hover:border-red-200 dark:hover:border-red-900/50'
+                                  }
+                                  ${isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
+                              `}
+                          >
+                              <Flag className={`w-3.5 h-3.5 ${isClosingFinal ? 'fill-current' : ''}`} />
+                              <span>Cierre Final</span>
+                          </button>
+                      </div>
+
+                      <button
+                        onClick={handleTransform}
+                        disabled={isLoading || !inputText.trim()}
+                        className={`
+                          group relative w-full sm:w-auto px-10 py-4 rounded-2xl flex items-center justify-center gap-3
+                          font-black text-sm uppercase tracking-widest text-white transition-all duration-500 shadow-xl
+                          overflow-hidden
+                          ${isLoading || !inputText.trim() 
+                            ? 'bg-slate-400 dark:bg-slate-600 cursor-not-allowed opacity-70 shadow-none' 
+                            : 'bg-gradient-to-br from-indigo-600 via-indigo-600 to-violet-700 hover:scale-[1.02] active:scale-[0.98] shadow-indigo-500/30 hover:shadow-indigo-500/50'}
+                        `}
+                      >
+                        {!isLoading && inputText.trim() && (
+                          <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"></div>
+                        )}
+                        {isLoading ? (
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        ) : (
+                          <Sparkles className="w-5 h-5" />
+                        )}
+                        <span className="relative">{isLoading ? 'Procesando...' : 'Transformar'}</span>
+                        {!isLoading && <ArrowRight className="w-4 h-4 opacity-80 relative group-hover:translate-x-1 transition-transform" />}
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
+
+              {activeTab === 'im' && (
+                <div className="theme-panel bg-white/80 dark:bg-slate-900/60 backdrop-blur-lg rounded-2xl p-4 shadow-sm border border-gray-200/50 dark:border-slate-700/50 transition-colors duration-300 flex flex-col xl:flex-row items-center justify-between gap-4">
+                  <div className="flex items-center gap-3 w-full xl:w-auto shrink-0">
+                    <div className="flex flex-col shrink-0">
+                       <span className="text-[10px] font-black text-indigo-500 dark:text-indigo-400 uppercase tracking-widest flex items-center gap-1.5 ml-1 mb-1">
+                          <Zap className="w-3.5 h-3.5" />
+                          Flash Lite
+                       </span>
+                    </div>
+                    <LanguageSelector 
+                      selectedLanguage={selectedLanguage}
+                      onChange={setSelectedLanguage}
+                      disabled={isLoading}
+                    />
+                  </div>
+                  
+                  <div className="flex flex-wrap justify-center xl:justify-start gap-2 flex-1 xl:px-4 py-2 xl:border-x border-gray-200/50 dark:border-slate-700/50">
+                    {Object.values(ToneOption).map((tone) => (
+                      <OptionButton
+                        key={tone}
+                        option={tone}
+                        isSelected={selectedTones.includes(tone)}
+                        onClick={() => toggleTone(tone)}
+                        disabled={isLoading}
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={handleTransform}
+                    disabled={isLoading || !inputText.trim()}
+                    className={`
+                      group relative shrink-0 w-full xl:w-auto px-6 py-2.5 rounded-xl flex items-center justify-center gap-2
+                      font-black text-xs uppercase tracking-widest text-white transition-all duration-500 shadow-md
+                      overflow-hidden
+                      ${isLoading || !inputText.trim() 
+                        ? 'bg-slate-400 dark:bg-slate-600 cursor-not-allowed opacity-70 shadow-none' 
+                        : 'bg-gradient-to-br from-indigo-600 to-violet-600 hover:scale-[1.02] active:scale-[0.98] shadow-indigo-500/30 hover:shadow-indigo-500/40'}
+                    `}
+                  >
+                    {!isLoading && inputText.trim() && (
+                      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"></div>
+                    )}
+                    {isLoading ? (
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    ) : (
+                      <Zap className="w-4 h-4" />
+                    )}
+                    <span className="relative">{isLoading ? 'Procesando...' : 'Generar Chat'}</span>
+                    {!isLoading && <ArrowRight className="w-3.5 h-3.5 opacity-80 relative group-hover:translate-x-1 transition-transform" />}
+                  </button>
+                </div>
+              )}
 
               {/* Main Interface Grid */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-[550px] lg:h-[700px]">
-                <div className="flex flex-col h-full bg-white/60 dark:bg-slate-800/60 backdrop-blur-md rounded-[2rem] shadow-premium dark:shadow-premium-dark border border-white/30 dark:border-slate-700/30 overflow-hidden focus-within:ring-4 focus-within:ring-indigo-500/10 transition-all duration-500 hover:bg-white/80 dark:hover:bg-slate-800/80">
+                <div className="theme-panel flex flex-col h-full bg-white/60 dark:bg-slate-800/60 backdrop-blur-md rounded-[2rem] shadow-premium dark:shadow-premium-dark border border-white/30 dark:border-slate-700/30 overflow-hidden focus-within:ring-4 focus-within:ring-indigo-500/10 transition-all duration-500 hover:bg-white/80 dark:hover:bg-slate-800/80">
                   <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100/50 dark:border-slate-700/50">
                     <label htmlFor="input-text" className="text-[10px] font-black text-gray-400 dark:text-slate-400 uppercase tracking-[0.2em] flex items-center gap-2">
                       <MessageSquareText className="w-4 h-4" />
-                      Entrada
+                      {activeTab === 'transform' ? 'Entrada (Ticket Completo)' : 'Lo que quieres decir (En tu idioma)'}
                     </label>
                     <button 
                       onClick={handleClear}
@@ -441,7 +517,7 @@ const App: React.FC = () => {
                   <textarea
                     id="input-text"
                     className="flex-1 w-full p-8 resize-none focus:outline-none text-base sm:text-lg font-medium text-slate-700 dark:text-slate-100 placeholder:text-slate-400/50 dark:placeholder:text-slate-500 bg-transparent leading-relaxed"
-                    placeholder="Escribe o pega el cuerpo de tu respuesta aquí..."
+                    placeholder={activeTab === 'transform' ? "Escribe o pega el cuerpo del ticket original aquí..." : "Escribe tu idea de forma sencilla, nosotros la convertimos a un mensaje de chat brillante..."}
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
                     disabled={isLoading}

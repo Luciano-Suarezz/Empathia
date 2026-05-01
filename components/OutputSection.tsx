@@ -60,7 +60,7 @@ export const OutputSection: React.FC<OutputSectionProps> = ({
 
   if (!transformedText && !isLoading) {
     return (
-      <div className="h-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-[2.5rem] border border-white/20 dark:border-slate-800 shadow-sm flex flex-col items-center justify-center p-12 text-center group">
+      <div className="theme-panel h-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-[2.5rem] border border-white/20 dark:border-slate-800 shadow-sm flex flex-col items-center justify-center p-12 text-center group">
         <div className="relative mb-8">
           <div className="absolute inset-0 bg-indigo-500/20 blur-3xl rounded-full group-hover:scale-150 transition-transform duration-1000"></div>
           <div className="relative w-24 h-24 bg-indigo-50 dark:bg-slate-800 rounded-[2rem] flex items-center justify-center shadow-inner">
@@ -80,7 +80,7 @@ export const OutputSection: React.FC<OutputSectionProps> = ({
   const textToCompareModified = isCorrecting ? (correctionSuggestion || '') : transformedText;
 
   return (
-    <div className={`relative flex flex-col h-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-[2.5rem] border ${isCorrecting ? 'border-amber-400 dark:border-amber-600 ring-4 ring-amber-500/10' : 'border-white/20 dark:border-slate-800'} shadow-sm overflow-hidden transition-all duration-500 group`}>
+    <div className={`theme-panel relative flex flex-col h-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-[2.5rem] border ${isCorrecting ? 'border-amber-400 dark:border-amber-600 ring-4 ring-amber-500/10' : 'border-white/20 dark:border-slate-800'} shadow-sm overflow-hidden transition-all duration-500 group`}>
       
       {/* Header */}
       <div className="px-8 py-4 border-b border-gray-100 dark:border-slate-800 flex items-center justify-between bg-white/40 dark:bg-slate-900/40">

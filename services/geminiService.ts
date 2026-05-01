@@ -15,6 +15,7 @@ interface TransformParams {
   refinementInstruction?: string;
   previousOutput?: string;
   isClosingFinal?: boolean; // New parameter
+  isIMMode?: boolean; // IM Mode override
 }
 
 export const streamTransformText = async (
@@ -22,7 +23,7 @@ export const streamTransformText = async (
   onChunk: (text: string) => void
 ): Promise<string> => {
   
-  const { text, tones, targetLanguage, macroType, lengthOption, perspective, model, issueTopic, refinementInstruction, previousOutput, isClosingFinal } = params;
+  const { text, tones, targetLanguage, macroType, lengthOption, perspective, model, issueTopic, refinementInstruction, previousOutput, isClosingFinal, isIMMode } = params;
 
   // --- Lógica de Prompt ---
   let prompt = "";
@@ -44,8 +45,34 @@ export const streamTransformText = async (
       Mantén el idioma del texto anterior a menos que la solicitud diga lo contrario.
       Devuelve SOLO el texto corregido.
     `;
+  } else if (isIMMode) {
+    // MODO INSTANT MESSAGING (CHAT)
+    const tonesList = tones.length > 0 ? tones.join(", ") : "Conversacional y natural";
+    const languageInstruction = targetLanguage === OutputLanguage.AUTO 
+      ? "Detecta y mantén el idioma de la entrada original." 
+      : `Escribe o traduce toda la respuesta estrictamente a: ${targetLanguage}.`;
+
+    prompt = `
+      Actúa como agente de soporte de primera línea en un CHAT EN VIVO (Instant Messaging) para TikTok LIVE.
+      
+      CONTEXTO:
+      El usuario es otro agente que te proporciona ideas sueltas o un borrador rápido de lo que necesita decirle al cliente. 
+      Tu trabajo es escribir el texto final que se enviará al cliente.
+      
+      REGLAS DE ORO DEL MODO CHAT:
+      1. FORMATO CHAT: Escribe como si chatearas en vivo con el cliente. Sé directo, conversacional y muy natural.
+      2. MÚLTIPLES PÁRRAFOS: Es crucial que dividas el mensaje en párrafos cortos (1-2 oraciones por párrafo) separados por SALTOS DE LÍNEA. Así el agente puede copiar cada frase rápidamente.
+      3. CERO ESTRUCTURA DE CORREO: NO incluyas saludos (Hola, Estimado) ni despedidas, firmas, cierres ("If you have any questions...") a menos que el borrador del agente lo pida explícitamente. Es una conversación en curso.
+      4. TONO: ${tonesList}
+      5. IDIOMA: ${languageInstruction}
+      
+      BORRADOR DEL AGENTE (Lo que quiere decir):
+      "${text}"
+      
+      MENSAJE DE CHAT PARCELADO:
+    `;
   } else {
-    // MODO TRANSFORMACIÓN ORIGINAL
+    // MODO TRANSFORMACIÓN ORIGINAL (TICKET)
     const hasEmpathy = tones.includes(ToneOption.EMPATHY);
     const hasSuperEmpathy = tones.includes(ToneOption.SUPER_EMPATHY);
     const isParaphrase = tones.includes(ToneOption.PARAPHRASE);

@@ -4,7 +4,10 @@ export enum ToneOption {
   PARAPHRASE = 'Parafrasear',
   PROFESSIONAL = 'Profesional',
   SIMPLIFY = 'Simplificar',
-  ASSERTIVE = 'Asertivo'
+  ASSERTIVE = 'Asertivo',
+  FRIENDLY = 'Amistoso',
+  DIRECT = 'Directo',
+  URGENT = 'Urgente'
 }
 
 export enum MacroType {
@@ -30,17 +33,35 @@ export enum OutputLanguage {
   EN = 'Inglés',
   PT = 'Portugués',
   FR = 'Francés',
-  // Secondary
   IT = 'Italiano',
   DE = 'Alemán',
+  NL = 'Holandés',
+  RO = 'Rumano',
+  EL = 'Griego',
+  PL = 'Polaco',
+  CS = 'Checo',
+  SV = 'Sueco',
+  DA = 'Danés',
+  FI = 'Finlandés',
+  HU = 'Húngaro',
+  BG = 'Búlgaro',
   RU = 'Ruso',
   ZH = 'Chino',
-  JA = 'Japonés'
+  JA = 'Japonés',
+  NO = 'Noruego',
+  SK = 'Eslovaco',
+  HR = 'Croata',
+  SR = 'Serbio',
+  UK = 'Ucraniano',
+  LT = 'Lituano',
+  LV = 'Letón',
+  ET = 'Estonio',
+  SL = 'Esloveno'
 }
 
 export enum ModelOption {
   FLASH = 'gemini-3-flash-preview',
-  LITE = 'gemini-flash-lite-latest'
+  LITE = 'gemini-3.1-flash-lite-preview'
 }
 
 export interface InternalNote {
