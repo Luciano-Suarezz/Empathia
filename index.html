@@ -863,6 +863,35 @@
         80% { transform: translate(2px, -2px) }
         100% { transform: translate(0) }
       }
+      body[data-theme="y2k"] * {
+        border-radius: 0 !important;
+      }
+      body[data-theme="y2k"] .option-btn {
+        background: transparent !important;
+        color: #000080 !important;
+        border: 2px solid #000080 !important;
+        box-shadow: 2px 2px 0px #000080 !important;
+      }
+      body[data-theme="y2k"] .option-btn.option-selected {
+        background: transparent !important;
+        color: #00ffff !important;
+        border: 2px solid #00ffff !important;
+        box-shadow: 2px 2px 0px #00ffff !important;
+        text-shadow: 0 0 4px rgba(0, 255, 255, 0.5) !important;
+      }
+      html.dark body[data-theme="y2k"] .option-btn {
+        background: transparent !important;
+        color: #00ff00 !important;
+        border: 2px solid #00ff00 !important;
+        box-shadow: 2px 2px 0px #00ff00 !important;
+      }
+      html.dark body[data-theme="y2k"] .option-btn.option-selected {
+        background: transparent !important;
+        color: #00ffff !important;
+        border: 2px solid #00ffff !important;
+        box-shadow: 2px 2px 0px #00ffff !important;
+        text-shadow: 0 0 5px #00ffff !important;
+      }
       body[data-theme="y2k"] .glass-panel,
       body[data-theme="y2k"] .glass,
       body[data-theme="y2k"] header {
@@ -1068,6 +1097,198 @@
         border-color: #A0A0A0 !important;
       }
       body[data-theme="opencode"] .bg-dot-pattern { display: none !important; }
+
+      /* CYBER NEON */
+      body[data-theme="cyber-neon"] {
+        background: #000000 !important;
+        color: #ffffff !important;
+      }
+      html.dark body[data-theme="cyber-neon"] {
+        background: #000000 !important;
+        color: #ffffff !important;
+      }
+      body[data-theme="cyber-neon"] .option-btn {
+        background: transparent !important;
+        color: #ffffff !important;
+        border: 2px solid #ffffff !important;
+        border-radius: 9999px !important;
+      }
+      body[data-theme="cyber-neon"] .option-btn.option-selected {
+        background: transparent !important;
+        color: #00ffff !important;
+        border: 2px solid #00ffff !important;
+        box-shadow: 0 0 12px rgba(0, 255, 255, 0.6), inset 0 0 6px rgba(0, 255, 255, 0.3) !important;
+        text-shadow: 0 0 6px #00ffff !important;
+      }
+      body[data-theme="cyber-neon"] .glass-panel,
+      body[data-theme="cyber-neon"] .glass,
+      body[data-theme="cyber-neon"] header {
+        background: #000000 !important;
+        border: 2px solid #ffffff !important;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.1) !important;
+        color: #ffffff !important;
+        border-radius: 2.5rem !important; /* bubblier look */
+      }
+      body[data-theme="cyber-neon"] .theme-panel.glass-panel {
+        /* Extra high contrast boundaries for the panels */
+        border: 2px solid #ffffff !important;
+        background: #000000 !important;
+      }
+      body[data-theme="cyber-neon"] .glass-panel > div[class*="border-b"],
+      body[data-theme="cyber-neon"] .border-b,
+      body[data-theme="cyber-neon"] .border-t {
+         border-color: #ffffff !important;
+      }
+      body[data-theme="cyber-neon"] .glass-input {
+        background: transparent !important;
+        border: none !important;
+        color: #ffffff !important;
+        box-shadow: none !important;
+      }
+      body[data-theme="cyber-neon"] .glass-input:focus {
+        border-color: transparent !important;
+        box-shadow: none !important;
+        outline: none !important;
+      }
+      body[data-theme="cyber-neon"] .glass-input::placeholder {
+        color: rgba(255, 255, 255, 0.5) !important;
+      }
+      
+      /* --- Tema del Problema Container --- */
+      body[data-theme="cyber-neon"] [class*="bg-indigo-50/50"],
+      html.dark body[data-theme="cyber-neon"] [class*="dark:bg-indigo-900/10"] {
+        background: transparent !important;
+        border: 2px solid #ffffff !important;
+        border-radius: 9999px !important;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1) !important;
+      }
+      body[data-theme="cyber-neon"] .animate-slide-up .glass-input {
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+      /* --- Macro / Length Option containers --- */
+      body[data-theme="cyber-neon"] [class*="bg-gray-100/80"],
+      html.dark body[data-theme="cyber-neon"] [class*="dark:bg-zinc-900/80"] {
+        background: transparent !important;
+        border: 2px solid #ffffff !important;
+        border-radius: 9999px !important;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1) !important;
+      }
+
+      /* --- Selectors (Language / Model) --- */
+      body[data-theme="cyber-neon"] select {
+        background-color: transparent !important;
+        border: none !important;
+        color: #ffffff !important;
+        box-shadow: none !important;
+      }
+      body[data-theme="cyber-neon"] select:focus {
+        border-color: transparent !important;
+        box-shadow: none !important;
+        outline: none !important;
+      }
+      body[data-theme="cyber-neon"] select option {
+        background-color: #000000 !important;
+        color: #ffffff !important;
+      }
+
+      /* --- Top Tabs (Transformacion / IM / Notes) --- */
+      body[data-theme="cyber-neon"] [class*="bg-gray-200/50"],
+      html.dark body[data-theme="cyber-neon"] [class*="dark:bg-zinc-900/80"] {
+        background: transparent !important;
+        border: 2px solid #ffffff !important;
+        border-radius: 9999px !important;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1) !important;
+      }
+      body[data-theme="cyber-neon"] [class*="bg-gray-200/50"] button {
+        color: #ffffff !important;
+      }
+      body[data-theme="cyber-neon"] [class*="bg-gray-200/50"] button:hover {
+        color: #00ffff !important;
+        text-shadow: 0 0 5px #00ffff !important;
+        background: transparent !important;
+      }
+      /* The active tab indicator */
+      body[data-theme="cyber-neon"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
+      body[data-theme="cyber-neon"] [class*="bg-gray-200/50"] [class*="bg-white"][class*="dark:bg-zinc-700"] {
+        background: transparent !important;
+        border: 2px solid #00ffff !important;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), inset 0 0 5px rgba(0, 255, 255, 0.3) !important;
+        border-radius: 9999px !important;
+      }
+
+      /* Language / Model selectors container Fix */
+      body[data-theme="cyber-neon"] [class*="bg-white"][class*="dark:bg-zinc-800"] {
+        background: transparent !important;
+        border: 2px solid #ffffff !important;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1) !important;
+      }
+      body[data-theme="cyber-neon"] [class*="bg-white"][class*="dark:bg-zinc-800"]:has(select:focus) {
+        border-color: #00ffff !important;
+        box-shadow: 0 0 12px rgba(0, 255, 255, 0.5), inset 0 0 5px rgba(0, 255, 255, 0.3) !important;
+      }
+
+      /* Header buttons (Theme Selector, Info, Moon/Sun) */
+      body[data-theme="cyber-neon"] header button {
+        background: transparent !important;
+        border: 2px solid #ffffff !important;
+        color: #ffffff !important;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1) !important;
+      }
+      body[data-theme="cyber-neon"] header button:hover {
+        border-color: #00ffff !important;
+        color: #00ffff !important;
+        box-shadow: 0 0 12px rgba(0, 255, 255, 0.4) !important;
+        text-shadow: 0 0 5px #00ffff !important;
+      }
+      
+      body[data-theme="cyber-neon"] .glass-btn:not(.option-btn) {
+        background: transparent !important;
+        border: 2px solid #ffffff !important;
+        color: #ffffff !important;
+        border-radius: 9999px !important;
+      }
+      body[data-theme="cyber-neon"] .glass-btn:not(.option-btn):hover {
+        background: rgba(0, 255, 255, 0.1) !important;
+        border-color: #00ffff !important;
+        color: #00ffff !important;
+        box-shadow: 0 0 12px rgba(0, 255, 255, 0.4) !important;
+      }
+      /* Ensure action buttons stand out */
+      body[data-theme="cyber-neon"] .bg-indigo-600,
+      body[data-theme="cyber-neon"] .bg-indigo-500,
+      body[data-theme="cyber-neon"] button.bg-indigo-500 {
+        background: transparent !important;
+        border: 2px solid #00ffff !important;
+        color: #00ffff !important;
+        box-shadow: 0 0 12px rgba(0,255,255,0.4), inset 0 0 6px rgba(0,255,255,0.2) !important;
+        border-radius: 9999px !important;
+      }
+      body[data-theme="cyber-neon"] .bg-indigo-600:hover,
+      body[data-theme="cyber-neon"] .bg-indigo-500:hover,
+      body[data-theme="cyber-neon"] button.bg-indigo-500:hover {
+        background: rgba(0, 255, 255, 0.15) !important;
+        box-shadow: 0 0 20px rgba(0,255,255,0.6), inset 0 0 12px rgba(0,255,255,0.3) !important;
+      }
+      /* Text colors */
+      body[data-theme="cyber-neon"] .text-gray-500,
+      body[data-theme="cyber-neon"] .text-zinc-500,
+      body[data-theme="cyber-neon"] .text-gray-400,
+      body[data-theme="cyber-neon"] .text-slate-700,
+      body[data-theme="cyber-neon"] .text-zinc-700,
+      body[data-theme="cyber-neon"] .text-gray-900,
+      body[data-theme="cyber-neon"] span.text-indigo-500,
+      body[data-theme="cyber-neon"] p,
+      body[data-theme="cyber-neon"] .prose,
+      body[data-theme="cyber-neon"] .prose * { color: #ffffff !important; opacity: 1 !important; }
+      
+      body[data-theme="cyber-neon"] span.text-indigo-500 svg,
+      body[data-theme="cyber-neon"] span.text-indigo-400 svg {
+         color: #00ffff !important;
+      }
+
+      body[data-theme="cyber-neon"] .bg-dot-pattern { display: none !important; }
 
     </style>
   <script type="importmap">

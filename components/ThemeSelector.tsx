@@ -13,6 +13,7 @@ const THEMES = [
   { id: 'bento-grid', name: 'Bento Grid', icon: '🍱' },
   { id: 'skeuomorphism', name: 'Skeuomorphism', icon: '📱' },
   { id: 'y2k', name: 'Retro Y2K', icon: '💿' },
+  { id: 'cyber-neon', name: 'Cyber Neon', icon: '🌠' },
   { id: 'dopamine', name: 'Dopamine Design', icon: '🎉' },
   { id: 'opencode', name: 'OpenCode', icon: '💻' },
 ];

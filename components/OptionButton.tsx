@@ -48,7 +48,8 @@ export const OptionButton: React.FC<OptionButtonProps> = ({ option, isSelected, 
       disabled={disabled}
       className={`
         flex items-center gap-1.5 px-3 py-1.5 rounded-lg border transition-all duration-200
-        text-xs font-semibold active:scale-95
+        text-xs font-semibold active:scale-95 option-btn
+        ${isSelected ? 'option-selected' : ''}
         ${getColorClass(option, isSelected)}
         ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
       `}

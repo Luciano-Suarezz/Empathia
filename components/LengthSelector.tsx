@@ -24,7 +24,8 @@ export const LengthSelector: React.FC<LengthSelectorProps> = ({ selectedLength, 
             onClick={() => onChange(option)}
             disabled={disabled}
             className={`
-              flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200
+              flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 option-btn
+              ${isSelected ? 'option-selected' : ''}
               ${isSelected 
                 ? 'bg-white dark:bg-zinc-700 text-indigo-600 dark:text-indigo-300 shadow-[0_1px_3px_rgba(0,0,0,0.1)] dark:shadow-none' 
                 : 'text-gray-500 dark:text-zinc-400 hover:text-gray-700 dark:hover:text-zinc-200 hover:bg-black/5 dark:hover:bg-white/5'
