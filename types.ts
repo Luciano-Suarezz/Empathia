@@ -22,11 +22,6 @@ export enum LengthOption {
   LONG = 'Largo'
 }
 
-export enum PerspectiveOption {
-  WE = 'Nosotros (Corp.)',
-  ME = 'Yo (Personal)'
-}
-
 export enum OutputLanguage {
   AUTO = 'Original (Detectar)',
   ES = 'Español',

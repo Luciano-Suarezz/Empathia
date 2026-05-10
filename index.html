@@ -78,7 +78,7 @@
         border-radius: 10px;
       }
       .dark ::-webkit-scrollbar-thumb {
-        background: #1e293b;
+        background: #18181b;
       }
       ::-webkit-scrollbar-thumb:hover {
         background: #cbd5e1;
@@ -91,76 +91,418 @@
          CUSTOM THEMES
          ========================================= */
 
-      /* 1. GLASSMORPHISM */
-      body[data-theme="glassmorphism"] {
-        font-family: 'Poppins', sans-serif !important;
-        background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop') center/cover fixed !important;
-        background-color: transparent !important;
+      /* 1. GENERIC GLASSMORPHISM */
+      @keyframes orb-drift {
+        0% { background-position: 0% 0%, 100% 0%, 30% 100%; }
+        33% { background-position: 5% 5%, 95% 5%, 35% 95%; }
+        66% { background-position: -5% -5%, 105% -5%, 25% 105%; }
+        100% { background-position: 0% 0%, 100% 0%, 30% 100%; }
       }
-      /* 1. GLASSMORPHISM */
       body[data-theme="glassmorphism"] {
-        font-family: 'Poppins', sans-serif !important;
-        background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop') center/cover fixed !important;
-        background-color: transparent !important;
-        color: #1e293b !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif !important;
+        background: #e0e5ec !important;
+          background-image: 
+            radial-gradient(at 40% 20%, hsla(228,100%,74%,1) 0px, transparent 50%),
+            radial-gradient(at 80% 0%, hsla(189,100%,56%,1) 0px, transparent 50%),
+            radial-gradient(at 0% 50%, hsla(355,100%,93%,1) 0px, transparent 50%) !important;
+          background-attachment: fixed !important;
+        
+        background-size: 150% 150%, 150% 150%, 150% 150% !important;
+        background-attachment: fixed !important;
+        
+        color: rgba(0,0,0,0.9) !important;
       }
       body[data-theme="glassmorphism"]::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        background: rgba(255, 255, 255, 0.1);
-        z-index: -1;
+        display: none !important;
       }
       html.dark body[data-theme="glassmorphism"] {
-        background: url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2564&auto=format&fit=crop') center/cover fixed !important;
-        color: #f8fafc !important;
+        background: #09090b !important;
+          background-image: 
+            radial-gradient(at 40% 20%, hsla(228,100%,74%,0.2) 0px, transparent 50%),
+            radial-gradient(at 80% 0%, hsla(189,100%,56%,0.2) 0px, transparent 50%),
+            radial-gradient(at 0% 50%, hsla(355,100%,93%,0.1) 0px, transparent 50%) !important;
+          background-attachment: fixed !important;
+        
+        background-size: 150% 150%, 150% 150%, 150% 150% !important;
+        background-attachment: fixed !important;
+        
+        color: rgba(255,255,255,0.95) !important;
       }
-      html.dark body[data-theme="glassmorphism"]::before {
-        background: rgba(0, 0, 0, 0.5);
+      
+      /* Base glass properties for light mode */
+      body[data-theme="glassmorphism"] .glass-panel,
+      body[data-theme="glassmorphism"] .glass {
+        background: rgba(255, 255, 255, 0.5) !important;
+        backdrop-filter: blur(24px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+        border: 1px solid rgba(0, 0, 0, 0.05) !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04) !important;
+        position: relative;
       }
-      body[data-theme="glassmorphism"] .theme-panel,
-      body[data-theme="glassmorphism"] .glass,
-      body[data-theme="glassmorphism"] header {
-        background: rgba(255, 255, 255, 0.15) !important;
-        backdrop-filter: blur(16px) saturate(180%) !important;
-        -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-        border: 1px solid rgba(255, 255, 255, 0.4) !important;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.1) !important;
+      /* Top highlight for light mode */
+      body[data-theme="glassmorphism"] .glass-panel::before,
+      body[data-theme="glassmorphism"] .glass::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-top: 1px solid rgba(255,255,255,0.8);
+        border-radius: inherit;
+        -webkit-mask-image: linear-gradient(90deg, transparent, black 20%, black 80%, transparent);
+        mask-image: linear-gradient(90deg, transparent, black 20%, black 80%, transparent);
+        pointer-events: none;
       }
-      html.dark body[data-theme="glassmorphism"] .theme-panel,
-      html.dark body[data-theme="glassmorphism"] .glass,
-      html.dark body[data-theme="glassmorphism"] header {
-        background: rgba(15, 23, 42, 0.25) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
+
+      /* Base glass properties for dark mode */
+      html.dark body[data-theme="glassmorphism"] .glass-panel,
+      html.dark body[data-theme="glassmorphism"] .glass {
+        background: rgba(255,255,255,0.06) !important;
+        backdrop-filter: blur(24px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+        border: 1px solid rgba(255,255,255,0.14) !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3) !important;
       }
-      body[data-theme="glassmorphism"] textarea,
-      body[data-theme="glassmorphism"] input {
-        background: rgba(255, 255, 255, 0.25) !important;
+      /* Top highlight for dark mode */
+      html.dark body[data-theme="glassmorphism"] .glass-panel::before,
+      html.dark body[data-theme="glassmorphism"] .glass::before {
+        border-top: 1px solid rgba(255,255,255,0.3);
+      }
+
+      /* Inputs and Textareas */
+      body[data-theme="glassmorphism"] .glass-input,
+      body[data-theme="glassmorphism"] .glass-input {
+        background: rgba(255, 255, 255, 0.4) !important;
         backdrop-filter: blur(16px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.5) !important;
-        color: #1e293b !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
+        
+        color: rgba(0,0,0,0.9) !important;
+        box-shadow: inset 0 1px 4px rgba(0,0,0,0.05) !important;
+        transition: all 0.2s ease !important;
       }
-      html.dark body[data-theme="glassmorphism"] textarea,
-      html.dark body[data-theme="glassmorphism"] input {
-        background: rgba(15, 23, 42, 0.35) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        color: #f8fafc !important;
+      html.dark body[data-theme="glassmorphism"] .glass-input,
+      html.dark body[data-theme="glassmorphism"] .glass-input {
+        background: rgba(255,255,255,0.05) !important;
+        border: 1px solid rgba(255,255,255,0.14) !important;
+        color: rgba(255,255,255,0.95) !important;
+        box-shadow: inset 0 1px 4px rgba(0,0,0,0.2) !important;
       }
-      body[data-theme="glassmorphism"] button {
-        background: rgba(255, 255, 255, 0.3) !important;
-        backdrop-filter: blur(10px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.5) !important;
-        color: #1e293b !important;
+      body[data-theme="glassmorphism"] .glass-input:focus,
+      body[data-theme="glassmorphism"] .glass-input:focus {
+        border-color: rgba(99, 102, 241,0.4) !important;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241,0.15), inset 0 1px 4px rgba(0,0,0,0.05) !important;
+        outline: none !important;
       }
-      html.dark body[data-theme="glassmorphism"] button {
-        background: rgba(255, 255, 255, 0.1) !important;
-        border: 1px solid rgba(255, 255, 255, 0.15) !important;
-        color: #f8fafc !important;
+      html.dark body[data-theme="glassmorphism"] .glass-input:focus,
+      html.dark body[data-theme="glassmorphism"] .glass-input:focus {
+        border-color: rgba(99, 102, 241,0.5) !important;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241,0.15), inset 0 1px 4px rgba(0,0,0,0.2) !important;
       }
+
+      /* Buttons */
+      body[data-theme="glassmorphism"] .glass-btn {
+        background: rgba(255,255,255,0.6) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border: 1px solid rgba(0,0,0,0.05) !important;
+        
+        color: rgba(0,0,0,0.8) !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+      }
+      body[data-theme="glassmorphism"] .glass-btn:hover {
+        background: rgba(255,255,255,0.8) !important;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+      }
+      html.dark body[data-theme="glassmorphism"] .glass-btn {
+        background: rgba(255,255,255,0.06) !important;
+        border: 1px solid rgba(255,255,255,0.24) !important;
+        color: rgba(255,255,255,0.95) !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+      }
+      html.dark body[data-theme="glassmorphism"] .glass-btn:hover {
+        background: rgba(255,255,255,0.10) !important;
+        border-color: rgba(255,255,255,0.35) !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+      }
+      
       body[data-theme="glassmorphism"] .bg-dot-pattern { display: none !important; }
       body[data-theme="glassmorphism"] .text-gray-400, 
-      body[data-theme="glassmorphism"] .text-slate-400 { color: inherit !important; opacity: 0.8 !important; }
+      body[data-theme="glassmorphism"] .text-zinc-400 { color: inherit !important; opacity: 0.6 !important; }
+
+
+      
+/* 1. GLASSMORPHISM (iOS 26 Liquid Glass) */
+      @keyframes orb-drift {
+        0% { background-position: 0% 0%, 100% 0%, 30% 100%; }
+        33% { background-position: 5% 5%, 95% 5%, 35% 95%; }
+        66% { background-position: -5% -5%, 105% -5%, 25% 105%; }
+        100% { background-position: 0% 0%, 100% 0%, 30% 100%; }
+      }
+      body[data-theme="ios"] {
+        font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif !important;
+        background: #f2f2f7 !important;
+        background-attachment: fixed !important;
+        color: rgba(0,0,0,0.9) !important;
+      }
+      body[data-theme="ios"]::before {
+        display: none !important;
+      }
+      html.dark body[data-theme="ios"] {
+        background: #000000 !important;
+        background-attachment: fixed !important;
+        color: rgba(255,255,255,0.95) !important;
+      }
+      
+      /* Base glass properties for light mode */
+      body[data-theme="ios"] .glass-panel,
+      body[data-theme="ios"] .glass {
+        background: rgba(255, 255, 255, 0.5) !important;
+        backdrop-filter: blur(24px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+        border: 1px solid rgba(0, 0, 0, 0.05) !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04) !important;
+        position: relative;
+      }
+      /* Top highlight for light mode */
+      body[data-theme="ios"] .glass-panel::before,
+      body[data-theme="ios"] .glass::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-top: 1px solid rgba(255,255,255,0.8);
+        border-radius: inherit;
+        -webkit-mask-image: linear-gradient(90deg, transparent, black 20%, black 80%, transparent);
+        mask-image: linear-gradient(90deg, transparent, black 20%, black 80%, transparent);
+        pointer-events: none;
+      }
+
+      /* Base glass properties for dark mode */
+      html.dark body[data-theme="ios"] .glass-panel,
+      html.dark body[data-theme="ios"] .glass {
+        background: rgba(255,255,255,0.06) !important;
+        backdrop-filter: blur(24px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+        border: 1px solid rgba(255,255,255,0.14) !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3) !important;
+      }
+      /* Top highlight for dark mode */
+      html.dark body[data-theme="ios"] .glass-panel::before,
+      html.dark body[data-theme="ios"] .glass::before {
+        border-top: 1px solid rgba(255,255,255,0.3);
+      }
+
+      /* Inputs and Textareas */
+      body[data-theme="ios"] .glass-input,
+      body[data-theme="ios"] .glass-input {
+        background: rgba(255, 255, 255, 0.4) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
+        border-radius: 16px !important;
+        color: rgba(0,0,0,0.9) !important;
+        box-shadow: inset 0 1px 4px rgba(0,0,0,0.05) !important;
+        transition: all 0.2s ease !important;
+      }
+      html.dark body[data-theme="ios"] .glass-input,
+      html.dark body[data-theme="ios"] .glass-input {
+        background: rgba(255,255,255,0.05) !important;
+        border: 1px solid rgba(255,255,255,0.14) !important;
+        color: rgba(255,255,255,0.95) !important;
+        box-shadow: inset 0 1px 4px rgba(0,0,0,0.2) !important;
+      }
+      body[data-theme="ios"] .glass-input:focus,
+      body[data-theme="ios"] .glass-input:focus {
+        border-color: rgba(10,132,255,0.4) !important;
+        box-shadow: 0 0 0 3px rgba(10,132,255,0.15), inset 0 1px 4px rgba(0,0,0,0.05) !important;
+        outline: none !important;
+      }
+      html.dark body[data-theme="ios"] .glass-input:focus,
+      html.dark body[data-theme="ios"] .glass-input:focus {
+        border-color: rgba(10,132,255,0.5) !important;
+        box-shadow: 0 0 0 3px rgba(10,132,255,0.15), inset 0 1px 4px rgba(0,0,0,0.2) !important;
+      }
+
+      /* Buttons */
+      body[data-theme="ios"] .glass-btn {
+        background: rgba(255,255,255,0.6) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border: 1px solid rgba(0,0,0,0.05) !important;
+        border-radius: 999px !important;
+        color: rgba(0,0,0,0.8) !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+      }
+      body[data-theme="ios"] .glass-btn:hover {
+        background: rgba(255,255,255,0.8) !important;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+      }
+      html.dark body[data-theme="ios"] .glass-btn {
+        background: rgba(255,255,255,0.06) !important;
+        border: 1px solid rgba(255,255,255,0.24) !important;
+        color: rgba(255,255,255,0.95) !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+      }
+      html.dark body[data-theme="ios"] .glass-btn:hover {
+        background: rgba(255,255,255,0.10) !important;
+        border-color: rgba(255,255,255,0.35) !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+      }
+      
+      /* Primary Button Override */
+      body[data-theme="ios"] .glass-btn.bg-indigo-600,
+      body[data-theme="ios"] .glass-btn.bg-indigo-500,
+      body[data-theme="ios"] .glass-btn.bg-indigo-600:hover,
+      html.dark body[data-theme="ios"] .glass-btn.bg-indigo-600,
+      html.dark body[data-theme="ios"] .glass-btn.bg-indigo-500 {
+        background: #0a84ff !important;
+        color: #fff !important;
+        border: none !important;
+        box-shadow: 0 0 20px rgba(10,132,255,0.4), 0 4px 12px rgba(0,0,0,0.2) !important;
+      }
+      body[data-theme="ios"] .glass-btn.bg-indigo-600:hover,
+      html.dark body[data-theme="ios"] .glass-btn.bg-indigo-600:hover {
+        background: #3d9dff !important;
+        box-shadow: 0 0 28px rgba(10,132,255,0.55), 0 6px 16px rgba(0,0,0,0.3) !important;
+      }
+
+      body[data-theme="ios"] .bg-dot-pattern { display: none !important; }
+      body[data-theme="ios"] .text-gray-400, 
+      body[data-theme="ios"] .text-zinc-400 { color: inherit !important; opacity: 0.6 !important; }
+
+
+      
+
+      
+      /* iOS Color Overrides (Remap ALL Indigo/Violet to iOS Blue) */
+      body[data-theme="ios"] .text-indigo-900,
+      body[data-theme="ios"] .text-indigo-800,
+      body[data-theme="ios"] .text-indigo-700,
+      body[data-theme="ios"] .text-indigo-600,
+      body[data-theme="ios"] .text-indigo-500,
+      body[data-theme="ios"] .text-indigo-400,
+      body[data-theme="ios"] .text-violet-600,
+      body[data-theme="ios"] .text-violet-500 {
+        color: #007AFF !important;
+      }
+      html.dark body[data-theme="ios"] .text-indigo-900,
+      html.dark body[data-theme="ios"] .text-indigo-800,
+      html.dark body[data-theme="ios"] .text-indigo-700,
+      html.dark body[data-theme="ios"] .text-indigo-600,
+      html.dark body[data-theme="ios"] .text-indigo-500,
+      html.dark body[data-theme="ios"] .text-indigo-400,
+      html.dark body[data-theme="ios"] .text-indigo-300,
+      html.dark body[data-theme="ios"] .text-indigo-200,
+      html.dark body[data-theme="ios"] .text-indigo-100,
+      html.dark body[data-theme="ios"] .text-violet-600,
+      html.dark body[data-theme="ios"] .text-violet-500,
+      html.dark body[data-theme="ios"] .text-violet-400 {
+        color: #0A84FF !important;
+      }
+
+      body[data-theme="ios"] .bg-indigo-900,
+      body[data-theme="ios"] .bg-indigo-800,
+      body[data-theme="ios"] .bg-indigo-700,
+      body[data-theme="ios"] .bg-indigo-600,
+      body[data-theme="ios"] .bg-indigo-500,
+      body[data-theme="ios"] .bg-violet-600,
+      body[data-theme="ios"] .bg-violet-500 {
+        background-color: #007AFF !important;
+        color: white !important;
+      }
+      html.dark body[data-theme="ios"] .bg-indigo-900,
+      html.dark body[data-theme="ios"] .bg-indigo-800,
+      html.dark body[data-theme="ios"] .bg-indigo-700,
+      html.dark body[data-theme="ios"] .bg-indigo-600,
+      html.dark body[data-theme="ios"] .bg-indigo-500,
+      html.dark body[data-theme="ios"] .bg-violet-600,
+      html.dark body[data-theme="ios"] .bg-violet-500 {
+        background-color: #0A84FF !important;
+        color: white !important;
+      }
+
+      body[data-theme="ios"] .bg-indigo-100,
+      body[data-theme="ios"] .bg-indigo-50 {
+        background-color: rgba(0,122,255,0.08) !important;
+      }
+      html.dark body[data-theme="ios"] .bg-indigo-100,
+      html.dark body[data-theme="ios"] .bg-indigo-50 {
+        background-color: rgba(10,132,255,0.15) !important;
+      }
+
+      body[data-theme="ios"] [class*="bg-indigo-900\/"] {
+        background-color: rgba(10,132,255,0.12) !important;
+      }
+      html.dark body[data-theme="ios"] [class*="bg-indigo-900\/"] {
+        background-color: rgba(10,132,255,0.2) !important;
+      }
+      
+      body[data-theme="ios"] [class*="bg-indigo-500\/"] {
+        background-color: rgba(0,122,255,0.1) !important;
+      }
+      html.dark body[data-theme="ios"] [class*="bg-indigo-500\/"] {
+        background-color: rgba(10,132,255,0.2) !important;
+      }
+      
+      body[data-theme="ios"] [class*="bg-indigo-50\/"] {
+        background-color: rgba(0,122,255,0.05) !important;
+      }
+
+      body[data-theme="ios"] .border-indigo-500, .border-indigo-600, .border-indigo-400, .border-indigo-300, .border-indigo-200, .border-indigo-100, .border-indigo-50, .border-indigo-700, .border-indigo-800, .border-indigo-900 {
+        border-color: #007AFF !important;
+      }
+      html.dark body[data-theme="ios"] .border-indigo-500, .border-indigo-600, .border-indigo-400, .border-indigo-300, .border-indigo-200, .border-indigo-100, .border-indigo-50, .border-indigo-700, .border-indigo-800, .border-indigo-900 {
+        border-color: #0A84FF !important;
+      }
+      
+      /* Specific opacity border overrides */
+      body[data-theme="ios"] [class*="border-indigo-200\/"],
+      body[data-theme="ios"] [class*="border-indigo-100\/"],
+      body[data-theme="ios"] .border-indigo-50,
+      body[data-theme="ios"] .border-indigo-100,
+      body[data-theme="ios"] .border-indigo-200,
+      body[data-theme="ios"] .border-indigo-300 {
+        border-color: rgba(0,122,255,0.2) !important;
+      }
+      html.dark body[data-theme="ios"] [class*="border-indigo-800\/"],
+      html.dark body[data-theme="ios"] [class*="border-indigo-900\/"],
+      html.dark body[data-theme="ios"] .border-indigo-800,
+      html.dark body[data-theme="ios"] .border-indigo-700,
+      html.dark body[data-theme="ios"] .border-indigo-900 {
+        border-color: rgba(10,132,255,0.3) !important;
+      }
+
+      body[data-theme="ios"] .shadow-indigo-500\\/20, .shadow-indigo-600\\/20, .shadow-indigo-600\\/30 {
+        box-shadow: 0 4px 14px 0 rgba(0, 122, 255, 0.2) !important;
+      }
+
+      body[data-theme="ios"] .ring-indigo-500\\/10, .ring-indigo-500\\/20 {
+        --tw-ring-color: #007AFF !important;
+      }
+      html.dark body[data-theme="ios"] .ring-indigo-500\\/10, .ring-indigo-500\\/20 {
+        --tw-ring-color: #0A84FF !important;
+      }
+      
+      body[data-theme="ios"] .from-indigo-600, .from-indigo-700, .from-indigo-400 {
+        --tw-gradient-from: #007AFF var(--tw-gradient-from-position) !important;
+        --tw-gradient-to: rgba(0, 122, 255, 0) var(--tw-gradient-to-position) !important;
+        --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+      }
+      body[data-theme="ios"] .to-violet-600, .to-violet-700, .to-violet-400 {
+        --tw-gradient-to: #5AC8FA var(--tw-gradient-to-position) !important;
+      }
+      
+      body[data-theme="ios"] .fill-indigo-600,
+      body[data-theme="ios"] .fill-indigo-500 {
+        fill: #007AFF !important;
+      }
+      body[data-theme="ios"] .stroke-indigo-600,
+      body[data-theme="ios"] .stroke-indigo-500 {
+        stroke: #007AFF !important;
+      }
+
 
       /* 2. NEUMORPHISM */
       body[data-theme="neumorphism"] {
@@ -172,7 +514,7 @@
         background-color: #292d32 !important;
         color: #e2e8f0 !important;
       }
-      body[data-theme="neumorphism"] .theme-panel,
+      body[data-theme="neumorphism"] .glass-panel,
       body[data-theme="neumorphism"] .glass,
       body[data-theme="neumorphism"] header {
         background-color: #e0e5ec !important;
@@ -181,42 +523,42 @@
         box-shadow: 9px 9px 16px rgba(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5) !important;
         backdrop-filter: none !important;
       }
-      html.dark body[data-theme="neumorphism"] .theme-panel,
+      html.dark body[data-theme="neumorphism"] .glass-panel,
       html.dark body[data-theme="neumorphism"] .glass,
       html.dark body[data-theme="neumorphism"] header {
         background-color: #292d32 !important;
         box-shadow: 7px 7px 15px #1e2125, -7px -7px 15px #34393f !important;
       }
-      body[data-theme="neumorphism"] textarea,
-      body[data-theme="neumorphism"] input {
+      body[data-theme="neumorphism"] .glass-input,
+      body[data-theme="neumorphism"] .glass-input {
         background-color: #e0e5ec !important;
         border: none !important;
         border-radius: 12px !important;
         box-shadow: inset 6px 6px 10px 0 rgba(163,177,198,0.6), inset -6px -6px 10px 0 rgba(255,255,255,0.5) !important;
         color: #2d3748 !important;
       }
-      html.dark body[data-theme="neumorphism"] textarea,
-      html.dark body[data-theme="neumorphism"] input {
+      html.dark body[data-theme="neumorphism"] .glass-input,
+      html.dark body[data-theme="neumorphism"] .glass-input {
         background-color: #292d32 !important;
         box-shadow: inset 6px 6px 10px #1e2125, inset -6px -6px 10px #34393f !important;
         color: #e2e8f0 !important;
       }
-      body[data-theme="neumorphism"] button {
+      body[data-theme="neumorphism"] .glass-btn {
         background-color: #e0e5ec !important;
         border: none !important;
         border-radius: 12px !important;
         box-shadow: 6px 6px 10px 0 rgba(163,177,198,0.6), -6px -6px 10px 0 rgba(255,255,255,0.5) !important;
         color: #4a5568 !important;
       }
-      html.dark body[data-theme="neumorphism"] button {
+      html.dark body[data-theme="neumorphism"] .glass-btn {
         background-color: #292d32 !important;
         box-shadow: 6px 6px 10px #1e2125, -6px -6px 10px #34393f !important;
         color: #cbd5e1 !important;
       }
-      body[data-theme="neumorphism"] button:active {
+      body[data-theme="neumorphism"] .glass-btn:active {
         box-shadow: inset 6px 6px 10px 0 rgba(163,177,198,0.6), inset -6px -6px 10px 0 rgba(255,255,255,0.5) !important;
       }
-      html.dark body[data-theme="neumorphism"] button:active {
+      html.dark body[data-theme="neumorphism"] .glass-btn:active {
         box-shadow: inset 6px 6px 10px #1e2125, inset -6px -6px 10px #34393f !important;
       }
       body[data-theme="neumorphism"] .bg-dot-pattern { display: none !important; }
@@ -228,10 +570,10 @@
         color: #334155 !important;
       }
       html.dark body[data-theme="claymorphism"] { 
-        background-color: #0f172a !important; 
+        background-color: #09090b !important; 
         color: #f1f5f9 !important;
       }
-      body[data-theme="claymorphism"] .theme-panel,
+      body[data-theme="claymorphism"] .glass-panel,
       body[data-theme="claymorphism"] .glass,
       body[data-theme="claymorphism"] header {
         border-radius: 35px !important;
@@ -241,28 +583,28 @@
         backdrop-filter: none !important;
         transition: transform 0.2s ease !important;
       }
-      html.dark body[data-theme="claymorphism"] .theme-panel,
+      html.dark body[data-theme="claymorphism"] .glass-panel,
       html.dark body[data-theme="claymorphism"] .glass,
       html.dark body[data-theme="claymorphism"] header {
-        background: #1e293b !important;
+        background: #18181b !important;
         border: 2px solid #334155 !important;
         box-shadow: inset -5px -5px 15px rgba(0,0,0,0.3), inset 5px 5px 15px rgba(255,255,255,0.05), 10px 10px 30px rgba(0,0,0,0.5) !important;
       }
-      body[data-theme="claymorphism"] textarea,
-      body[data-theme="claymorphism"] input {
+      body[data-theme="claymorphism"] .glass-input,
+      body[data-theme="claymorphism"] .glass-input {
         background-color: #f8fafc !important;
         border-radius: 20px !important;
         border: none !important;
         box-shadow: inset 4px 4px 10px rgba(0,0,0,0.08), inset -4px -4px 10px rgba(255,255,255,0.8) !important;
         color: #334155 !important;
       }
-      html.dark body[data-theme="claymorphism"] textarea,
-      html.dark body[data-theme="claymorphism"] input {
-        background-color: #0f172a !important;
+      html.dark body[data-theme="claymorphism"] .glass-input,
+      html.dark body[data-theme="claymorphism"] .glass-input {
+        background-color: #09090b !important;
         box-shadow: inset 4px 4px 10px rgba(0,0,0,0.4), inset -4px -4px 10px rgba(255,255,255,0.02) !important;
         color: #f1f5f9 !important;
       }
-      body[data-theme="claymorphism"] button {
+      body[data-theme="claymorphism"] .glass-btn {
         background-color: #f1f5f9 !important;
         border-radius: 25px !important;
         border: none !important;
@@ -270,16 +612,16 @@
         color: #475569 !important;
         transition: transform 0.2s ease, box-shadow 0.2s ease !important;
       }
-      html.dark body[data-theme="claymorphism"] button {
+      html.dark body[data-theme="claymorphism"] .glass-btn {
         background-color: #334155 !important;
         box-shadow: inset -4px -4px 10px rgba(0,0,0,0.3), inset 4px 4px 10px rgba(255,255,255,0.05), 4px 4px 15px rgba(0,0,0,0.4) !important;
         color: #cbd5e1 !important;
       }
-      body[data-theme="claymorphism"] button:hover {
+      body[data-theme="claymorphism"] .glass-btn:hover {
         transform: scale(0.97) !important;
         box-shadow: inset -2px -2px 5px rgba(0,0,0,0.05), inset 2px 2px 5px rgba(255,255,255,0.8), 2px 2px 8px rgba(0,0,0,0.08) !important;
       }
-      html.dark body[data-theme="claymorphism"] button:hover {
+      html.dark body[data-theme="claymorphism"] .glass-btn:hover {
         box-shadow: inset -2px -2px 5px rgba(0,0,0,0.3), inset 2px 2px 5px rgba(255,255,255,0.05), 2px 2px 8px rgba(0,0,0,0.4) !important;
       }
       body[data-theme="claymorphism"] .bg-dot-pattern { display: none !important; }
@@ -295,16 +637,16 @@
         background: linear-gradient(-45deg, #FF9A9E, #FECFEF, #A1C4FD, #C2E9FB) fixed !important;
         background-size: 400% 400% !important;
         animation: gradient-shift 15s ease infinite !important;
-        color: #1e293b !important;
+        color: #18181b !important;
       }
       html.dark body[data-theme="auroramorphism"] {
         background: linear-gradient(-45deg, #1A2980, #26D0CE, #8E2DE2, #4A00E0) fixed !important;
         color: #ffffff !important;
       }
       body[data-theme="auroramorphism"] .text-gray-500,
-      body[data-theme="auroramorphism"] .text-slate-500,
+      body[data-theme="auroramorphism"] .text-zinc-500,
       body[data-theme="auroramorphism"] .text-gray-400 { color: inherit !important; opacity: 0.8 !important; }
-      body[data-theme="auroramorphism"] .theme-panel,
+      body[data-theme="auroramorphism"] .glass-panel,
       body[data-theme="auroramorphism"] .glass,
       body[data-theme="auroramorphism"] header {
         background: rgba(255, 255, 255, 0.4) !important;
@@ -312,26 +654,26 @@
         border: 1px solid rgba(255, 255, 255, 0.5) !important;
         border-radius: 24px !important;
         box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
-        color: #1e293b !important;
+        color: #18181b !important;
       }
-      html.dark body[data-theme="auroramorphism"] .theme-panel,
+      html.dark body[data-theme="auroramorphism"] .glass-panel,
       html.dark body[data-theme="auroramorphism"] .glass,
       html.dark body[data-theme="auroramorphism"] header {
         background: rgba(0, 0, 0, 0.3) !important;
         border: 1px solid rgba(255, 255, 255, 0.1) !important;
         color: white !important;
       }
-      body[data-theme="auroramorphism"] textarea,
-      body[data-theme="auroramorphism"] input,
-      body[data-theme="auroramorphism"] button {
+      body[data-theme="auroramorphism"] .glass-input,
+      body[data-theme="auroramorphism"] .glass-input,
+      body[data-theme="auroramorphism"] .glass-btn {
         background: rgba(255, 255, 255, 0.5) !important;
         backdrop-filter: blur(10px) !important;
         border: 1px solid rgba(255, 255, 255, 0.6) !important;
         color: inherit !important;
       }
-      html.dark body[data-theme="auroramorphism"] textarea,
-      html.dark body[data-theme="auroramorphism"] input,
-      html.dark body[data-theme="auroramorphism"] button {
+      html.dark body[data-theme="auroramorphism"] .glass-input,
+      html.dark body[data-theme="auroramorphism"] .glass-input,
+      html.dark body[data-theme="auroramorphism"] .glass-btn {
         background: rgba(0, 0, 0, 0.4) !important;
         border: 1px solid rgba(255, 255, 255, 0.15) !important;
       }
@@ -347,12 +689,12 @@
         background-color: #f72585 !important;
         color: #000000 !important; 
       }
-      body[data-theme="neo-brutalism"] .theme-panel,
+      body[data-theme="neo-brutalism"] .glass-panel,
       body[data-theme="neo-brutalism"] .glass,
       body[data-theme="neo-brutalism"] header,
-      body[data-theme="neo-brutalism"] button,
-      body[data-theme="neo-brutalism"] input,
-      body[data-theme="neo-brutalism"] textarea {
+      body[data-theme="neo-brutalism"] .glass-btn,
+      body[data-theme="neo-brutalism"] .glass-input,
+      body[data-theme="neo-brutalism"] .glass-input {
         background: #ffffff !important;
         color: #000000 !important;
         border: 4px solid #000000 !important;
@@ -361,30 +703,30 @@
         backdrop-filter: none !important;
         transition: transform 0.1s, box-shadow 0.1s !important;
       }
-      html.dark body[data-theme="neo-brutalism"] .theme-panel,
+      html.dark body[data-theme="neo-brutalism"] .glass-panel,
       html.dark body[data-theme="neo-brutalism"] .glass,
       html.dark body[data-theme="neo-brutalism"] header,
-      html.dark body[data-theme="neo-brutalism"] button,
-      html.dark body[data-theme="neo-brutalism"] input,
-      html.dark body[data-theme="neo-brutalism"] textarea {
+      html.dark body[data-theme="neo-brutalism"] .glass-btn,
+      html.dark body[data-theme="neo-brutalism"] .glass-input,
+      html.dark body[data-theme="neo-brutalism"] .glass-input {
         background: #FF006E !important; 
         color: #ffffff !important;
         border: 4px solid #000000 !important;
       }
-      body[data-theme="neo-brutalism"] input,
-      body[data-theme="neo-brutalism"] textarea {
+      body[data-theme="neo-brutalism"] .glass-input,
+      body[data-theme="neo-brutalism"] .glass-input {
         box-shadow: 4px 4px 0px #000000 !important;
       }
-      body[data-theme="neo-brutalism"] textarea:focus,
-      body[data-theme="neo-brutalism"] input:focus {
+      body[data-theme="neo-brutalism"] .glass-input:focus,
+      body[data-theme="neo-brutalism"] .glass-input:focus {
         outline: none !important;
         background-color: #e0e0e0 !important;
       }
-      html.dark body[data-theme="neo-brutalism"] textarea:focus,
-      html.dark body[data-theme="neo-brutalism"] input:focus {
+      html.dark body[data-theme="neo-brutalism"] .glass-input:focus,
+      html.dark body[data-theme="neo-brutalism"] .glass-input:focus {
         background-color: #db005e !important;
       }
-      body[data-theme="neo-brutalism"] button:active {
+      body[data-theme="neo-brutalism"] .glass-btn:active {
         transform: translate(6px, 6px) !important;
         box-shadow: 0px 0px 0px #000000 !important;
       }
@@ -406,7 +748,7 @@
         background-color: #000000 !important; 
         color: #f5f5f7 !important;
       }
-      body[data-theme="bento-grid"] .theme-panel,
+      body[data-theme="bento-grid"] .glass-panel,
       body[data-theme="bento-grid"] .glass,
       body[data-theme="bento-grid"] header {
         background: #ffffff !important;
@@ -415,28 +757,28 @@
         box-shadow: 0 4px 20px rgba(0,0,0,0.04) !important;
         backdrop-filter: none !important;
       }
-      html.dark body[data-theme="bento-grid"] .theme-panel,
+      html.dark body[data-theme="bento-grid"] .glass-panel,
       html.dark body[data-theme="bento-grid"] .glass,
       html.dark body[data-theme="bento-grid"] header {
         background: #1c1c1e !important;
         border: 1px solid rgba(255,255,255,0.05) !important;
         box-shadow: 0 4px 20px rgba(0,0,0,0.4) !important;
       }
-      body[data-theme="bento-grid"] textarea,
-      body[data-theme="bento-grid"] input,
-      body[data-theme="bento-grid"] button {
+      body[data-theme="bento-grid"] .glass-input,
+      body[data-theme="bento-grid"] .glass-input,
+      body[data-theme="bento-grid"] .glass-btn {
         background-color: #f2f2f7 !important;
         border-radius: 12px !important;
         border: none !important;
         color: #1d1d1f !important;
       }
-      html.dark body[data-theme="bento-grid"] textarea,
-      html.dark body[data-theme="bento-grid"] input,
-      html.dark body[data-theme="bento-grid"] button {
+      html.dark body[data-theme="bento-grid"] .glass-input,
+      html.dark body[data-theme="bento-grid"] .glass-input,
+      html.dark body[data-theme="bento-grid"] .glass-btn {
         background-color: #2c2c2e !important;
         color: #f5f5f7 !important;
       }
-      body[data-theme="bento-grid"] button:hover {
+      body[data-theme="bento-grid"] .glass-btn:hover {
         transform: translateY(-2px) !important;
       }
       body[data-theme="bento-grid"] .bg-dot-pattern { display: none !important; }
@@ -453,7 +795,7 @@
         background-blend-mode: multiply;
         color: #e0d9c8 !important;
       }
-      body[data-theme="skeuomorphism"] .theme-panel,
+      body[data-theme="skeuomorphism"] .glass-panel,
       body[data-theme="skeuomorphism"] .glass,
       body[data-theme="skeuomorphism"] header {
         background: linear-gradient(to bottom, #f4f0e6, #ded7c6) !important;
@@ -461,15 +803,15 @@
         border-radius: 12px !important;
         box-shadow: 0 2px 6px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.9), inset 0 -1px 0 rgba(0,0,0,0.1) !important;
       }
-      html.dark body[data-theme="skeuomorphism"] .theme-panel,
+      html.dark body[data-theme="skeuomorphism"] .glass-panel,
       html.dark body[data-theme="skeuomorphism"] .glass,
       html.dark body[data-theme="skeuomorphism"] header {
         background: linear-gradient(to bottom, #4a4542, #302d2b) !important;
         border: 1px solid #1a1817 !important;
         box-shadow: 0 4px 8px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.4) !important;
       }
-      body[data-theme="skeuomorphism"] textarea,
-      body[data-theme="skeuomorphism"] input {
+      body[data-theme="skeuomorphism"] .glass-input,
+      body[data-theme="skeuomorphism"] .glass-input {
         background: #fffdf9 !important;
         border: 1px solid #9e9584 !important;
         border-top-color: #7d7568 !important;
@@ -477,22 +819,22 @@
         border-radius: 6px !important;
         color: #3b312b !important;
       }
-      html.dark body[data-theme="skeuomorphism"] textarea,
-      html.dark body[data-theme="skeuomorphism"] input {
+      html.dark body[data-theme="skeuomorphism"] .glass-input,
+      html.dark body[data-theme="skeuomorphism"] .glass-input {
         background: #1f1d1c !important;
         border: 1px solid #111 !important;
         border-bottom-color: #333 !important;
         box-shadow: inset 0 2px 4px rgba(0,0,0,0.4) !important;
         color: #e0d9c8 !important;
       }
-      body[data-theme="skeuomorphism"] button {
+      body[data-theme="skeuomorphism"] .glass-btn {
         background: linear-gradient(to bottom, #ffffff, #dcdcdc) !important;
         border: 1px solid #aaa !important;
         border-radius: 20px !important;
         box-shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 0 #fff !important;
         color: #333 !important;
       }
-      html.dark body[data-theme="skeuomorphism"] button {
+      html.dark body[data-theme="skeuomorphism"] .glass-btn {
         background: linear-gradient(to bottom, #5d5754, #3a3633) !important;
         border: 1px solid #1a1817 !important;
         box-shadow: 0 2px 4px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2) !important;
@@ -521,7 +863,7 @@
         80% { transform: translate(2px, -2px) }
         100% { transform: translate(0) }
       }
-      body[data-theme="y2k"] .theme-panel,
+      body[data-theme="y2k"] .glass-panel,
       body[data-theme="y2k"] .glass,
       body[data-theme="y2k"] header {
         background: #dfdfdf !important;
@@ -533,7 +875,7 @@
         box-shadow: none !important;
         color: #000080 !important;
       }
-      html.dark body[data-theme="y2k"] .theme-panel,
+      html.dark body[data-theme="y2k"] .glass-panel,
       html.dark body[data-theme="y2k"] .glass,
       html.dark body[data-theme="y2k"] header {
         background: rgba(0, 20, 0, 0.8) !important;
@@ -541,8 +883,8 @@
         box-shadow: 0 0 10px #00ff00, inset 0 0 10px #00ff00 !important;
         color: #00ff00 !important;
       }
-      body[data-theme="y2k"] textarea,
-      body[data-theme="y2k"] input {
+      body[data-theme="y2k"] .glass-input,
+      body[data-theme="y2k"] .glass-input {
         background: #ffffff !important;
         border-top: 2px solid #808080 !important;
         border-left: 2px solid #808080 !important;
@@ -551,13 +893,13 @@
         color: #000000 !important;
         border-radius: 0 !important;
       }
-      html.dark body[data-theme="y2k"] textarea,
-      html.dark body[data-theme="y2k"] input {
+      html.dark body[data-theme="y2k"] .glass-input,
+      html.dark body[data-theme="y2k"] .glass-input {
         background: #000000 !important;
         border: 1px solid #00ff00 !important;
         color: #00ff00 !important;
       }
-      body[data-theme="y2k"] button {
+      body[data-theme="y2k"] .glass-btn {
         background: #c0c0c0 !important;
         border-top: 2px solid #ffffff !important;
         border-left: 2px solid #ffffff !important;
@@ -566,24 +908,24 @@
         color: #000000 !important;
         border-radius: 0 !important;
       }
-      html.dark body[data-theme="y2k"] button {
+      html.dark body[data-theme="y2k"] .glass-btn {
         background: #002200 !important;
         border: 1px solid #00ff00 !important;
         color: #00ff00 !important;
       }
-      body[data-theme="y2k"] button:hover {
+      body[data-theme="y2k"] .glass-btn:hover {
         animation: glitch 0.3s infinite !important;
         background: #000080 !important;
         color: #ffffff !important;
       }
-      html.dark body[data-theme="y2k"] button:hover {
+      html.dark body[data-theme="y2k"] .glass-btn:hover {
         animation: glitch 0.3s infinite !important;
         background: #00ff00 !important;
         color: #000 !important;
         box-shadow: 0 0 15px #00ff00 !important;
       }
       body[data-theme="y2k"] .text-gray-500,
-      body[data-theme="y2k"] .text-slate-400 { color: inherit !important; }
+      body[data-theme="y2k"] .text-zinc-400 { color: inherit !important; }
       body[data-theme="y2k"] h1 {
         text-shadow: 2px 2px #ffffff !important;
       }
@@ -604,7 +946,7 @@
         background-image: radial-gradient(#7C4DFF 3px, transparent 3px) !important;
         color: #FFFFFF !important;
       }
-      body[data-theme="dopamine"] .theme-panel,
+      body[data-theme="dopamine"] .glass-panel,
       body[data-theme="dopamine"] .glass,
       body[data-theme="dopamine"] header {
         background: #FFFFFF !important;
@@ -612,7 +954,7 @@
         border-radius: 40px !important;
         box-shadow: 0 8px 0 #FF8A65 !important;
       }
-      html.dark body[data-theme="dopamine"] .theme-panel,
+      html.dark body[data-theme="dopamine"] .glass-panel,
       html.dark body[data-theme="dopamine"] .glass,
       html.dark body[data-theme="dopamine"] header {
         background: #512DA8 !important;
@@ -620,20 +962,20 @@
         box-shadow: 0 8px 0 #B388FF !important;
         color: white !important;
       }
-      body[data-theme="dopamine"] textarea,
-      body[data-theme="dopamine"] input {
+      body[data-theme="dopamine"] .glass-input,
+      body[data-theme="dopamine"] .glass-input {
         background: #FFF8E1 !important;
         border: 2px solid #FFD54F !important;
         border-radius: 20px !important;
         color: #5D4037 !important;
       }
-      html.dark body[data-theme="dopamine"] textarea,
-      html.dark body[data-theme="dopamine"] input {
+      html.dark body[data-theme="dopamine"] .glass-input,
+      html.dark body[data-theme="dopamine"] .glass-input {
         background: #4527A0 !important;
         border: 2px solid #7C4DFF !important;
         color: #FFFFFF !important;
       }
-      body[data-theme="dopamine"] button {
+      body[data-theme="dopamine"] .glass-btn {
         background: #69F0AE !important;
         border: 2px solid #00E676 !important;
         border-radius: 20px !important;
@@ -641,16 +983,16 @@
         box-shadow: 0 4px 0 #00E676 !important;
         transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s !important;
       }
-      html.dark body[data-theme="dopamine"] button {
+      html.dark body[data-theme="dopamine"] .glass-btn {
         background: #FF4081 !important;
         border: 2px solid #F50057 !important;
         color: #FFFFFF !important;
         box-shadow: 0 4px 0 #F50057 !important;
       }
-      body[data-theme="dopamine"] button:hover {
+      body[data-theme="dopamine"] .glass-btn:hover {
         transform: translateY(-2px) scale(1.05) rotate(2deg) !important;
       }
-      body[data-theme="dopamine"] button:active {
+      body[data-theme="dopamine"] .glass-btn:active {
         transform: translateY(2px) scale(0.95) !important;
         box-shadow: 0 0 0 transparent !important;
       }
@@ -666,7 +1008,7 @@
         background-color: #0A0A0A !important; 
         color: #EDEDED !important;
       }
-      body[data-theme="opencode"] .theme-panel,
+      body[data-theme="opencode"] .glass-panel,
       body[data-theme="opencode"] .glass,
       body[data-theme="opencode"] header {
         background: #FFFFFF !important;
@@ -675,53 +1017,53 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
         backdrop-filter: none !important;
       }
-      html.dark body[data-theme="opencode"] .theme-panel,
+      html.dark body[data-theme="opencode"] .glass-panel,
       html.dark body[data-theme="opencode"] .glass,
       html.dark body[data-theme="opencode"] header {
         background: #111111 !important;
         border: 1px solid #333333 !important;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
       }
-      body[data-theme="opencode"] textarea,
-      body[data-theme="opencode"] input {
+      body[data-theme="opencode"] .glass-input,
+      body[data-theme="opencode"] .glass-input {
         background: #F5F5F5 !important;
         border: 1px solid #EAEAEA !important;
         border-radius: 6px !important;
         color: #111111 !important;
       }
-      html.dark body[data-theme="opencode"] textarea,
-      html.dark body[data-theme="opencode"] input {
+      html.dark body[data-theme="opencode"] .glass-input,
+      html.dark body[data-theme="opencode"] .glass-input {
         background: #000000 !important;
         border: 1px solid #333333 !important;
         color: #EDEDED !important;
       }
-      body[data-theme="opencode"] textarea:focus,
-      body[data-theme="opencode"] input:focus {
+      body[data-theme="opencode"] .glass-input:focus,
+      body[data-theme="opencode"] .glass-input:focus {
         border-color: #3B82F6 !important;
         outline: none !important;
         box-shadow: 0 0 0 1px #3B82F6 !important;
       }
-      html.dark body[data-theme="opencode"] textarea:focus,
-      html.dark body[data-theme="opencode"] input:focus {
+      html.dark body[data-theme="opencode"] .glass-input:focus,
+      html.dark body[data-theme="opencode"] .glass-input:focus {
         border-color: #3B82F6 !important;
         box-shadow: 0 0 0 1px #3B82F6 !important;
       }
-      body[data-theme="opencode"] button {
+      body[data-theme="opencode"] .glass-btn {
         background: #000000 !important;
         border: 1px solid #000000 !important;
         border-radius: 6px !important;
         color: #FFFFFF !important;
         transition: background-color 0.2s, color 0.2s !important;
       }
-      html.dark body[data-theme="opencode"] button {
+      html.dark body[data-theme="opencode"] .glass-btn {
         background: #EDEDED !important;
         border: 1px solid #EDEDED !important;
         color: #000000 !important;
       }
-      body[data-theme="opencode"] button:hover {
+      body[data-theme="opencode"] .glass-btn:hover {
         background: #333333 !important;
       }
-      html.dark body[data-theme="opencode"] button:hover {
+      html.dark body[data-theme="opencode"] .glass-btn:hover {
         background: #A0A0A0 !important;
         border-color: #A0A0A0 !important;
       }
@@ -742,7 +1084,7 @@
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-zinc-50 dark:bg-slate-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-300 antialiased selection:bg-indigo-100 dark:selection:bg-indigo-900/50 selection:text-indigo-700 dark:selection:text-indigo-200">
+  <body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-300 antialiased selection:bg-indigo-100 dark:selection:bg-indigo-900/50 selection:text-indigo-700 dark:selection:text-indigo-200">
     <div id="root" class="min-h-screen relative z-10"></div>
     <!-- Background Gradient overlay -->
     <div class="fixed inset-0 z-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-100/40 via-transparent to-transparent dark:from-indigo-950/20 dark:via-transparent dark:to-transparent"></div>

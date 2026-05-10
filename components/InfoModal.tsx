@@ -26,10 +26,10 @@ export const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose, type, for
       />
 
       {/* Modal Container */}
-      <div className="relative bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col border border-gray-200 dark:border-slate-700 animate-slide-up overflow-hidden">
+      <div className="relative bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col border border-gray-200 dark:border-zinc-700 animate-slide-up overflow-hidden">
         
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 backdrop-blur">
           <h2 className={`text-lg font-bold ${type === 'DISCLAIMER' ? 'text-red-600 dark:text-red-400' : 'text-indigo-600 dark:text-indigo-400'}`}>
             {content.title}
           </h2>
@@ -38,7 +38,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose, type, for
           {!forced && (
             <button 
                 onClick={onClose}
-                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800 text-gray-500 transition-colors"
+                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 text-gray-500 transition-colors"
             >
                 <X className="w-5 h-5" />
             </button>
@@ -46,7 +46,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose, type, for
         </div>
 
         {/* Language Tabs */}
-        <div className="flex items-center gap-1 px-6 py-2 bg-gray-50 dark:bg-slate-950/50 border-b border-gray-100 dark:border-slate-800 overflow-x-auto">
+        <div className="flex items-center gap-1 px-6 py-2 bg-gray-50 dark:bg-zinc-950/50 border-b border-gray-100 dark:border-zinc-800 overflow-x-auto">
             <Globe className="w-4 h-4 text-gray-400 mr-2 flex-shrink-0" />
             {(['ES', 'EN', 'PT', 'FR'] as InfoLanguage[]).map((lang) => (
                 <button
@@ -56,7 +56,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose, type, for
                         px-3 py-1 text-xs font-semibold rounded-full transition-colors whitespace-nowrap
                         ${language === lang 
                             ? 'bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300' 
-                            : 'text-gray-500 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-800'}
+                            : 'text-gray-500 dark:text-zinc-400 hover:bg-gray-200 dark:hover:bg-zinc-800'}
                     `}
                 >
                     {lang}
@@ -65,19 +65,19 @@ export const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose, type, for
         </div>
 
         {/* Content Body */}
-        <div className="p-6 overflow-y-auto text-gray-700 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
+        <div className="p-6 overflow-y-auto text-gray-700 dark:text-zinc-300 leading-relaxed text-sm sm:text-base">
             <div dangerouslySetInnerHTML={{ __html: content.body as string }} />
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-gray-100 dark:border-slate-800 bg-gray-50 dark:bg-slate-950/30 flex justify-end">
+        <div className="px-6 py-4 border-t border-gray-100 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-950/30 flex justify-end">
           <button
             onClick={onClose}
             className={`
                 px-6 py-2 rounded-xl text-sm font-semibold transition-transform active:scale-95 shadow-lg
                 ${forced 
                     ? 'bg-red-600 hover:bg-red-700 text-white w-full sm:w-auto' 
-                    : 'bg-gray-900 dark:bg-slate-700 text-white hover:bg-gray-800 dark:hover:bg-slate-600'}
+                    : 'bg-gray-900 dark:bg-zinc-700 text-white hover:bg-gray-800 dark:hover:bg-zinc-600'}
             `}
           >
             {forced ? (language === 'ES' ? 'Aceptar y Continuar' : 'Accept & Continue') : 'Entendido'}

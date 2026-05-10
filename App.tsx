@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, MessageSquareText, Eraser, Moon, Sun, ArrowRight, PenLine, Flag, BookOpen, ShieldAlert, StickyNote, Wand2, Zap, Layers } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ToneOption, OutputLanguage, MacroType, LengthOption, PerspectiveOption, ModelOption } from './types';
+import { ToneOption, OutputLanguage, MacroType, LengthOption, ModelOption } from './types';
 import { streamTransformText } from './services/geminiService';
 import { OptionButton } from './components/OptionButton';
 import { OutputSection } from './components/OutputSection';
 import { LanguageSelector } from './components/LanguageSelector';
 import { MacroSelector } from './components/MacroSelector';
 import { LengthSelector } from './components/LengthSelector';
-import { PerspectiveSelector } from './components/PerspectiveSelector';
 import { ModelSelector } from './components/ModelSelector';
 import { Logo } from './components/Logo';
 import { InfoModal } from './components/InfoModal';
@@ -31,7 +30,6 @@ const App: React.FC = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<OutputLanguage>(OutputLanguage.AUTO);
   const [selectedMacro, setSelectedMacro] = useState<MacroType>(MacroType.FULL);
   const [selectedLength, setSelectedLength] = useState<LengthOption>(LengthOption.ORIGINAL);
-  const [selectedPerspective, setSelectedPerspective] = useState<PerspectiveOption>(PerspectiveOption.WE);
   const [selectedModel, setSelectedModel] = useState<ModelOption>(ModelOption.LITE);
   const [issueTopic, setIssueTopic] = useState('');
   const [isClosingFinal, setIsClosingFinal] = useState(false);
@@ -102,7 +100,6 @@ const App: React.FC = () => {
         targetLanguage: selectedLanguage,
         macroType: selectedMacro,
         lengthOption: selectedLength,
-        perspective: selectedPerspective,
         model: activeTab === 'im' ? ModelOption.LITE : selectedModel,
         issueTopic: issueTopic, 
         refinementInstruction: refinement,
@@ -137,7 +134,6 @@ const App: React.FC = () => {
         targetLanguage: OutputLanguage.AUTO, // Mismo idioma
         macroType: MacroType.FULL, // Irrelevante, se sobreescribe con refinement
         lengthOption: LengthOption.ORIGINAL,
-        perspective: selectedPerspective,
         model: ModelOption.LITE, // Usamos lite para ahorro de costes
         refinementInstruction: "Corrige estrictamente la ORTOGRAFÍA y GRAMÁTICA. No cambies el estilo, ni el tono, ni reescribas frases si son correctas. Solo devuelve el texto corregido exacto.",
         previousOutput: outputText
@@ -192,12 +188,12 @@ const App: React.FC = () => {
       />
 
       {/* Header */}
-      <header className="sticky top-0 z-50 glass border-b border-gray-200/50 dark:border-slate-800/50 transition-colors duration-300">
+      <header className="sticky top-0 z-50 glass border-b border-gray-200/50 dark:border-zinc-800/50 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="relative group cursor-pointer">
                <div className="absolute inset-0 bg-indigo-500/30 blur-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-               <div className="relative w-10 h-10 group-hover:scale-105 transition-transform duration-300 rounded-xl overflow-hidden shadow-lg shadow-indigo-500/20 bg-white dark:bg-slate-900 flex items-center justify-center p-1.5 border border-indigo-50 dark:border-indigo-900/50">
+               <div className="relative w-10 h-10 group-hover:scale-105 transition-transform duration-300 rounded-xl overflow-hidden shadow-lg shadow-indigo-500/20 bg-white dark:bg-zinc-900 flex items-center justify-center p-1.5 border border-indigo-50 dark:border-indigo-900/50">
                   <Logo className="w-full h-full text-indigo-600 dark:text-indigo-400" />
                </div>
             </div>
@@ -235,7 +231,7 @@ const App: React.FC = () => {
             
             <button
               onClick={() => setIsDarkMode(!isDarkMode)}
-              className="p-2.5 rounded-full text-gray-500 dark:text-slate-300 hover:bg-gray-100/80 dark:hover:bg-slate-800/80 transition-all hover:scale-105 active:scale-95 bg-transparent dark:bg-slate-800/50"
+              className="p-2.5 rounded-full text-gray-500 dark:text-zinc-300 hover:bg-gray-100/80 dark:hover:bg-zinc-800/80 transition-all hover:scale-105 active:scale-95 bg-transparent dark:bg-zinc-800/50"
               title={isDarkMode ? "Modo Claro" : "Modo Oscuro"}
             >
               {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
@@ -248,45 +244,45 @@ const App: React.FC = () => {
         
         {/* Tab Switcher */}
         <div className="flex justify-center mb-10">
-          <div className="bg-gray-200/50 dark:bg-slate-900/80 p-1.5 rounded-2xl border border-gray-300/50 dark:border-slate-800 backdrop-blur-sm flex relative">
+          <div className="bg-gray-200/50 dark:bg-zinc-900/80 p-1.5 rounded-2xl border border-gray-300/50 dark:border-zinc-800 backdrop-blur-sm flex relative">
             <button 
               onClick={() => setActiveTab('transform')}
-              className={`relative z-10 flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-black transition-all duration-300 ${activeTab === 'transform' ? 'text-indigo-600 dark:text-indigo-300' : 'text-gray-500 dark:text-slate-400 hover:text-indigo-600'}`}
+              className={`relative z-10 flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-black transition-all duration-300 ${activeTab === 'transform' ? 'text-indigo-600 dark:text-indigo-300' : 'text-gray-500 dark:text-zinc-400 hover:text-indigo-600'}`}
             >
               <Wand2 className="w-4 h-4" />
               <span>Transformación (Tickets)</span>
               {activeTab === 'transform' && (
                 <motion.div 
                   layoutId="activeTab"
-                  className="absolute inset-0 bg-white dark:bg-slate-700 rounded-xl shadow-premium dark:shadow-premium-dark -z-10"
+                  className="absolute inset-0 bg-white dark:bg-zinc-700 rounded-xl shadow-premium dark:shadow-premium-dark -z-10"
                   transition={{ type: "spring", bounce: 0.2, duration: 0.3 }}
                 />
               )}
             </button>
             <button 
               onClick={() => setActiveTab('im')}
-              className={`relative z-10 flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-black transition-all duration-300 ${activeTab === 'im' ? 'text-indigo-600 dark:text-indigo-300' : 'text-gray-500 dark:text-slate-400 hover:text-indigo-600'}`}
+              className={`relative z-10 flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-black transition-all duration-300 ${activeTab === 'im' ? 'text-indigo-600 dark:text-indigo-300' : 'text-gray-500 dark:text-zinc-400 hover:text-indigo-600'}`}
             >
               <Zap className="w-4 h-4" />
               <span>IM (Chat en Vivo)</span>
               {activeTab === 'im' && (
                 <motion.div 
                   layoutId="activeTab"
-                  className="absolute inset-0 bg-white dark:bg-slate-700 rounded-xl shadow-premium dark:shadow-premium-dark -z-10"
+                  className="absolute inset-0 bg-white dark:bg-zinc-700 rounded-xl shadow-premium dark:shadow-premium-dark -z-10"
                   transition={{ type: "spring", bounce: 0.2, duration: 0.3 }}
                 />
               )}
             </button>
             <button 
               onClick={() => setActiveTab('notes')}
-              className={`relative z-10 flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-black transition-all duration-300 ${activeTab === 'notes' ? 'text-indigo-600 dark:text-indigo-300' : 'text-gray-500 dark:text-slate-400 hover:text-indigo-600'}`}
+              className={`relative z-10 flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-black transition-all duration-300 ${activeTab === 'notes' ? 'text-indigo-600 dark:text-indigo-300' : 'text-gray-500 dark:text-zinc-400 hover:text-indigo-600'}`}
             >
               <StickyNote className="w-4 h-4" />
               <span>Internal Notes</span>
               {activeTab === 'notes' && (
                 <motion.div 
                   layoutId="activeTab"
-                  className="absolute inset-0 bg-white dark:bg-slate-700 rounded-xl shadow-premium dark:shadow-premium-dark -z-10"
+                  className="absolute inset-0 bg-white dark:bg-zinc-700 rounded-xl shadow-premium dark:shadow-premium-dark -z-10"
                   transition={{ type: "spring", bounce: 0.2, duration: 0.3 }}
                 />
               )}
@@ -306,12 +302,12 @@ const App: React.FC = () => {
             >
               {/* Controls */}
               {activeTab === 'transform' && (
-                <div className="theme-panel bg-white/80 dark:bg-slate-900/60 backdrop-blur-lg rounded-[2rem] p-8 shadow-premium dark:shadow-premium-dark border border-white/50 dark:border-slate-700/50 transition-colors duration-300">
+                <div className="theme-panel glass-panel backdrop-blur-lg rounded-[2rem] p-8 shadow-premium dark:shadow-premium-dark border border-white/50 dark:border-zinc-700/50 transition-colors duration-300">
                   <div className="flex flex-col lg:flex-row gap-10 lg:items-start justify-between">
                     <div className="flex flex-col gap-6 flex-1 w-full">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
                         <div className="flex flex-col gap-3">
-                          <span className="text-[10px] font-black text-gray-400 dark:text-slate-400 uppercase tracking-[0.2em] ml-1">Estructura</span>
+                          <span className="text-[10px] font-black text-gray-400 dark:text-zinc-400 uppercase tracking-[0.2em] ml-1">Estructura</span>
                           <MacroSelector 
                             selectedMacro={selectedMacro} 
                             onChange={setSelectedMacro} 
@@ -319,7 +315,7 @@ const App: React.FC = () => {
                           />
                         </div>
                         <div className="flex flex-col gap-3">
-                          <span className="text-[10px] font-black text-gray-400 dark:text-slate-400 uppercase tracking-[0.2em] ml-1">Longitud</span>
+                          <span className="text-[10px] font-black text-gray-400 dark:text-zinc-400 uppercase tracking-[0.2em] ml-1">Longitud</span>
                           <LengthSelector
                             selectedLength={selectedLength}
                             onChange={setSelectedLength}
@@ -346,7 +342,7 @@ const App: React.FC = () => {
                               value={issueTopic}
                               onChange={(e) => setIssueTopic(e.target.value)}
                               placeholder="Ej: suscripción, pago rechazado..."
-                              className="flex-1 px-4 py-2.5 rounded-xl border border-indigo-200/50 dark:border-indigo-800/50 bg-white dark:bg-slate-900 dark:text-slate-200 text-sm font-medium focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-colors placeholder:text-gray-400 dark:placeholder:text-slate-500"
+                              className="glass-input flex-1 px-4 py-2.5 rounded-xl border border-indigo-200/50 dark:border-indigo-800/50 bg-white dark:bg-zinc-900 dark:text-zinc-200 text-sm font-medium focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-colors placeholder:text-gray-400 dark:placeholder:text-zinc-500"
                             />
                           </motion.div>
                         )}
@@ -354,7 +350,7 @@ const App: React.FC = () => {
                     </div>
 
                     <div className="flex flex-col gap-3 w-full lg:w-auto">
-                        <span className="text-[10px] font-black text-gray-400 dark:text-slate-400 uppercase tracking-[0.2em] ml-1 lg:text-right">
+                        <span className="text-[10px] font-black text-gray-400 dark:text-zinc-400 uppercase tracking-[0.2em] ml-1 lg:text-right">
                           Idiomas y Modelos
                         </span>
                         <div className="flex flex-col sm:flex-row gap-3 lg:ml-auto">
@@ -372,11 +368,11 @@ const App: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-200 dark:via-slate-700 to-transparent my-8"></div>
+                  <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-200 dark:via-zinc-700 to-transparent my-8"></div>
 
                   <div className="flex flex-col xl:flex-row items-end justify-between gap-8">
                     <div className="flex flex-col gap-3 w-full xl:w-auto">
-                      <span className="text-[10px] font-black text-gray-400 dark:text-slate-400 uppercase tracking-[0.2em] ml-1 text-center xl:text-left">Tonos Emocionales</span>
+                      <span className="text-[10px] font-black text-gray-400 dark:text-zinc-400 uppercase tracking-[0.2em] ml-1 text-center xl:text-left">Tonos Emocionales</span>
                       <div className="flex flex-wrap justify-center xl:justify-start gap-2.5">
                         {Object.values(ToneOption).map((tone) => (
                           <OptionButton
@@ -391,12 +387,7 @@ const App: React.FC = () => {
                     </div>
 
                     <div className="flex flex-col sm:flex-row items-center gap-5 w-full xl:w-auto justify-end mt-4 xl:mt-0">
-                      <div className="flex items-center gap-4 bg-gray-100/50 dark:bg-slate-800/50 p-1.5 rounded-2xl border border-gray-200/50 dark:border-slate-700/50">
-                          <PerspectiveSelector
-                              selectedPerspective={selectedPerspective}
-                              onChange={setSelectedPerspective}
-                              disabled={isLoading}
-                          />
+                      <div className="flex items-center gap-4 bg-gray-100/50 dark:bg-zinc-800/50 p-1.5 rounded-2xl border border-gray-200/50 dark:border-zinc-700/50">
                           <button
                               onClick={() => setIsClosingFinal(!isClosingFinal)}
                               disabled={isLoading}
@@ -405,7 +396,7 @@ const App: React.FC = () => {
                                   relative flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 border
                                   ${isClosingFinal 
                                       ? 'bg-red-500 border-red-500 text-white shadow-lg shadow-red-500/30' 
-                                      : 'bg-white dark:bg-slate-900 text-gray-500 dark:text-slate-400 border-gray-200 dark:border-slate-800 hover:border-red-200 dark:hover:border-red-900/50'
+                                      : 'bg-white dark:bg-zinc-900 text-gray-500 dark:text-zinc-400 border-gray-200 dark:border-zinc-800 hover:border-red-200 dark:hover:border-red-900/50'
                                   }
                                   ${isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
                               `}
@@ -423,7 +414,7 @@ const App: React.FC = () => {
                           font-black text-sm uppercase tracking-widest text-white transition-all duration-500 shadow-xl
                           overflow-hidden
                           ${isLoading || !inputText.trim() 
-                            ? 'bg-slate-400 dark:bg-slate-600 cursor-not-allowed opacity-70 shadow-none' 
+                            ? 'bg-zinc-400 dark:bg-zinc-600 cursor-not-allowed opacity-70 shadow-none' 
                             : 'bg-gradient-to-br from-indigo-600 via-indigo-600 to-violet-700 hover:scale-[1.02] active:scale-[0.98] shadow-indigo-500/30 hover:shadow-indigo-500/50'}
                         `}
                       >
@@ -444,7 +435,7 @@ const App: React.FC = () => {
               )}
 
               {activeTab === 'im' && (
-                <div className="theme-panel bg-white/80 dark:bg-slate-900/60 backdrop-blur-lg rounded-2xl p-4 shadow-sm border border-gray-200/50 dark:border-slate-700/50 transition-colors duration-300 flex flex-col xl:flex-row items-center justify-between gap-4">
+                <div className="theme-panel glass-panel backdrop-blur-lg rounded-2xl p-4 shadow-sm border border-gray-200/50 dark:border-zinc-700/50 transition-colors duration-300 flex flex-col xl:flex-row items-center justify-between gap-4">
                   <div className="flex items-center gap-3 w-full xl:w-auto shrink-0">
                     <div className="flex flex-col shrink-0">
                        <span className="text-[10px] font-black text-indigo-500 dark:text-indigo-400 uppercase tracking-widest flex items-center gap-1.5 ml-1 mb-1">
@@ -459,7 +450,7 @@ const App: React.FC = () => {
                     />
                   </div>
                   
-                  <div className="flex flex-wrap justify-center xl:justify-start gap-2 flex-1 xl:px-4 py-2 xl:border-x border-gray-200/50 dark:border-slate-700/50">
+                  <div className="flex flex-wrap justify-center xl:justify-start gap-2 flex-1 xl:px-4 py-2 xl:border-x border-gray-200/50 dark:border-zinc-700/50">
                     {Object.values(ToneOption).map((tone) => (
                       <OptionButton
                         key={tone}
@@ -479,7 +470,7 @@ const App: React.FC = () => {
                       font-black text-xs uppercase tracking-widest text-white transition-all duration-500 shadow-md
                       overflow-hidden
                       ${isLoading || !inputText.trim() 
-                        ? 'bg-slate-400 dark:bg-slate-600 cursor-not-allowed opacity-70 shadow-none' 
+                        ? 'bg-zinc-400 dark:bg-zinc-600 cursor-not-allowed opacity-70 shadow-none' 
                         : 'bg-gradient-to-br from-indigo-600 to-violet-600 hover:scale-[1.02] active:scale-[0.98] shadow-indigo-500/30 hover:shadow-indigo-500/40'}
                     `}
                   >
@@ -499,9 +490,9 @@ const App: React.FC = () => {
 
               {/* Main Interface Grid */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-[550px] lg:h-[700px]">
-                <div className="theme-panel flex flex-col h-full bg-white/60 dark:bg-slate-800/60 backdrop-blur-md rounded-[2rem] shadow-premium dark:shadow-premium-dark border border-white/30 dark:border-slate-700/30 overflow-hidden focus-within:ring-4 focus-within:ring-indigo-500/10 transition-all duration-500 hover:bg-white/80 dark:hover:bg-slate-800/80">
-                  <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100/50 dark:border-slate-700/50">
-                    <label htmlFor="input-text" className="text-[10px] font-black text-gray-400 dark:text-slate-400 uppercase tracking-[0.2em] flex items-center gap-2">
+                <div className="theme-panel flex flex-col h-full glass-panel backdrop-blur-md rounded-[2rem] shadow-premium dark:shadow-premium-dark border border-white/30 dark:border-zinc-700/30 overflow-hidden focus-within:ring-4 focus-within:ring-indigo-500/10 transition-all duration-500">
+                  <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100/50 dark:border-zinc-700/50">
+                    <label htmlFor="input-text" className="text-[10px] font-black text-gray-400 dark:text-zinc-400 uppercase tracking-[0.2em] flex items-center gap-2">
                       <MessageSquareText className="w-4 h-4" />
                       {activeTab === 'transform' ? 'Entrada (Ticket Completo)' : 'Lo que quieres decir (En tu idioma)'}
                     </label>
@@ -516,14 +507,14 @@ const App: React.FC = () => {
                   </div>
                   <textarea
                     id="input-text"
-                    className="flex-1 w-full p-8 resize-none focus:outline-none text-base sm:text-lg font-medium text-slate-700 dark:text-slate-100 placeholder:text-slate-400/50 dark:placeholder:text-slate-500 bg-transparent leading-relaxed"
+                    className="glass-input flex-1 w-full p-8 resize-none focus:outline-none text-base sm:text-lg font-medium text-zinc-700 dark:text-zinc-100 placeholder:text-zinc-400/50 dark:placeholder:text-zinc-500 bg-transparent leading-relaxed"
                     placeholder={activeTab === 'transform' ? "Escribe o pega el cuerpo del ticket original aquí..." : "Escribe tu idea de forma sencilla, nosotros la convertimos a un mensaje de chat brillante..."}
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
                     disabled={isLoading}
                   />
-                   <div className="px-6 py-3 border-t border-gray-100/50 dark:border-slate-700/50 flex justify-end">
-                      <span className="text-[10px] font-black text-gray-400 dark:text-slate-500 bg-gray-100/50 dark:bg-slate-900/50 px-3 py-1 rounded-lg border border-gray-200/50 dark:border-slate-800/50">
+                   <div className="px-6 py-3 border-t border-gray-100/50 dark:border-zinc-700/50 flex justify-end">
+                      <span className="text-[10px] font-black text-gray-400 dark:text-zinc-500 bg-gray-100/50 dark:bg-zinc-900/50 px-3 py-1 rounded-lg border border-gray-200/50 dark:border-zinc-800/50">
                         {inputText.length} caracteres
                       </span>
                    </div>

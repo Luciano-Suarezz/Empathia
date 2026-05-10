@@ -18,7 +18,7 @@ export const DiffView: React.FC<DiffViewProps> = ({ original, modified }) => {
           ? 'bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-200 decoration-green-500'
           : part.removed
           ? 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-200 decoration-red-500 line-through decoration-2 opacity-70'
-          : 'text-gray-800 dark:text-slate-200';
+          : 'text-gray-800 dark:text-zinc-200';
 
         return (
           <span key={index} className={`${color} px-0.5 rounded-sm`}>

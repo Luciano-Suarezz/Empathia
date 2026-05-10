@@ -60,15 +60,15 @@ export const OutputSection: React.FC<OutputSectionProps> = ({
 
   if (!transformedText && !isLoading) {
     return (
-      <div className="theme-panel h-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-[2.5rem] border border-white/20 dark:border-slate-800 shadow-sm flex flex-col items-center justify-center p-12 text-center group">
+      <div className="glass-panel h-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl rounded-[2.5rem] border border-white/20 dark:border-zinc-800 shadow-sm flex flex-col items-center justify-center p-12 text-center group">
         <div className="relative mb-8">
           <div className="absolute inset-0 bg-indigo-500/20 blur-3xl rounded-full group-hover:scale-150 transition-transform duration-1000"></div>
-          <div className="relative w-24 h-24 bg-indigo-50 dark:bg-slate-800 rounded-[2rem] flex items-center justify-center shadow-inner">
-              <Sparkles className="w-10 h-10 text-indigo-400 dark:text-slate-600 animate-pulse" />
+          <div className="relative w-24 h-24 bg-indigo-50 dark:bg-zinc-800 rounded-[2rem] flex items-center justify-center shadow-inner">
+              <Sparkles className="w-10 h-10 text-indigo-400 dark:text-zinc-600 animate-pulse" />
           </div>
         </div>
         <h3 className="text-xl font-black text-gray-900 dark:text-white mb-3 tracking-tight">Tu respuesta aparecerá aquí</h3>
-        <p className="text-sm text-gray-500 dark:text-slate-500 max-w-[280px] leading-relaxed font-medium">
+        <p className="text-sm text-gray-500 dark:text-zinc-500 max-w-[280px] leading-relaxed font-medium">
           Una vez que transformes el texto, podrás refinarlo, corregir la ortografía o copiarlo directamente.
         </p>
       </div>
@@ -80,10 +80,10 @@ export const OutputSection: React.FC<OutputSectionProps> = ({
   const textToCompareModified = isCorrecting ? (correctionSuggestion || '') : transformedText;
 
   return (
-    <div className={`theme-panel relative flex flex-col h-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-[2.5rem] border ${isCorrecting ? 'border-amber-400 dark:border-amber-600 ring-4 ring-amber-500/10' : 'border-white/20 dark:border-slate-800'} shadow-sm overflow-hidden transition-all duration-500 group`}>
+    <div className={`glass-panel relative flex flex-col h-full backdrop-blur-xl rounded-[2.5rem] border ${isCorrecting ? 'border-amber-400 dark:border-amber-600 ring-4 ring-amber-500/10' : 'border-white/20 dark:border-zinc-800'} shadow-sm overflow-hidden transition-all duration-500 group`}>
       
       {/* Header */}
-      <div className="px-8 py-4 border-b border-gray-100 dark:border-slate-800 flex items-center justify-between bg-white/40 dark:bg-slate-900/40">
+      <div className="px-8 py-4 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between bg-white/40 dark:bg-zinc-900/40">
         <div className="flex items-center gap-4">
           {isCorrecting ? (
              <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400 font-black text-xs uppercase tracking-widest animate-pulse">
@@ -91,17 +91,17 @@ export const OutputSection: React.FC<OutputSectionProps> = ({
                 <span>Revisión en curso</span>
              </div>
           ) : (
-            <div className="flex bg-gray-100/80 dark:bg-slate-800/80 p-1 rounded-xl border border-gray-200/50 dark:border-slate-700/50">
+            <div className="flex bg-gray-100/80 dark:bg-zinc-800/80 p-1 rounded-xl border border-gray-200/50 dark:border-zinc-700/50">
               <button
                 onClick={() => setViewMode('final')}
-                className={`flex items-center gap-2 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-lg transition-all ${viewMode === 'final' ? 'bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 shadow-sm' : 'text-gray-400 dark:text-slate-500 hover:text-gray-600'}`}
+                className={`flex items-center gap-2 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-lg transition-all ${viewMode === 'final' ? 'bg-white dark:bg-zinc-700 text-indigo-600 dark:text-indigo-400 shadow-sm' : 'text-gray-400 dark:text-zinc-500 hover:text-gray-600'}`}
               >
                 <Eye className="w-3.5 h-3.5" />
                 <span>Final</span>
               </button>
               <button
                 onClick={() => setViewMode('diff')}
-                className={`flex items-center gap-2 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-lg transition-all ${viewMode === 'diff' ? 'bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 shadow-sm' : 'text-gray-400 dark:text-slate-500 hover:text-gray-600'}`}
+                className={`flex items-center gap-2 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-lg transition-all ${viewMode === 'diff' ? 'bg-white dark:bg-zinc-700 text-indigo-600 dark:text-indigo-400 shadow-sm' : 'text-gray-400 dark:text-zinc-500 hover:text-gray-600'}`}
               >
                 <GitCompare className="w-3.5 h-3.5" />
                 <span>Cambios</span>
@@ -143,10 +143,10 @@ export const OutputSection: React.FC<OutputSectionProps> = ({
 
         {isLoading && !transformedText ? (
           <div className="space-y-6 animate-pulse mt-4">
-            <div className="h-4 bg-gray-100 dark:bg-slate-800 rounded-full w-3/4"></div>
-            <div className="h-4 bg-gray-100 dark:bg-slate-800 rounded-full w-full"></div>
-            <div className="h-4 bg-gray-100 dark:bg-slate-800 rounded-full w-5/6"></div>
-            <div className="h-4 bg-gray-100 dark:bg-slate-800 rounded-full w-2/3"></div>
+            <div className="h-4 bg-gray-100 dark:bg-zinc-800 rounded-full w-3/4"></div>
+            <div className="h-4 bg-gray-100 dark:bg-zinc-800 rounded-full w-full"></div>
+            <div className="h-4 bg-gray-100 dark:bg-zinc-800 rounded-full w-5/6"></div>
+            <div className="h-4 bg-gray-100 dark:bg-zinc-800 rounded-full w-2/3"></div>
           </div>
         ) : (
           currentViewMode === 'final' ? (
@@ -158,7 +158,7 @@ export const OutputSection: React.FC<OutputSectionProps> = ({
                   </div>
                 )}
                 <textarea
-                    className="flex-1 w-full bg-transparent border-none outline-none resize-none text-gray-800 dark:text-slate-100 leading-relaxed font-medium text-lg placeholder:text-gray-300 dark:placeholder:text-slate-800 p-0"
+                    className="glass-input flex-1 w-full bg-transparent border-none outline-none resize-none text-gray-800 dark:text-zinc-100 leading-relaxed font-medium text-lg placeholder:text-gray-300 dark:placeholder:text-zinc-800 p-0"
                     value={transformedText}
                     onChange={(e) => onUpdateText(e.target.value)}
                     spellCheck={true}
@@ -169,7 +169,7 @@ export const OutputSection: React.FC<OutputSectionProps> = ({
           ) : (
             <div className="animate-fade-in">
                 {isCorrecting && (
-                  <div className="text-[10px] font-black text-gray-400 dark:text-slate-500 uppercase tracking-widest mb-6 flex items-center gap-2">
+                  <div className="text-[10px] font-black text-gray-400 dark:text-zinc-500 uppercase tracking-widest mb-6 flex items-center gap-2">
                      <div className="w-2 h-2 rounded-full bg-red-500"></div>
                      <span>Original</span>
                      <div className="w-2 h-2 rounded-full bg-emerald-500 ml-4"></div>
@@ -185,7 +185,7 @@ export const OutputSection: React.FC<OutputSectionProps> = ({
 
       {/* Footer / Refinement */}
       {!isLoading && transformedText && !isCorrecting && (
-        <div className="p-6 bg-gray-50/50 dark:bg-slate-900/50 border-t border-gray-100 dark:border-slate-800 backdrop-blur-xl">
+        <div className="p-6 bg-gray-50/50 dark:bg-zinc-900/50 border-t border-gray-100 dark:border-zinc-800 backdrop-blur-xl">
           <div className="flex flex-wrap gap-2 mb-6">
              {[
                { label: "Más Corto", icon: ArrowDownNarrowWide, action: "Hazlo más corto" },
@@ -195,7 +195,7 @@ export const OutputSection: React.FC<OutputSectionProps> = ({
                <button 
                  key={btn.label}
                  onClick={() => handleQuickAction(btn.action)} 
-                 className="flex items-center gap-2 px-4 py-2 text-[10px] font-black uppercase tracking-widest bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl hover:border-indigo-500 dark:hover:border-indigo-400 transition-all text-gray-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm"
+                 className="flex items-center gap-2 px-4 py-2 text-[10px] font-black uppercase tracking-widest bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl hover:border-indigo-500 dark:hover:border-indigo-400 transition-all text-gray-500 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm"
                >
                   <btn.icon className="w-3 h-3" />
                   <span>{btn.label}</span>
@@ -209,7 +209,7 @@ export const OutputSection: React.FC<OutputSectionProps> = ({
               value={refinementInput}
               onChange={(e) => setRefinementInput(e.target.value)}
               placeholder="¿Algún ajuste final? Ej: 'Quita la disculpa'..."
-              className="w-full pl-6 pr-14 py-4 text-sm font-medium rounded-2xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all shadow-sm dark:text-slate-100 placeholder:text-gray-400 dark:placeholder:text-slate-600"
+              className="glass-input w-full pl-6 pr-14 py-4 text-sm font-medium rounded-2xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all shadow-sm dark:text-zinc-100 placeholder:text-gray-400 dark:placeholder:text-zinc-600"
             />
             <button
               type="submit"
@@ -224,14 +224,14 @@ export const OutputSection: React.FC<OutputSectionProps> = ({
 
       {/* Correction Actions Overlay */}
       {isCorrecting && !isLoading && (
-        <div className="absolute bottom-0 left-0 right-0 p-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border-t border-amber-200 dark:border-amber-900/50 flex items-center justify-between gap-6 animate-slide-up z-30 shadow-2xl">
+        <div className="absolute bottom-0 left-0 right-0 p-6 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-2xl border-t border-amber-200 dark:border-amber-900/50 flex items-center justify-between gap-6 animate-slide-up z-30 shadow-2xl">
             <div className="text-sm font-bold text-gray-900 dark:text-white">
                 ¿Aplicar correcciones?
             </div>
             <div className="flex gap-3">
                 <button 
                   onClick={onDiscardCorrection}
-                  className="px-6 py-2.5 text-[10px] font-black uppercase tracking-widest text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-xl transition-colors"
+                  className="px-6 py-2.5 text-[10px] font-black uppercase tracking-widest text-gray-500 dark:text-zinc-400 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-xl transition-colors"
                 >
                     Descartar
                 </button>

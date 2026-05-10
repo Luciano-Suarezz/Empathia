@@ -26,7 +26,7 @@ const getIcon = (option: ToneOption) => {
 
 // More subtle coloring logic
 const getColorClass = (option: ToneOption, isSelected: boolean) => {
-  if (!isSelected) return "bg-white dark:bg-slate-800 text-gray-500 dark:text-slate-300 border-gray-200 dark:border-slate-700 hover:border-indigo-200 dark:hover:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-700/50";
+  if (!isSelected) return "bg-white dark:bg-zinc-800 text-gray-500 dark:text-zinc-300 border-gray-200 dark:border-zinc-700 hover:border-indigo-200 dark:hover:border-zinc-600 hover:bg-gray-50 dark:hover:bg-zinc-700/50";
   
   if (option === ToneOption.SUPER_EMPATHY) {
     return "bg-rose-50 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-700/50 ring-1 ring-rose-500/10 dark:ring-rose-500/20 shadow-sm";

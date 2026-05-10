@@ -57,7 +57,7 @@ const SortableNoteItem: React.FC<SortableNoteItemProps> = ({
       ref={setNodeRef}
       style={style}
       className={`
-        group relative flex flex-col glass rounded-2xl p-4 border border-gray-100/50 dark:border-slate-800/50 shadow-sm hover:shadow-premium dark:hover:shadow-premium-dark transition-all duration-300 hover:border-indigo-200 dark:hover:border-indigo-900/50 cursor-pointer overflow-hidden h-40
+        group relative flex flex-col glass rounded-2xl p-4 border border-gray-100/50 dark:border-zinc-800/50 shadow-sm hover:shadow-premium dark:hover:shadow-premium-dark transition-all duration-300 hover:border-indigo-200 dark:hover:border-indigo-900/50 cursor-pointer overflow-hidden h-40
         ${isDragging ? 'ring-2 ring-indigo-500 shadow-2xl scale-105 z-50' : ''}
       `}
       onClick={() => handleCopy(note)}
@@ -67,7 +67,7 @@ const SortableNoteItem: React.FC<SortableNoteItemProps> = ({
         <div 
           {...attributes}
           {...listeners}
-          className="p-1.5 -ml-1 text-gray-300 dark:text-slate-700 hover:text-indigo-400 dark:hover:text-indigo-500 cursor-grab active:cursor-grabbing transition-colors"
+          className="p-1.5 -ml-1 text-gray-300 dark:text-zinc-700 hover:text-indigo-400 dark:hover:text-indigo-500 cursor-grab active:cursor-grabbing transition-colors"
           onClick={(e) => e.stopPropagation()}
         >
           <GripVertical className="w-4 h-4" />
@@ -79,7 +79,7 @@ const SortableNoteItem: React.FC<SortableNoteItemProps> = ({
               e.stopPropagation();
               handleOpenEdit(note);
             }}
-            className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 text-gray-400 hover:text-indigo-500 transition-colors"
+            className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 text-gray-400 hover:text-indigo-500 transition-colors"
             title="Editar nota"
           >
             <Edit2 className="w-3.5 h-3.5" />
@@ -99,10 +99,10 @@ const SortableNoteItem: React.FC<SortableNoteItemProps> = ({
 
       {/* Content */}
       <div className="flex-1 min-w-0 flex flex-col">
-        <h3 className="font-black text-gray-800 dark:text-slate-100 text-base line-clamp-2 mb-1 select-none font-display uppercase tracking-tight">
+        <h3 className="font-black text-gray-800 dark:text-zinc-100 text-base line-clamp-2 mb-1 select-none font-display uppercase tracking-tight">
           {note.title}
         </h3>
-        <p className="text-xs text-gray-400 dark:text-slate-500 line-clamp-3 select-none leading-relaxed">
+        <p className="text-xs text-gray-400 dark:text-zinc-500 line-clamp-3 select-none leading-relaxed">
           {note.content}
         </p>
       </div>
@@ -116,7 +116,7 @@ const SortableNoteItem: React.FC<SortableNoteItemProps> = ({
             exit={{ opacity: 0, scale: 0.9 }}
             className="absolute inset-0 bg-emerald-500/10 dark:bg-emerald-500/20 backdrop-blur-[2px] flex items-center justify-center z-10"
           >
-            <div className="bg-white dark:bg-slate-900 p-3 rounded-full shadow-premium dark:shadow-premium-dark border border-emerald-200 dark:border-emerald-900/50">
+            <div className="bg-white dark:bg-zinc-900 p-3 rounded-full shadow-premium dark:shadow-premium-dark border border-emerald-200 dark:border-emerald-900/50">
               <Check className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
             </div>
           </motion.div>
@@ -334,7 +334,7 @@ export const InternalNotes: React.FC = () => {
   return (
     <div className="flex flex-col gap-8 animate-fade-in max-w-6xl mx-auto w-full pb-20">
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 px-4 bg-white/80 dark:bg-slate-900/60 backdrop-blur-lg p-8 rounded-[2.5rem] shadow-premium dark:shadow-premium-dark border border-white/50 dark:border-slate-800/50">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 px-4 bg-white/80 dark:bg-zinc-900/60 backdrop-blur-lg p-8 rounded-[2.5rem] shadow-premium dark:shadow-premium-dark border border-white/50 dark:border-zinc-800/50">
         <div className="flex items-center gap-5">
           <div className="p-4 bg-indigo-600 rounded-[1.5rem] shadow-xl shadow-indigo-600/20 relative group">
             <div className="absolute inset-0 bg-white/20 rounded-[1.5rem] scale-0 group-hover:scale-100 transition-transform duration-500"></div>
@@ -342,7 +342,7 @@ export const InternalNotes: React.FC = () => {
           </div>
           <div>
             <h2 className="text-2xl font-black text-gray-900 dark:text-white tracking-tight font-display uppercase">Notas Internas</h2>
-            <p className="text-sm text-gray-500 dark:text-slate-400 font-medium">Gestiona tus plantillas y categorías.</p>
+            <p className="text-sm text-gray-500 dark:text-zinc-400 font-medium">Gestiona tus plantillas y categorías.</p>
           </div>
         </div>
         
@@ -350,7 +350,7 @@ export const InternalNotes: React.FC = () => {
           <button
             onClick={handleExportYAML}
             title="Exportar todo (YAML)"
-            className="p-3 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 text-gray-600 dark:text-slate-400 rounded-2xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-all active:scale-95 shadow-sm hover:shadow-md"
+            className="p-3 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 text-gray-600 dark:text-zinc-400 rounded-2xl hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all active:scale-95 shadow-sm hover:shadow-md"
           >
             <Download className="w-5 h-5" />
           </button>
@@ -358,7 +358,7 @@ export const InternalNotes: React.FC = () => {
           <button
             onClick={handleImportYAML}
             title="Importar todo (YAML)"
-            className="p-3 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 text-gray-600 dark:text-slate-400 rounded-2xl hover:bg-gray-50 dark:hover:bg-slate-800 transition-all active:scale-95 shadow-sm hover:shadow-md"
+            className="p-3 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 text-gray-600 dark:text-zinc-400 rounded-2xl hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all active:scale-95 shadow-sm hover:shadow-md"
           >
             <Upload className="w-5 h-5" />
           </button>
@@ -381,7 +381,7 @@ export const InternalNotes: React.FC = () => {
             px-6 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all whitespace-nowrap border
             ${selectedCategoryId === 'all' 
               ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-600/20' 
-              : 'bg-white dark:bg-slate-900 border-gray-200 dark:border-slate-800 text-gray-500 dark:text-slate-400 hover:border-indigo-300 dark:hover:border-indigo-800'}
+              : 'bg-white dark:bg-zinc-900 border-gray-200 dark:border-zinc-800 text-gray-500 dark:text-zinc-400 hover:border-indigo-300 dark:hover:border-indigo-800'}
           `}
         >
           Todas
@@ -394,7 +394,7 @@ export const InternalNotes: React.FC = () => {
                 px-6 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all whitespace-nowrap border pr-12
                 ${selectedCategoryId === cat.id 
                   ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-600/20' 
-                  : 'bg-white dark:bg-slate-900 border-gray-200 dark:border-slate-800 text-gray-500 dark:text-slate-400 hover:border-indigo-300 dark:hover:border-indigo-800'}
+                  : 'bg-white dark:bg-zinc-900 border-gray-200 dark:border-zinc-800 text-gray-500 dark:text-zinc-400 hover:border-indigo-300 dark:hover:border-indigo-800'}
               `}
             >
               {cat.name}
@@ -431,7 +431,7 @@ export const InternalNotes: React.FC = () => {
             setCategoryName('');
             setIsCategoryModalOpen(true);
           }}
-          className="flex items-center gap-2 px-6 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest bg-gray-50/50 dark:bg-slate-800/30 text-gray-400 dark:text-slate-500 border border-dashed border-gray-300 dark:border-slate-800 hover:border-indigo-400 dark:hover:border-indigo-700 transition-all whitespace-nowrap"
+          className="flex items-center gap-2 px-6 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest bg-gray-50/50 dark:bg-zinc-800/30 text-gray-400 dark:text-zinc-500 border border-dashed border-gray-300 dark:border-zinc-800 hover:border-indigo-400 dark:hover:border-indigo-700 transition-all whitespace-nowrap"
         >
           <FolderPlus className="w-4 h-4" />
           <span>Nueva Categoría</span>
@@ -443,12 +443,12 @@ export const InternalNotes: React.FC = () => {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex flex-col items-center justify-center p-20 bg-white/40 dark:bg-slate-900/40 backdrop-blur-sm rounded-[3rem] border-2 border-dashed border-gray-200 dark:border-slate-800 mx-2"
+          className="flex flex-col items-center justify-center p-20 bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm rounded-[3rem] border-2 border-dashed border-gray-200 dark:border-zinc-800 mx-2"
         >
-          <div className="w-20 h-20 bg-gray-100 dark:bg-slate-800 rounded-full flex items-center justify-center mb-6 text-gray-300">
+          <div className="w-20 h-20 bg-gray-100 dark:bg-zinc-800 rounded-full flex items-center justify-center mb-6 text-gray-300">
             <StickyNote className="w-10 h-10" />
           </div>
-          <p className="text-gray-500 dark:text-slate-400 font-black uppercase tracking-widest text-xs">No hay notas en esta categoría.</p>
+          <p className="text-gray-500 dark:text-zinc-400 font-black uppercase tracking-widest text-xs">No hay notas en esta categoría.</p>
           <button onClick={handleOpenAdd} className="mt-4 text-indigo-600 dark:text-indigo-400 font-black uppercase tracking-widest text-[10px] hover:underline">Crea una nota ahora</button>
         </motion.div>
       ) : (
@@ -495,30 +495,30 @@ export const InternalNotes: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" 
+              className="absolute inset-0 bg-zinc-900/60 backdrop-blur-sm" 
               onClick={() => setIsModalOpen(false)} 
             />
             <motion.div 
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl w-full max-w-lg border border-white/20 dark:border-slate-800 overflow-hidden"
+              className="relative bg-white dark:bg-zinc-900 rounded-[2.5rem] shadow-2xl w-full max-w-lg border border-white/20 dark:border-zinc-800 overflow-hidden"
             >
-              <div className="flex items-center justify-between px-8 py-6 border-b border-gray-100 dark:border-slate-800 bg-gray-50/50 dark:bg-slate-800/50">
+              <div className="flex items-center justify-between px-8 py-6 border-b border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-800/50">
                 <h2 className="text-xl font-black text-gray-900 dark:text-white font-display uppercase tracking-tight">
                   {editingNote ? 'Editar Nota' : 'Nueva Nota'}
                 </h2>
-                <button onClick={() => setIsModalOpen(false)} className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800 text-gray-400 transition-colors">
+                <button onClick={() => setIsModalOpen(false)} className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 text-gray-400 transition-colors">
                   <X className="w-6 h-6" />
                 </button>
               </div>
               <div className="p-8 space-y-6">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-gray-400 dark:text-slate-500 uppercase tracking-widest ml-1">Categoría</label>
+                  <label className="text-[10px] font-black text-gray-400 dark:text-zinc-500 uppercase tracking-widest ml-1">Categoría</label>
                   <select
                     value={noteCategoryId}
                     onChange={(e) => setNoteCategoryId(e.target.value)}
-                    className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 dark:text-slate-100 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all appearance-none font-bold text-sm"
+                    className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 dark:text-zinc-100 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all appearance-none font-bold text-sm"
                   >
                     {categories.map(cat => (
                       <option key={cat.id} value={cat.id}>{cat.name}</option>
@@ -526,31 +526,31 @@ export const InternalNotes: React.FC = () => {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-gray-400 dark:text-slate-500 uppercase tracking-widest ml-1">Título</label>
+                  <label className="text-[10px] font-black text-gray-400 dark:text-zinc-500 uppercase tracking-widest ml-1">Título</label>
                   <input
                     autoFocus
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Ej: Saludo inicial"
-                    className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 dark:text-slate-100 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all font-bold text-sm"
+                    className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 dark:text-zinc-100 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all font-bold text-sm"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-gray-400 dark:text-slate-500 uppercase tracking-widest ml-1">Contenido</label>
+                  <label className="text-[10px] font-black text-gray-400 dark:text-zinc-500 uppercase tracking-widest ml-1">Contenido</label>
                   <textarea
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     placeholder="Escribe lo que se copiará..."
                     rows={5}
-                    className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 dark:text-slate-100 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all resize-none font-medium leading-relaxed"
+                    className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 dark:text-zinc-100 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all resize-none font-medium leading-relaxed"
                   />
                 </div>
               </div>
-              <div className="px-8 py-6 bg-gray-50 dark:bg-slate-950/30 flex justify-end gap-3">
+              <div className="px-8 py-6 bg-gray-50 dark:bg-zinc-950/30 flex justify-end gap-3">
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="px-6 py-3 text-[10px] font-black uppercase tracking-widest text-gray-500 hover:text-gray-700 dark:text-slate-400 transition-colors"
+                  className="px-6 py-3 text-[10px] font-black uppercase tracking-widest text-gray-500 hover:text-gray-700 dark:text-zinc-400 transition-colors"
                 >
                   Cancelar
                 </button>
@@ -576,35 +576,35 @@ export const InternalNotes: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" 
+              className="absolute inset-0 bg-zinc-900/60 backdrop-blur-sm" 
               onClick={() => setIsCategoryModalOpen(false)} 
             />
             <motion.div 
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl w-full max-w-sm border border-white/20 dark:border-slate-800 overflow-hidden"
+              className="relative bg-white dark:bg-zinc-900 rounded-[2rem] shadow-2xl w-full max-w-sm border border-white/20 dark:border-zinc-800 overflow-hidden"
             >
-              <div className="px-8 py-6 border-b border-gray-100 dark:border-slate-800 bg-gray-50/50 dark:bg-slate-800/50">
+              <div className="px-8 py-6 border-b border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-800/50">
                 <h2 className="text-lg font-black text-gray-900 dark:text-white font-display uppercase tracking-tight">
                   {editingCategory ? 'Editar Categoría' : 'Nueva Categoría'}
                 </h2>
               </div>
               <div className="p-8 space-y-4">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-gray-400 dark:text-slate-500 uppercase tracking-widest ml-1">Nombre</label>
+                  <label className="text-[10px] font-black text-gray-400 dark:text-zinc-500 uppercase tracking-widest ml-1">Nombre</label>
                   <input
                     autoFocus
                     type="text"
                     value={categoryName}
                     onChange={(e) => setCategoryName(e.target.value)}
                     placeholder="Ej: Reembolsos"
-                    className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 dark:text-slate-100 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all font-bold text-sm"
+                    className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 dark:text-zinc-100 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all font-bold text-sm"
                     onKeyDown={(e) => e.key === 'Enter' && handleSaveCategory()}
                   />
                 </div>
               </div>
-              <div className="px-8 py-6 bg-gray-50 dark:bg-slate-950/30 flex justify-end gap-3">
+              <div className="px-8 py-6 bg-gray-50 dark:bg-zinc-950/30 flex justify-end gap-3">
                 <button onClick={() => setIsCategoryModalOpen(false)} className="px-4 py-2 text-[10px] font-black uppercase tracking-widest text-gray-500">Cancelar</button>
                 <button
                   onClick={handleSaveCategory}

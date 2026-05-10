@@ -61,7 +61,6 @@ export const GUIDE_CONTENT: Record<InfoLanguage, ContentSection> = {
               <li><strong>Longitud:</strong> Define qué tan extenso será el mensaje generado.</li>
               <li><strong>Idioma:</strong> Selecciona el idioma de salida (Output).</li>
               <li><strong>Tono Emocional:</strong> Cambia el estilo (Empatía, Profesional, etc.).</li>
-              <li><strong>Nosotros / Yo:</strong> Selector de perspectiva. "Yo" (1ª persona) o "Nosotros" (3ª persona/Corporativo).</li>
             </ul>
           </div>
           <div>
@@ -96,7 +95,6 @@ export const GUIDE_CONTENT: Record<InfoLanguage, ContentSection> = {
               <li><strong>Length:</strong> Defines the length of the generated message.</li>
               <li><strong>Language:</strong> Selects the output language.</li>
               <li><strong>Emotional Tone:</strong> Changes the style (Empathy, Professional, etc.).</li>
-              <li><strong>We / Me:</strong> Perspective selector. "Me" (1st person) or "We" (3rd person/Corporate).</li>
             </ul>
           </div>
           <div>
@@ -131,7 +129,6 @@ export const GUIDE_CONTENT: Record<InfoLanguage, ContentSection> = {
               <li><strong>Comprimento:</strong> Define a extensão da mensagem gerada.</li>
               <li><strong>Idioma:</strong> Seleciona o idioma de saída.</li>
               <li><strong>Tom Emocional:</strong> Altera o estilo (Empatia, Profissional, etc.).</li>
-              <li><strong>Nós / Eu:</strong> Seletor de perspectiva. "Eu" (1ª pessoa) ou "Nós" (3ª pessoa/Corporativo).</li>
             </ul>
           </div>
           <div>
@@ -166,7 +163,6 @@ export const GUIDE_CONTENT: Record<InfoLanguage, ContentSection> = {
               <li><strong>Longueur :</strong> Définit la longueur du message généré.</li>
               <li><strong>Langue :</strong> Sélectionne la langue de sortie.</li>
               <li><strong>Ton Émotionnel :</strong> Change le style (Empathie, Professionnel, etc.).</li>
-              <li><strong>Nous / Je :</strong> Sélecteur de perspective. "Je" (1ère personne) ou "Nous" (3ème personne/Entreprise).</li>
             </ul>
           </div>
           <div>

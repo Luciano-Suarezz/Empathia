@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-import { ToneOption, OutputLanguage, MacroType, LengthOption, PerspectiveOption, ModelOption } from "../types";
+import { ToneOption, OutputLanguage, MacroType, LengthOption, ModelOption } from "../types";
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
@@ -9,7 +9,6 @@ interface TransformParams {
   targetLanguage: OutputLanguage;
   macroType: MacroType;
   lengthOption: LengthOption;
-  perspective: PerspectiveOption;
   model: ModelOption;
   issueTopic?: string;
   refinementInstruction?: string;
@@ -23,7 +22,7 @@ export const streamTransformText = async (
   onChunk: (text: string) => void
 ): Promise<string> => {
   
-  const { text, tones, targetLanguage, macroType, lengthOption, perspective, model, issueTopic, refinementInstruction, previousOutput, isClosingFinal, isIMMode } = params;
+  const { text, tones, targetLanguage, macroType, lengthOption, model, issueTopic, refinementInstruction, previousOutput, isClosingFinal, isIMMode } = params;
 
   // --- Lógica de Prompt ---
   let prompt = "";
@@ -41,7 +40,7 @@ export const streamTransformText = async (
       
       TAREA:
       Reescribe el texto anterior aplicando la solicitud del usuario.
-      Mantén las reglas de seguridad (No tocar URLs, emails, marcas).
+      Mantén las reglas de seguridad (No tocar ni eliminar URLs, emails, marcas).
       Mantén el idioma del texto anterior a menos que la solicitud diga lo contrario.
       Devuelve SOLO el texto corregido.
     `;
@@ -79,10 +78,7 @@ export const streamTransformText = async (
     const otherTones = tones.filter(t => t !== ToneOption.PARAPHRASE && t !== ToneOption.EMPATHY && t !== ToneOption.SUPER_EMPATHY);
     
     // --- Configuración de Perspectiva ---
-    const isPersonal = perspective === PerspectiveOption.ME;
-    const perspectiveInstruction = isPersonal
-        ? "PERSPECTIVA: Usa PRIMERA PERSONA SINGULAR ('Yo', 'Mi', 'I', 'Me', 'My'). Habla como un agente individual. Adapta cualquier plantilla plural a singular (Ej: cambia 'We understand' por 'I understand')."
-        : "PERSPECTIVA: Usa PLURAL CORPORATIVO ('Nosotros', 'Nuestro', 'We', 'Us', 'Our'). Hablas en nombre de TikTok LIVE.";
+    const perspectiveInstruction = "PERSPECTIVA OBLIGATORIA: El remitente (tú) SIEMPRE DEBE hablar en PLURAL CORPORATIVO ('Nosotros', 'Nuestro', 'Entendemos', 'We', 'Us', 'Our'). Hablas en nombre de un equipo (TikTok LIVE). El destinatario (el usuario) es SIEMPRE SINGULAR ('tú', 'tu cuenta', 'You', 'Your'). NUNCA uses la primera persona del singular para tí ('yo', 'mi', 'entiendo', 'I', 'me'). NUNCA te dirijas a múltiples usuarios ('ustedes', 'vosotros', y all).";
 
     const genderNeutralInstruction = "GÉNERO: Usa un lenguaje neutro en cuanto a género. Evita asumir el género del usuario.";
 
@@ -115,8 +111,8 @@ export const streamTransformText = async (
       : "MODO EDICIÓN MÍNIMA: Mantén la estructura del CUERPO casi idéntica.";
 
     const languageInstruction = targetLanguage === OutputLanguage.AUTO
-      ? "Mantén el idioma original del texto."
-      : `TRADUCE TODO el texto (incluido saludos o cierres agregados) al idioma: ${targetLanguage}.`;
+      ? "Mantén el idioma original del texto. Asegúrate de traducir todas las plantillas, saludos o despedidas al mismo idioma original detectado."
+      : `TRADUCE TODO el texto (incluido saludos, resoluciones o mensajes de cierre finales) exactamente al idioma: ${targetLanguage}.`;
 
     let lengthInstruction = "";
     switch (lengthOption) {
@@ -138,34 +134,33 @@ export const streamTransformText = async (
         // Reglas para Closing Final (Survey / Rejection / Timeout)
         closingRules = `
         PASO FINAL: CIERRE DE TICKET (MODO FINAL ACTIVADO)
-        Analiza el contenido de la resolución que has generado y selecciona AUTOMÁTICAMENTE uno de los siguientes cierres.
-        IMPORTANTE: Si la perspectiva es 'Yo' (Personal), adapta los pronombres de estos textos (We -> I, Us -> Me, Our -> My).
-
-        Escenario A: Resolución Positiva (Problema arreglado/solucionado/ayuda completada). Elige uno al azar:
+        Analiza el contenido de la resolución que has generado y selecciona AUTOMÁTICAMENTE uno de los siguientes cierres. Tienes que adaptarlo EXACTAMENTE al IDIOMA DE SALIDA SELECCIONADO o al idioma de la resolución. ¡NUNCA dejes la despedida en inglés si el resto del texto no está en inglés!
+        
+        Escenario A: Resolución Positiva (Problema arreglado/solucionado/ayuda completada). Elige uno al azar y TRADÚCELO AL IDIOMA FINAL:
            1. "We’re glad to hear the issue has been resolved! Your feedback is invaluable to us, so we’d appreciate it if you could take a moment to complete a brief survey."
            2. "We’re happy to hear the issue has been resolved! Your feedback means a lot to us, so we’d greatly appreciate it if you could share your thoughts in a brief survey to help us improve."
            3. "We’re glad we could assist you today. Your feedback is important to us, so we’d appreciate it if you could share your thoughts in a brief survey."
 
-        Escenario B: Resolución Negativa (No es lo que el usuario quería, pero se dio claridad/explicación final):
+        Escenario B: Resolución Negativa (No es lo que el usuario quería, pero se dio claridad/explicación final) - TRADÚCELO AL IDIOMA FINAL:
            "We understand this may not be the resolution you were hoping for, but we hope our explanation has provided clarity. We’ll proceed to close this ticket for now. If you have any other questions or need further assistance with a different matter, please feel free to reach out. Thank you for your understanding."
 
-        Escenario C: Cierre por falta de información / Usuario no responde (Timeout):
+        Escenario C: Cierre por falta de información / Usuario no responde (Timeout) - TRADÚCELO AL IDIOMA FINAL:
            "Despite multiple follow-ups, we haven’t received any additional information to proceed with a re-evaluation. As such, we’ll be closing this ticket for now. If you’re able to provide the necessary details in the future, feel free to reach out again and we’ll be happy to assist. Thank you for your understanding."
         
-        NO añadidas ninguna otra firma o despedida después de esto.
+        NO añadas ninguna otra firma o despedida después de esto.
         `;
     } else {
         // Reglas de cierre estándar (Abierto)
         closingRules = `
         PASO FINAL: CIERRE (OBLIGATORIO)
-        Debes finalizar el mensaje EXCLUSIVAMENTE con una de las siguientes opciones (adaptando a Singular 'I'/'My' si la perspectiva es personal).
+        Debes finalizar el mensaje EXCLUSIVAMENTE con una de las siguientes opciones (DEBES TRADUCIRLAS AL IDIOMA DE SALIDA, ¡NUNCA en inglés si el idioma de salida es otro!).
         
         CRÍTICO / PROHIBIDO:
         - NO uses "Best regards", "Sincerely", "Cheers", etc.
         - NO escribas ninguna firma como "TikTok LIVE Support", "TikTok Team", ni tu nombre.
         - TU RESPUESTA DEBE TERMINAR INMEDIATAMENTE DESPUÉS DE LA FRASE DE CIERRE.
 
-        Opciones permitidas (Elige una):
+        Opciones permitidas (Elige una y TRADÚCELA AL MODO U IDIOMA CORRESPONDIENTE):
            1) "If you have any further questions, don't hesitate to get in touch. Thank you and have a great day!"
            2) "If there’s anything else we can assist you with, please don’t hesitate to let us know. Thank you, and have a wonderful day ahead."
            3) "If you have any further questions, feel free to let us know. Thank you, and have a wonderful day!"
@@ -184,8 +179,10 @@ export const streamTransformText = async (
       `;
     } else if (macroType === MacroType.FIRST) {
       
-      const issuePlaceholder = issueTopic ? issueTopic.trim() : "[ISSUE]";
-      
+      const issueInstruction = issueTopic && issueTopic.trim() !== "" 
+        ? `Debes mencionar que entiendes que el usuario necesita ayuda con este tema: "${issueTopic.trim()}". Intégralo de forma natural (ej. "Entendemos que necesitas ayuda para ${issueTopic.trim()}").`
+        : `Menciona de forma general que estamos aquí para ayudar con su consulta o problema.`;
+
       macroInstruction = `
         - TIPO: PRIMER MENSAJE.
         - FORMATO OBLIGATORIO:
@@ -194,11 +191,15 @@ export const streamTransformText = async (
            3. DESPEDIDA (Según reglas abajo)
 
         PASO 1: SALUDO + ACKNOWLEDGE
-        Elige aleatoriamente una opción. 
-        IMPORTANTE: Si la instrucción de PERSPECTIVA es 'Yo', CAMBIA 'We' por 'I' en estas frases:
-           - Opción A: "Hi there,\n\nThank you for contacting TikTok LIVE. We understand you're experiencing an issue with your ${issuePlaceholder}, and we're here to help."
-           - Opción B: "Hello there,\n\nThank you for reaching out to TikTok LIVE. We're here to assist you. We understand that you need assistance with your ${issuePlaceholder}."
-           - Opción C (Solo si el texto del usuario pide información): "Hi there,\n\nThank you for reaching out to TikTok LIVE. Could you please provide a detailed description of the issue you’re experiencing? This will help us verify and address the problem as quickly as possible."
+        MANTÉN SIEMPRE LA PERSPECTIVA PLURAL ('We', 'Nosotros').
+        Genera un saludo inicial agradeciendo por contactar a TikTok LIVE y un "Acknowledge" (reconocimiento del problema).
+        ${issueInstruction}
+        Asegúrate de adaptar la gramática correctamente al idioma de salida. Usa un fraseo natural de soporte técnico.
+        
+        EJEMPLOS DE ESTILO BASE (ADÁPTALOS AL IDIOMA Y AL TEMA EXACTO):
+           - "Hi there,\n\nThank you for contacting TikTok LIVE. We understand you're reaching out regarding [TEMA NATURAL], and we're here to help."
+           - "Hello there,\n\nThank you for reaching out to TikTok LIVE. We're here to assist you with your inquiry about [TEMA NATURAL]."
+           - (Si el cuerpo de la resolución pide información): "Hi there,\n\nThank you for reaching out to TikTok LIVE. To better assist you with [TEMA NATURAL], could you please provide more details?"
 
         PASO 2: RESOLUCIÓN (CUERPO)
         Toma el "Texto Original" del usuario y aplícale los tonos y longitud solicitados. Esta es la parte central del mensaje.
@@ -209,7 +210,7 @@ export const streamTransformText = async (
       macroInstruction = `
         - TIPO: SEGUNDO MENSAJE (Continuity).
         - ESTRUCTURA: Saludo de continuidad + Cuerpo transformado + Cierre Obligatorio.
-        - SALUDO: Antepón una de estas opciones al cuerpo (Adapta 'We' a 'I' si es modo personal):
+        - SALUDO: Antepón una de estas opciones al cuerpo y ADÁPTALA al idioma correcto:
            A: "Hi there,\n\nThanks for your reply."
            B: "Hello there,\n\nWe appreciate your swift response."
         
@@ -221,8 +222,8 @@ export const streamTransformText = async (
       Actúa como experto en comunicación para soporte TikTok LIVE.
       
       REGLAS DE ORO:
-      1. NO toques URLs, emails ni nombres de marcas.
-      2. Mantén "TikTok LIVE" escrito exactamente así.
+      1. Preservación de Enlaces: Es CRÍTICO que mantengas EXACTAMENTE TODOS los URLs, enlaces y correos electrónicos que aparecen en el texto original. NO LOS BORRES ni los modifiques bajo ninguna circunstancia.
+      2. No modifiques nombres de marcas; mantén "TikTok LIVE" escrito exactamente así.
       3. Asegúrate de separar los párrafos claramente (Salto de línea entre Saludo, Cuerpo y Cierre).
       
       Instrucciones de Voz y Tono:

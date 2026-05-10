@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iOS 26 Liquid Glass — Guía Visual para IA</title>
+<link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --glass-bg: rgba(255,255,255,0.06);
+    --glass-bg-hover: rgba(255,255,255,0.10);
+    --glass-border: rgba(255,255,255,0.14);
+    --glass-border-strong: rgba(255,255,255,0.24);
+    --glass-blur: blur(24px) saturate(180%);
+    --glass-blur-heavy: blur(40px) saturate(200%);
+    --text-primary: rgba(255,255,255,0.95);
+    --text-secondary: rgba(255,255,255,0.60);
+    --text-tertiary: rgba(255,255,255,0.35);
+    --accent-blue: rgba(10,132,255,1);
+    --accent-blue-glass: rgba(10,132,255,0.20);
+    --accent-teal: rgba(48,209,88,1);
+    --accent-purple: rgba(191,90,242,1);
+    --accent-orange: rgba(255,159,10,1);
+    --bg-deep: #050508;
+    --bg-surface: #0c0c14;
+    --radius-sm: 12px;
+    --radius-md: 16px;
+    --radius-lg: 22px;
+    --radius-xl: 30px;
+    --radius-full: 999px;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --shadow-glass: 0 8px 32px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.12);
+    --shadow-deep: 0 20px 60px rgba(0,0,0,0.6);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font);
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ANIMATED BACKGROUND */
+  .bg-orbs {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+  }
+  .orb {
+    position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4;
+    animation: drift 20s ease-in-out infinite;
+  }
+  .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, #0a84ff44, transparent 70%); top: -100px; left: -100px; animation-delay: 0s; }
+  .orb-2 { width: 600px; height: 600px; background: radial-gradient(circle, #bf5af244, transparent 70%); top: 20%; right: -200px; animation-delay: -7s; }
+  .orb-3 { width: 400px; height: 400px; background: radial-gradient(circle, #30d15844, transparent 70%); bottom: 10%; left: 30%; animation-delay: -14s; }
+  @keyframes drift {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(30px, -40px) scale(1.05); }
+    66% { transform: translate(-20px, 30px) scale(0.95); }
+  }
+
+  /* LAYOUT */
+  .wrapper {
+    position: relative; z-index: 1;
+    max-width: 1100px; margin: 0 auto;
+    padding: 60px 32px;
+  }
+
+  /* GLASS MIXIN */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-glass);
+    border-radius: var(--radius-lg);
+  }
+  .glass-heavy {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: var(--glass-blur-heavy);
+    -webkit-backdrop-filter: var(--glass-blur-heavy);
+    border: 1px solid var(--glass-border-strong);
+    box-shadow: var(--shadow-deep);
+    border-radius: var(--radius-xl);
+  }
+
+  /* HEADER */
+  .header { text-align: center; margin-bottom: 80px; }
+  .header .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--radius-full);
+    padding: 8px 18px; font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 28px;
+    letter-spacing: 0.04em;
+  }
+  .badge-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent-blue);
+    box-shadow: 0 0 8px var(--accent-blue);
+  }
+  .header h1 {
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.55) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header p {
+    font-size: 17px; color: var(--text-secondary); max-width: 520px;
+    margin: 0 auto; line-height: 1.6;
+  }
+
+  /* SECTIONS */
+  .section { margin-bottom: 80px; }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+    color: var(--accent-blue); text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: 26px; font-weight: 500; letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .section-desc {
+    font-size: 15px; color: var(--text-secondary); margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+  @media(max-width:700px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  }
+
+  /* ---- COMPONENT: COLOR TOKENS ---- */
+  .token-card {
+    padding: 20px; border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  }
+  .token-swatch {
+    height: 56px; border-radius: 10px; margin-bottom: 14px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .token-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .token-value { font-size: 11px; color: var(--text-tertiary); font-family: 'SF Mono', monospace; }
+
+  /* ---- COMPONENT: GLASS CARD DEMO ---- */
+  .demo-card {
+    padding: 28px;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-glass);
+    border-radius: var(--radius-xl);
+    position: relative; overflow: hidden;
+  }
+  .demo-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  }
+  .demo-card .card-icon {
+    width: 48px; height: 48px; border-radius: 14px;
+    background: var(--accent-blue-glass);
+    border: 1px solid rgba(10,132,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 16px;
+  }
+  .demo-card h3 { font-size: 17px; font-weight: 500; margin-bottom: 6px; }
+  .demo-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+
+  /* ---- COMPONENT: BUTTONS ---- */
+  .btn-group { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    padding: 12px 24px; border-radius: var(--radius-full);
+    font-family: var(--font); font-size: 15px; font-weight: 500;
+    cursor: pointer; border: none; transition: all 0.2s ease;
+    letter-spacing: -0.01em;
+  }
+  .btn-primary {
+    background: var(--accent-blue);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(10,132,255,0.4), 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .btn-primary:hover { background: #3d9dff; box-shadow: 0 0 28px rgba(10,132,255,0.55); transform: translateY(-1px); }
+  .btn-glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border-strong);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-glass);
+  }
+  .btn-glass:hover { background: var(--glass-bg-hover); border-color: rgba(255,255,255,0.35); transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent; border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+  }
+  .btn-ghost:hover { color: var(--text-primary); border-color: var(--glass-border-strong); }
+  .btn-destructive {
+    background: rgba(255,69,58,0.15);
+    border: 1px solid rgba(255,69,58,0.3);
+    color: #ff453a;
+  }
+
+  /* ---- COMPONENT: NAV BAR ---- */
+  .demo-navbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-glass);
+  }
+  .nav-logo { font-size: 16px; font-weight: 600; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-link {
+    padding: 8px 16px; border-radius: var(--radius-full);
+    font-size: 14px; color: var(--text-secondary); cursor: pointer;
+    transition: all 0.2s;
+  }
+  .nav-link.active {
+    background: var(--glass-bg-hover);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+  }
+  .nav-cta {
+    padding: 9px 20px; border-radius: var(--radius-full);
+    background: var(--accent-blue); color: #fff;
+    font-size: 14px; font-weight: 500; cursor: pointer;
+    box-shadow: 0 0 16px rgba(10,132,255,0.4);
+  }
+
+  /* ---- COMPONENT: INPUT ---- */
+  .demo-input {
+    width: 100%; padding: 14px 18px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary); font-size: 15px;
+    font-family: var(--font); outline: none;
+    transition: all 0.2s;
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.2);
+  }
+  .demo-input::placeholder { color: var(--text-tertiary); }
+  .demo-input:focus {
+    border-color: rgba(10,132,255,0.5);
+    box-shadow: 0 0 0 3px rgba(10,132,255,0.15), inset 0 1px 4px rgba(0,0,0,0.2);
+  }
+
+  /* ---- COMPONENT: MODAL ---- */
+  .demo-modal {
+    padding: 36px;
+    background: rgba(18,18,28,0.85);
+    backdrop-filter: blur(60px) saturate(200%);
+    -webkit-backdrop-filter: blur(60px) saturate(200%);
+    border: 1px solid var(--glass-border-strong);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.15);
+    position: relative; overflow: hidden;
+  }
+  .demo-modal::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  }
+  .modal-title { font-size: 20px; font-weight: 600; margin-bottom: 10px; }
+  .modal-desc { font-size: 15px; color: var(--text-secondary); margin-bottom: 28px; line-height: 1.5; }
+
+  /* ---- COMPONENT: TAGS / PILLS ---- */
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: var(--radius-full);
+    font-size: 13px; font-weight: 500;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  }
+  .pill-blue { background: rgba(10,132,255,0.15); border: 1px solid rgba(10,132,255,0.3); color: #5ac8fa; }
+  .pill-green { background: rgba(48,209,88,0.12); border: 1px solid rgba(48,209,88,0.25); color: #30d158; }
+  .pill-purple { background: rgba(191,90,242,0.12); border: 1px solid rgba(191,90,242,0.25); color: #bf5af2; }
+  .pill-orange { background: rgba(255,159,10,0.12); border: 1px solid rgba(255,159,10,0.25); color: #ff9f0a; }
+  .pill-red { background: rgba(255,69,58,0.12); border: 1px solid rgba(255,69,58,0.25); color: #ff453a; }
+
+  /* ---- COMPONENT: NOTIFICATION ---- */
+  .demo-notif {
+    display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-glass);
+  }
+  .notif-icon {
+    width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 18px;
+  }
+  .notif-title { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+  .notif-body { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+  .notif-time { font-size: 12px; color: var(--text-tertiary); margin-top: 4px; }
+
+  /* ---- CSS TOKENS TABLE ---- */
+  .code-block {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-md);
+    padding: 24px; font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 12.5px; line-height: 1.7; color: #a8b8d8;
+    overflow-x: auto;
+  }
+  .code-block .token-comment { color: #5a6a7a; }
+  .code-block .token-property { color: #5ac8fa; }
+  .code-block .token-value { color: #a8ff78; }
+  .code-block .token-punct { color: #5a6a7a; }
+
+  /* ---- PROMPT BLOCK ---- */
+  .prompt-block {
+    background: rgba(10,132,255,0.05);
+    border: 1px solid rgba(10,132,255,0.2);
+    border-left: 3px solid var(--accent-blue);
+    border-radius: var(--radius-md);
+    padding: 28px; font-size: 14px;
+    color: rgba(255,255,255,0.8); line-height: 1.8;
+  }
+  .prompt-block strong { color: var(--text-primary); }
+  .prompt-section { margin-bottom: 16px; }
+  .prompt-section:last-child { margin-bottom: 0; }
+
+  /* ---- DIVIDER ---- */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+    margin: 60px 0;
+  }
+
+  /* ---- TYPOGRAPHY SCALE ---- */
+  .type-row {
+    display: flex; align-items: baseline; gap: 20px; padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .type-meta { font-size: 11px; color: var(--text-tertiary); font-family: monospace; min-width: 120px; }
+  .type-weight { font-size: 11px; color: var(--text-tertiary); min-width: 60px; }
+
+  /* ---- SPACING SCALE ---- */
+  .spacing-row { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .spacing-bar { height: 8px; background: rgba(10,132,255,0.4); border-radius: 4px; border: 1px solid rgba(10,132,255,0.3); }
+  .spacing-label { font-size: 12px; color: var(--text-secondary); font-family: monospace; }
+
+  /* EFFECT DEMO */
+  .effect-row { display: flex; gap: 16px; }
+  .effect-pill {
+    padding: 10px 20px; border-radius: var(--radius-full);
+    font-size: 14px; font-weight: 500;
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+  }
+  .effect-frosted {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  }
+  .effect-tinted {
+    background: rgba(10,132,255,0.12);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-color: rgba(10,132,255,0.25);
+    color: #5ac8fa;
+  }
+  .effect-deep {
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+
+  /* iOS PHONE MOCKUP */
+  .phone-frame {
+    width: 220px; border-radius: 38px;
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(255,255,255,0.15);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.12);
+    overflow: hidden; padding: 20px 14px; margin: 0 auto;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  }
+  .phone-notch {
+    width: 80px; height: 22px; background: rgba(0,0,0,0.9);
+    border-radius: 0 0 16px 16px; margin: 0 auto 20px;
+  }
+  .phone-status { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 0 4px; }
+  .phone-time { font-size: 15px; font-weight: 600; }
+  .phone-icons { display: flex; gap: 5px; align-items: center; }
+  .phone-icon-dot { width: 5px; height: 5px; background: var(--text-secondary); border-radius: 50%; }
+  .phone-widget {
+    padding: 14px; border-radius: 20px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    margin-bottom: 10px;
+  }
+  .phone-widget-title { font-size: 11px; color: var(--text-secondary); margin-bottom: 4px; }
+  .phone-widget-value { font-size: 20px; font-weight: 600; }
+  .phone-widget-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+  .phone-app-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-top: 10px; }
+  .phone-app {
+    aspect-ratio: 1; border-radius: 13px; display: flex; align-items: center;
+    justify-content: center; font-size: 18px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  }
+
+  footer { text-align: center; padding: 40px 0; color: var(--text-tertiary); font-size: 13px; }
+</style>
+</head>
+<body>
+
+<div class="bg-orbs">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="badge"><span class="badge-dot"></span> iOS 26 · Liquid Glass · Dark Mode</div>
+    <h1>Guía Visual<br>para IA Coder</h1>
+    <p>Sistema de diseño completo para replicar el estilo Liquid Glass de Apple en tu página web. Tokens, componentes y prompt listo para usar.</p>
+  </div>
+
+  <!-- SECTION 1: QUÉ ES -->
+  <div class="section">
+    <div class="section-label">Concepto</div>
+    <div class="section-title">¿Qué es Liquid Glass?</div>
+    <div class="section-desc">El nuevo sistema de diseño de Apple para iOS 26 / iPhone 17. Superficies de vidrio translúcido que reaccionan al contenido del fondo — blur, refracción, bordes luminosos y profundidad en capas.</div>
+
+    <div class="grid-3" style="margin-bottom: 16px;">
+      <div class="demo-card">
+        <div class="card-icon" style="background: rgba(10,132,255,0.12); border-color: rgba(10,132,255,0.25);">🔮</div>
+        <h3>Translucidez</h3>
+        <p>El fondo se filtra a través del elemento. Blur intenso que crea sensación de profundidad real.</p>
+      </div>
+      <div class="demo-card">
+        <div class="card-icon" style="background: rgba(191,90,242,0.12); border-color: rgba(191,90,242,0.25);">✨</div>
+        <h3>Especular</h3>
+        <p>Bordes con gradiente luminoso que simulan luz rebotando en el vidrio. Efecto top-highlight.</p>
+      </div>
+      <div class="demo-card">
+        <div class="card-icon" style="background: rgba(48,209,88,0.12); border-color: rgba(48,209,88,0.25);">🌊</div>
+        <h3>Adaptativo</h3>
+        <p>El elemento cambia su opacidad según el contenido debajo. Más blur = más legibilidad.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 2: PHONE MOCKUP + COMPONENTS -->
+  <div class="section">
+    <div class="section-label">Vista previa</div>
+    <div class="section-title">Mockup iOS 26 Dark</div>
+    <div class="section-desc">Cómo se ven los elementos Liquid Glass sobre fondo oscuro con orbes de color detrás.</div>
+
+    <div class="grid-2" style="align-items: start; gap: 32px;">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-status">
+          <span class="phone-time">9:41</span>
+          <div class="phone-icons">
+            <div class="phone-icon-dot"></div>
+            <div class="phone-icon-dot"></div>
+            <div class="phone-icon-dot"></div>
+          </div>
+        </div>
+        <div class="phone-widget">
+          <div class="phone-widget-title">Mis clientes</div>
+          <div class="phone-widget-value" style="color: #30d158;">+4 <span style="font-size:13px; font-weight:400; color: var(--text-secondary);">este mes</span></div>
+          <div class="phone-widget-sub">DFY Content System</div>
+        </div>
+        <div class="phone-widget">
+          <div class="phone-widget-title">Reels publicados</div>
+          <div class="phone-widget-value">12</div>
+          <div class="phone-widget-sub">↑ 3 esta semana</div>
+        </div>
+        <div class="phone-app-grid">
+          <div class="phone-app">📸</div>
+          <div class="phone-app">📊</div>
+          <div class="phone-app">🎬</div>
+          <div class="phone-app">📨</div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <!-- NAV -->
+        <div>
+          <div style="font-size: 12px; color: var(--text-tertiary); margin-bottom: 10px; letter-spacing: 0.08em; text-transform: uppercase;">Navbar glass</div>
+          <div class="demo-navbar">
+            <div class="nav-logo">Luciano</div>
+            <div class="nav-links">
+              <div class="nav-link active">Inicio</div>
+              <div class="nav-link">Servicios</div>
+              <div class="nav-link">Casos</div>
+            </div>
+            <div class="nav-cta">Contactar</div>
+          </div>
+        </div>
+
+        <!-- NOTIFICATION -->
+        <div>
+          <div style="font-size: 12px; color: var(--text-tertiary); margin-bottom: 10px; letter-spacing: 0.08em; text-transform: uppercase;">Notificación glass</div>
+          <div class="demo-notif">
+            <div class="notif-icon" style="background: rgba(10,132,255,0.15); border: 1px solid rgba(10,132,255,0.3);">📩</div>
+            <div>
+              <div class="notif-title">Nuevo cliente potencial</div>
+              <div class="notif-body">Diego respondió tu DM después del Reel de ayer.</div>
+              <div class="notif-time">Hace 2 min</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAGS -->
+        <div>
+          <div style="font-size: 12px; color: var(--text-tertiary); margin-bottom: 10px; letter-spacing: 0.08em; text-transform: uppercase;">Pills / tags</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span class="pill pill-blue">Organic</span>
+            <span class="pill pill-green">Live</span>
+            <span class="pill pill-purple">DFY</span>
+            <span class="pill pill-orange">Pro</span>
+            <span class="pill pill-red">Urgente</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 3: BOTONES -->
+  <div class="section">
+    <div class="section-label">Componentes</div>
+    <div class="section-title">Botones</div>
+    <div class="section-desc">4 variantes de botón según jerarquía visual.</div>
+
+    <div class="glass" style="padding: 32px;">
+      <div class="btn-group">
+        <button class="btn btn-primary">Primario</button>
+        <button class="btn btn-glass">Glass</button>
+        <button class="btn btn-ghost">Ghost</button>
+        <button class="btn btn-destructive">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: MODAL -->
+  <div class="section">
+    <div class="section-title">Modal / Sheet</div>
+    <div class="section-desc">Componente de diálogo con máxima opacidad de blur para sobresalir del fondo.</div>
+
+    <div class="demo-modal" style="max-width: 440px;">
+      <div class="modal-title">¿Confirmar acción?</div>
+      <div class="modal-desc">Esto va a enviarle la propuesta a tu cliente. No podrás deshacer esta acción una vez confirmada.</div>
+      <input class="demo-input" placeholder="Mensaje personalizado (opcional)..." style="margin-bottom: 20px;">
+      <div class="btn-group">
+        <button class="btn btn-primary" style="flex: 1;">Confirmar</button>
+        <button class="btn btn-ghost" style="flex: 1;">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: EFECTOS -->
+  <div class="section">
+    <div class="section-title">Variantes del efecto glass</div>
+    <div class="section-desc">iOS 26 tiene tres modos de Liquid Glass. En dark mode se traducen así:</div>
+
+    <div class="glass" style="padding: 28px;">
+      <div class="grid-3">
+        <div style="text-align: center;">
+          <div class="effect-pill effect-frosted" style="display: block; margin-bottom: 12px; text-align: center; padding: 18px;">Frosted</div>
+          <div style="font-size: 12px; color: var(--text-tertiary);">bg: rgba(255,255,255,0.06)<br>blur: 24px<br>border: rgba(255,255,255,0.14)</div>
+        </div>
+        <div style="text-align: center;">
+          <div class="effect-pill effect-tinted" style="display: block; margin-bottom: 12px; text-align: center; padding: 18px;">Tinted</div>
+          <div style="font-size: 12px; color: var(--text-tertiary);">bg: rgba(accent,0.12)<br>blur: 20px<br>border: rgba(accent,0.25)</div>
+        </div>
+        <div style="text-align: center;">
+          <div class="effect-pill effect-deep" style="display: block; margin-bottom: 12px; text-align: center; padding: 18px;">Deep</div>
+          <div style="font-size: 12px; color: var(--text-tertiary);">bg: rgba(0,0,0,0.45)<br>blur: 40px<br>inset top-highlight</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 6: TOKENS CSS -->
+  <div class="section">
+    <div class="section-label">Variables CSS</div>
+    <div class="section-title">Design Tokens</div>
+    <div class="section-desc">Pegá estas variables en el <code style="font-size:13px; color:#5ac8fa;">:root</code> de tu CSS. Son la base de todo el sistema.</div>
+
+    <div class="code-block">
+<span class="token-comment">/* === iOS 26 Liquid Glass — Dark Mode Tokens === */</span>
+<span class="token-property">:root</span> <span class="token-punct">{</span>
+
+  <span class="token-comment">/* Fondo base */</span>
+  <span class="token-property">--bg-deep</span><span class="token-punct">:</span> <span class="token-value">#050508</span><span class="token-punct">;</span>
+  <span class="token-property">--bg-surface</span><span class="token-punct">:</span> <span class="token-value">#0c0c14</span><span class="token-punct">;</span>
+
+  <span class="token-comment">/* Glass — superficies */</span>
+  <span class="token-property">--glass-bg</span><span class="token-punct">:</span> <span class="token-value">rgba(255,255,255,0.06)</span><span class="token-punct">;</span>
+  <span class="token-property">--glass-bg-hover</span><span class="token-punct">:</span> <span class="token-value">rgba(255,255,255,0.10)</span><span class="token-punct">;</span>
+  <span class="token-property">--glass-border</span><span class="token-punct">:</span> <span class="token-value">rgba(255,255,255,0.14)</span><span class="token-punct">;</span>
+  <span class="token-property">--glass-border-strong</span><span class="token-punct">:</span> <span class="token-value">rgba(255,255,255,0.24)</span><span class="token-punct">;</span>
+
+  <span class="token-comment">/* Blur */</span>
+  <span class="token-property">--glass-blur</span><span class="token-punct">:</span> <span class="token-value">blur(24px) saturate(180%)</span><span class="token-punct">;</span>
+  <span class="token-property">--glass-blur-heavy</span><span class="token-punct">:</span> <span class="token-value">blur(40px) saturate(200%)</span><span class="token-punct">;</span>
+
+  <span class="token-comment">/* Texto */</span>
+  <span class="token-property">--text-primary</span><span class="token-punct">:</span> <span class="token-value">rgba(255,255,255,0.95)</span><span class="token-punct">;</span>
+  <span class="token-property">--text-secondary</span><span class="token-punct">:</span> <span class="token-value">rgba(255,255,255,0.60)</span><span class="token-punct">;</span>
+  <span class="token-property">--text-tertiary</span><span class="token-punct">:</span> <span class="token-value">rgba(255,255,255,0.35)</span><span class="token-punct">;</span>
+
+  <span class="token-comment">/* Acentos (Apple system colors) */</span>
+  <span class="token-property">--accent-blue</span><span class="token-punct">:</span>   <span class="token-value">#0a84ff</span><span class="token-punct">;</span>
+  <span class="token-property">--accent-teal</span><span class="token-punct">:</span>   <span class="token-value">#30d158</span><span class="token-punct">;</span>
+  <span class="token-property">--accent-purple</span><span class="token-punct">:</span> <span class="token-value">#bf5af2</span><span class="token-punct">;</span>
+  <span class="token-property">--accent-orange</span><span class="token-punct">:</span> <span class="token-value">#ff9f0a</span><span class="token-punct">;</span>
+  <span class="token-property">--accent-red</span><span class="token-punct">:</span>    <span class="token-value">#ff453a</span><span class="token-punct">;</span>
+  <span class="token-property">--accent-cyan</span><span class="token-punct">:</span>   <span class="token-value">#5ac8fa</span><span class="token-punct">;</span>
+
+  <span class="token-comment">/* Radios */</span>
+  <span class="token-property">--radius-sm</span><span class="token-punct">:</span>   <span class="token-value">12px</span><span class="token-punct">;</span>
+  <span class="token-property">--radius-md</span><span class="token-punct">:</span>   <span class="token-value">16px</span><span class="token-punct">;</span>
+  <span class="token-property">--radius-lg</span><span class="token-punct">:</span>   <span class="token-value">22px</span><span class="token-punct">;</span>
+  <span class="token-property">--radius-xl</span><span class="token-punct">:</span>   <span class="token-value">30px</span><span class="token-punct">;</span>
+  <span class="token-property">--radius-full</span><span class="token-punct">:</span> <span class="token-value">999px</span><span class="token-punct">;</span>
+
+  <span class="token-comment">/* Sombras */</span>
+  <span class="token-property">--shadow-glass</span><span class="token-punct">:</span> <span class="token-value">0 8px 32px rgba(0,0,0,0.4),
+                  0 2px 8px rgba(0,0,0,0.3),
+                  inset 0 1px 0 rgba(255,255,255,0.12)</span><span class="token-punct">;</span>
+
+<span class="token-punct">}</span>
+
+<span class="token-comment">/* === Clase base glass === */</span>
+<span class="token-property">.glass</span> <span class="token-punct">{</span>
+  <span class="token-property">background</span><span class="token-punct">:</span> <span class="token-value">var(--glass-bg)</span><span class="token-punct">;</span>
+  <span class="token-property">backdrop-filter</span><span class="token-punct">:</span> <span class="token-value">var(--glass-blur)</span><span class="token-punct">;</span>
+  <span class="token-property">-webkit-backdrop-filter</span><span class="token-punct">:</span> <span class="token-value">var(--glass-blur)</span><span class="token-punct">;</span>
+  <span class="token-property">border</span><span class="token-punct">:</span> <span class="token-value">1px solid var(--glass-border)</span><span class="token-punct">;</span>
+  <span class="token-property">box-shadow</span><span class="token-punct">:</span> <span class="token-value">var(--shadow-glass)</span><span class="token-punct">;</span>
+  <span class="token-property">border-radius</span><span class="token-punct">:</span> <span class="token-value">var(--radius-lg)</span><span class="token-punct">;</span>
+<span class="token-punct">}</span>
+
+<span class="token-comment">/* Top-highlight (especular del vidrio) */</span>
+<span class="token-property">.glass::before</span> <span class="token-punct">{</span>
+  <span class="token-property">content</span><span class="token-punct">:</span> <span class="token-value">''</span><span class="token-punct">;</span>
+  <span class="token-property">position</span><span class="token-punct">:</span> <span class="token-value">absolute</span><span class="token-punct">;</span>
+  <span class="token-property">top</span><span class="token-punct">:</span> <span class="token-value">0</span><span class="token-punct">;</span> <span class="token-property">left</span><span class="token-punct">:</span> <span class="token-value">0</span><span class="token-punct">;</span> <span class="token-property">right</span><span class="token-punct">:</span> <span class="token-value">0</span><span class="token-punct">;</span> <span class="token-property">height</span><span class="token-punct">:</span> <span class="token-value">1px</span><span class="token-punct">;</span>
+  <span class="token-property">background</span><span class="token-punct">:</span> <span class="token-value">linear-gradient(90deg,
+    transparent, rgba(255,255,255,0.3), transparent)</span><span class="token-punct">;</span>
+<span class="token-punct">}</span>
+    </div>
+  </div>
+
+  <!-- SECTION 7: COLORES -->
+  <div class="section">
+    <div class="section-label">Paleta</div>
+    <div class="section-title">Apple System Colors (Dark)</div>
+    <div class="section-desc">Los colores de acento de iOS en modo oscuro — más brillantes y saturados que en light mode.</div>
+
+    <div class="grid-4">
+      <div class="token-card">
+        <div class="token-swatch" style="background: linear-gradient(135deg, #0a84ff, #0066cc);"></div>
+        <div class="token-name">Blue</div>
+        <div class="token-value">#0a84ff</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background: linear-gradient(135deg, #30d158, #1a9e3a);"></div>
+        <div class="token-name">Green</div>
+        <div class="token-value">#30d158</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background: linear-gradient(135deg, #bf5af2, #9b3dcf);"></div>
+        <div class="token-name">Purple</div>
+        <div class="token-value">#bf5af2</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background: linear-gradient(135deg, #ff9f0a, #cc7a00);"></div>
+        <div class="token-name">Orange</div>
+        <div class="token-value">#ff9f0a</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background: linear-gradient(135deg, #ff453a, #cc1a10);"></div>
+        <div class="token-name">Red</div>
+        <div class="token-value">#ff453a</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background: linear-gradient(135deg, #5ac8fa, #2a8fcc);"></div>
+        <div class="token-name">Cyan</div>
+        <div class="token-value">#5ac8fa</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background: linear-gradient(135deg, #ff375f, #cc0030);"></div>
+        <div class="token-name">Pink</div>
+        <div class="token-value">#ff375f</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)); border: 1px solid rgba(255,255,255,0.15);"></div>
+        <div class="token-name">Glass</div>
+        <div class="token-value">rgba(255,255,255,0.06)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: TIPOGRAFÍA -->
+  <div class="section">
+    <div class="section-label">Tipografía</div>
+    <div class="section-title">Escala de texto</div>
+    <div class="section-desc">iOS usa SF Pro. En web: <code style="font-size:13px; color:#5ac8fa;">-apple-system, BlinkMacSystemFont, 'Inter', sans-serif</code>. Siempre letra tracking negativo en títulos.</div>
+
+    <div class="glass" style="padding: 28px 32px;">
+      <div class="type-row">
+        <div class="type-meta">64px / 300</div>
+        <div class="type-weight" style="color: var(--text-tertiary);">weight 300</div>
+        <div style="font-size: 48px; font-weight: 300; letter-spacing: -0.04em; line-height: 1;">Hero Title</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">40px / 400</div>
+        <div class="type-weight" style="color: var(--text-tertiary);">weight 400</div>
+        <div style="font-size: 36px; font-weight: 400; letter-spacing: -0.03em;">Sección principal</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">28px / 500</div>
+        <div class="type-weight" style="color: var(--text-tertiary);">weight 500</div>
+        <div style="font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">Subtítulo de card</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">17px / 400</div>
+        <div class="type-weight" style="color: var(--text-tertiary);">weight 400</div>
+        <div style="font-size: 17px; color: var(--text-secondary);">Cuerpo de texto con buena legibilidad sobre glass.</div>
+      </div>
+      <div class="type-row" style="border: none;">
+        <div class="type-meta">13px / 400</div>
+        <div class="type-weight" style="color: var(--text-tertiary);">weight 400</div>
+        <div style="font-size: 13px; color: var(--text-tertiary);">Metadato, timestamp, caption secundario</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 9: PROMPT PARA IA -->
+  <div class="section">
+    <div class="section-label">Instrucciones</div>
+    <div class="section-title">Prompt para tu IA coder</div>
+    <div class="section-desc">Copiá esto y pegalo como instrucciones de diseño en Cursor, v0, Bolt o el agente que uses. Reemplazá las secciones entre corchetes con el contenido de tu página.</div>
+
+    <div class="prompt-block">
+      <div class="prompt-section">
+        <strong>SISTEMA DE DISEÑO: iOS 26 Liquid Glass — Dark Mode</strong><br><br>
+        Diseñá esta página siguiendo exactamente el sistema visual de iOS 26 Liquid Glass en modo oscuro. Referencia directa: iPhone 17 / iOS 26 / Apple Liquid Glass.
+      </div>
+
+      <div class="prompt-section">
+        <strong>FONDO:</strong><br>
+        — Color base: #050508 (casi negro, con tinte azul muy leve)<br>
+        — Agregar 2-3 orbes de color difuso en el fondo (posición fija, pointer-events: none) con filter: blur(80-120px) y opacity: 0.35-0.45. Colores sugeridos: azul (#0a84ff), violeta (#bf5af2), verde (#30d158).<br>
+        — Los orbes deben tener animación CSS suave de drift (transform translate) con duración 15-25s y ease-in-out infinite.
+      </div>
+
+      <div class="prompt-section">
+        <strong>SUPERFICIES GLASS (usar en cards, navs, modales, inputs):</strong><br>
+        — background: rgba(255,255,255,0.06)<br>
+        — backdrop-filter: blur(24px) saturate(180%)<br>
+        — border: 1px solid rgba(255,255,255,0.14)<br>
+        — box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.12)<br>
+        — border-radius: mínimo 16px. Cards grandes: 22-30px. Botones: 999px (pill).
+      </div>
+
+      <div class="prompt-section">
+        <strong>TOP HIGHLIGHT (obligatorio en cards y modales):</strong><br>
+        Agregar ::before con position absolute, height: 1px, background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent). Simula la luz que rebota en el borde superior del vidrio.
+      </div>
+
+      <div class="prompt-section">
+        <strong>TEXTOS:</strong><br>
+        — Primario: rgba(255,255,255,0.95)<br>
+        — Secundario: rgba(255,255,255,0.60)<br>
+        — Terciario: rgba(255,255,255,0.35)<br>
+        — Títulos hero: font-weight 300, letter-spacing -0.03em a -0.04em<br>
+        — Títulos sección: font-weight 500, letter-spacing -0.02em<br>
+        — Fuente: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif
+      </div>
+
+      <div class="prompt-section">
+        <strong>BOTÓN PRIMARIO:</strong><br>
+        background: #0a84ff, color: white, border-radius: 999px, box-shadow: 0 0 20px rgba(10,132,255,0.4). Hover: brighten + translateY(-1px).
+      </div>
+
+      <div class="prompt-section">
+        <strong>NAVBAR:</strong><br>
+        Posición sticky top. Glass completo. Links activos con glass interno. CTA con accent azul. Padding generoso. border-radius: 999px o 22px si es full-width.
+      </div>
+
+      <div class="prompt-section">
+        <strong>INPUTS:</strong><br>
+        background: rgba(255,255,255,0.05), backdrop-filter: blur(16px), border: rgba(255,255,255,0.14). Focus ring: 0 0 0 3px rgba(10,132,255,0.2). Placeholder: rgba(255,255,255,0.35).
+      </div>
+
+      <div class="prompt-section">
+        <strong>COLORES DE ACENTO (Apple dark system colors):</strong><br>
+        Blue: #0a84ff | Green: #30d158 | Purple: #bf5af2 | Orange: #ff9f0a | Red: #ff453a | Cyan: #5ac8fa
+      </div>
+
+      <div class="prompt-section">
+        <strong>REGLAS CRÍTICAS:</strong><br>
+        — NUNCA usar blancos/negros sólidos en fondos. Todo debe ser semi-transparente.<br>
+        — TODO elemento interactivo debe tener backdrop-filter.<br>
+        — backdrop-filter requiere position: relative en el padre y overflow: hidden en algunos casos.<br>
+        — Agregar transiciones suaves (0.2s ease) en hover de todos los elementos glass.<br>
+        — Sin sombras de texto (text-shadow) salvo en casos extremos de contraste.<br>
+        — La jerarquía visual se logra variando la opacidad del bg glass (0.04 / 0.06 / 0.10 / 0.15).
+      </div>
+
+      <div class="prompt-section" style="border-top: 1px solid rgba(10,132,255,0.2); padding-top: 16px; margin-top: 8px;">
+        <strong>CONTENIDO DE ESTA PÁGINA:</strong><br>
+        [Describí acá qué secciones tiene tu página: hero, servicios, testimonios, CTA, etc.]
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 10: CHECKLIST -->
+  <div class="section">
+    <div class="section-label">Verificación</div>
+    <div class="section-title">Checklist de implementación</div>
+
+    <div class="glass-heavy" style="padding: 32px;">
+      <div class="grid-2" style="gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 12px; padding: 14px; background: rgba(48,209,88,0.06); border: 1px solid rgba(48,209,88,0.2); border-radius: var(--radius-md);">
+          <span style="color: #30d158; font-size: 18px;">✓</span>
+          <span style="font-size: 14px;">Fondo #050508 con orbes animados</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 14px; background: rgba(48,209,88,0.06); border: 1px solid rgba(48,209,88,0.2); border-radius: var(--radius-md);">
+          <span style="color: #30d158; font-size: 18px;">✓</span>
+          <span style="font-size: 14px;">backdrop-filter en todos los elementos</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 14px; background: rgba(48,209,88,0.06); border: 1px solid rgba(48,209,88,0.2); border-radius: var(--radius-md);">
+          <span style="color: #30d158; font-size: 18px;">✓</span>
+          <span style="font-size: 14px;">Bordes 1px semi-transparentes</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 14px; background: rgba(48,209,88,0.06); border: 1px solid rgba(48,209,88,0.2); border-radius: var(--radius-md);">
+          <span style="color: #30d158; font-size: 18px;">✓</span>
+          <span style="font-size: 14px;">Top-highlight ::before en cards</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 14px; background: rgba(48,209,88,0.06); border: 1px solid rgba(48,209,88,0.2); border-radius: var(--radius-md);">
+          <span style="color: #30d158; font-size: 18px;">✓</span>
+          <span style="font-size: 14px;">Textos con opacidad (no #fff puro)</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 14px; background: rgba(48,209,88,0.06); border: 1px solid rgba(48,209,88,0.2); border-radius: var(--radius-md);">
+          <span style="color: #30d158; font-size: 18px;">✓</span>
+          <span style="font-size: 14px;">border-radius mínimo 16px</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 14px; background: rgba(48,209,88,0.06); border: 1px solid rgba(48,209,88,0.2); border-radius: var(--radius-md);">
+          <span style="color: #30d158; font-size: 18px;">✓</span>
+          <span style="font-size: 14px;">Acento primario #0a84ff</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 14px; background: rgba(48,209,88,0.06); border: 1px solid rgba(48,209,88,0.2); border-radius: var(--radius-md);">
+          <span style="color: #30d158; font-size: 18px;">✓</span>
+          <span style="font-size: 14px;">Transiciones 0.2s ease en hovers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  iOS 26 · Liquid Glass · Dark Mode System — Guía para Luciano · 2026
+</footer>
+
+</body>
+</html>

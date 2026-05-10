@@ -78,7 +78,7 @@ export const VariableManager: React.FC<VariableManagerProps> = ({ text, onUpdate
               type="text"
               autoFocus={idx === 0}
               placeholder={`Escribe para reemplazar...`}
-              className="px-3 py-1.5 text-sm rounded border border-amber-300 dark:border-amber-700 bg-white dark:bg-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-amber-500/50 outline-none"
+              className="px-3 py-1.5 text-sm rounded border border-amber-300 dark:border-amber-700 bg-white dark:bg-zinc-900 dark:text-zinc-100 focus:ring-2 focus:ring-amber-500/50 outline-none"
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   handleValueChange(idx, e.currentTarget.value);
