@@ -256,13 +256,25 @@
       
       /* Base glass properties for light mode */
       body[data-theme="ios"] .glass-panel,
-      body[data-theme="ios"] .glass {
+      body[data-theme="ios"] .glass,
+      body[data-theme="ios"] select,
+      body[data-theme="ios"] [class*="bg-gray-200/50"],
+      body[data-theme="ios"] [class*="bg-indigo-50/50"],
+      body[data-theme="ios"] [class*="bg-gray-100/80"],
+      body[data-theme="ios"] [class*="bg-white"][class*="dark:bg-zinc-800"] {
         background: rgba(255, 255, 255, 0.5) !important;
         backdrop-filter: blur(24px) saturate(180%) !important;
         -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
         border: 1px solid rgba(0, 0, 0, 0.05) !important;
         box-shadow: 0 8px 32px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04) !important;
         position: relative;
+        border-radius: 20px !important;
+      }
+      body[data-theme="ios"] [class*="bg-gray-200/50"] button [layoutid="activeTab"] {
+        background: rgba(255, 255, 255, 0.9) !important;
+        border: 1px solid rgba(0, 0, 0, 0.05) !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+        border-radius: 12px !important;
       }
       /* Top highlight for light mode */
       body[data-theme="ios"] .glass-panel::before,
@@ -279,12 +291,24 @@
 
       /* Base glass properties for dark mode */
       html.dark body[data-theme="ios"] .glass-panel,
-      html.dark body[data-theme="ios"] .glass {
+      html.dark body[data-theme="ios"] .glass,
+      html.dark body[data-theme="ios"] select,
+      html.dark body[data-theme="ios"] [class*="bg-gray-200/50"],
+      html.dark body[data-theme="ios"] [class*="dark:bg-zinc-900/80"],
+      html.dark body[data-theme="ios"] [class*="dark:bg-indigo-900/10"],
+      html.dark body[data-theme="ios"] [class*="bg-white"][class*="dark:bg-zinc-800"] {
         background: rgba(255,255,255,0.06) !important;
         backdrop-filter: blur(24px) saturate(180%) !important;
         -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
         border: 1px solid rgba(255,255,255,0.14) !important;
         box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3) !important;
+        border-radius: 20px !important;
+      }
+      html.dark body[data-theme="ios"] [class*="bg-gray-200/50"] button [layoutid="activeTab"] {
+        background: rgba(255,255,255,0.15) !important;
+        border: 1px solid rgba(255,255,255,0.1) !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+        border-radius: 12px !important;
       }
       /* Top highlight for dark mode */
       html.dark body[data-theme="ios"] .glass-panel::before,
@@ -692,6 +716,11 @@
       body[data-theme="neo-brutalism"] .glass-panel,
       body[data-theme="neo-brutalism"] .glass,
       body[data-theme="neo-brutalism"] header,
+      body[data-theme="neo-brutalism"] select,
+      body[data-theme="neo-brutalism"] [class*="bg-gray-200/50"],
+      body[data-theme="neo-brutalism"] [class*="bg-indigo-50/50"],
+      body[data-theme="neo-brutalism"] [class*="bg-gray-100/80"],
+      body[data-theme="neo-brutalism"] [class*="bg-white"][class*="dark:bg-zinc-800"],
       body[data-theme="neo-brutalism"] .glass-btn,
       body[data-theme="neo-brutalism"] .glass-input,
       body[data-theme="neo-brutalism"] .glass-input {
@@ -703,15 +732,30 @@
         backdrop-filter: none !important;
         transition: transform 0.1s, box-shadow 0.1s !important;
       }
+      body[data-theme="neo-brutalism"] [class*="bg-gray-200/50"] button [layoutid="activeTab"] {
+        background: #FF006E !important;
+        border: 4px solid #000000 !important;
+        color: white !important;
+      }
       html.dark body[data-theme="neo-brutalism"] .glass-panel,
       html.dark body[data-theme="neo-brutalism"] .glass,
       html.dark body[data-theme="neo-brutalism"] header,
+      html.dark body[data-theme="neo-brutalism"] select,
+      html.dark body[data-theme="neo-brutalism"] [class*="bg-gray-200/50"],
+      html.dark body[data-theme="neo-brutalism"] [class*="dark:bg-zinc-900/80"],
+      html.dark body[data-theme="neo-brutalism"] [class*="dark:bg-indigo-900/10"],
+      html.dark body[data-theme="neo-brutalism"] [class*="bg-white"][class*="dark:bg-zinc-800"],
       html.dark body[data-theme="neo-brutalism"] .glass-btn,
       html.dark body[data-theme="neo-brutalism"] .glass-input,
       html.dark body[data-theme="neo-brutalism"] .glass-input {
         background: #FF006E !important; 
         color: #ffffff !important;
         border: 4px solid #000000 !important;
+      }
+      html.dark body[data-theme="neo-brutalism"] [class*="bg-gray-200/50"] button [layoutid="activeTab"] {
+        background: #FFBE0B !important;
+        border: 4px solid #000000 !important;
+        color: #000000 !important;
       }
       body[data-theme="neo-brutalism"] .glass-input,
       body[data-theme="neo-brutalism"] .glass-input {
@@ -894,7 +938,12 @@
       }
       body[data-theme="y2k"] .glass-panel,
       body[data-theme="y2k"] .glass,
-      body[data-theme="y2k"] header {
+      body[data-theme="y2k"] header,
+      body[data-theme="y2k"] select,
+      body[data-theme="y2k"] [class*="bg-gray-200/50"],
+      body[data-theme="y2k"] [class*="bg-indigo-50/50"],
+      body[data-theme="y2k"] [class*="bg-gray-100/80"],
+      body[data-theme="y2k"] [class*="bg-white"][class*="dark:bg-zinc-800"] {
         background: #dfdfdf !important;
         border-top: 2px solid #ffffff !important;
         border-left: 2px solid #ffffff !important;
@@ -904,13 +953,28 @@
         box-shadow: none !important;
         color: #000080 !important;
       }
+      body[data-theme="y2k"] [class*="bg-gray-200/50"] button [layoutid="activeTab"] {
+        border-top: 2px solid #808080 !important;
+        border-left: 2px solid #808080 !important;
+        border-right: 2px solid #ffffff !important;
+        border-bottom: 2px solid #ffffff !important;
+      }
       html.dark body[data-theme="y2k"] .glass-panel,
       html.dark body[data-theme="y2k"] .glass,
-      html.dark body[data-theme="y2k"] header {
+      html.dark body[data-theme="y2k"] header,
+      html.dark body[data-theme="y2k"] select,
+      html.dark body[data-theme="y2k"] [class*="bg-gray-200/50"],
+      html.dark body[data-theme="y2k"] [class*="dark:bg-zinc-900/80"],
+      html.dark body[data-theme="y2k"] [class*="dark:bg-indigo-900/10"],
+      html.dark body[data-theme="y2k"] [class*="bg-white"][class*="dark:bg-zinc-800"] {
         background: rgba(0, 20, 0, 0.8) !important;
         border: 2px solid #00ff00 !important;
         box-shadow: 0 0 10px #00ff00, inset 0 0 10px #00ff00 !important;
         color: #00ff00 !important;
+      }
+      html.dark body[data-theme="y2k"] [class*="bg-gray-200/50"] button [layoutid="activeTab"] {
+        background: #00ff00 !important;
+        color: #000000 !important;
       }
       body[data-theme="y2k"] .glass-input,
       body[data-theme="y2k"] .glass-input {
@@ -977,19 +1041,40 @@
       }
       body[data-theme="dopamine"] .glass-panel,
       body[data-theme="dopamine"] .glass,
-      body[data-theme="dopamine"] header {
+      body[data-theme="dopamine"] header,
+      body[data-theme="dopamine"] select,
+      body[data-theme="dopamine"] [class*="bg-gray-200/50"],
+      body[data-theme="dopamine"] [class*="bg-indigo-50/50"],
+      body[data-theme="dopamine"] [class*="bg-gray-100/80"],
+      body[data-theme="dopamine"] [class*="bg-white"][class*="dark:bg-zinc-800"] {
         background: #FFFFFF !important;
         border: 3px solid #FF8A65 !important;
         border-radius: 40px !important;
         box-shadow: 0 8px 0 #FF8A65 !important;
       }
+      body[data-theme="dopamine"] [class*="bg-gray-200/50"] button [layoutid="activeTab"] {
+        background: #FF8A65 !important;
+        color: white !important;
+        border-radius: 30px !important;
+      }
       html.dark body[data-theme="dopamine"] .glass-panel,
       html.dark body[data-theme="dopamine"] .glass,
-      html.dark body[data-theme="dopamine"] header {
+      html.dark body[data-theme="dopamine"] header,
+      html.dark body[data-theme="dopamine"] select,
+      html.dark body[data-theme="dopamine"] [class*="bg-gray-200/50"],
+      html.dark body[data-theme="dopamine"] [class*="dark:bg-zinc-900/80"],
+      html.dark body[data-theme="dopamine"] [class*="dark:bg-indigo-900/10"],
+      html.dark body[data-theme="dopamine"] [class*="bg-white"][class*="dark:bg-zinc-800"] {
         background: #512DA8 !important;
         border: 3px solid #B388FF !important;
         box-shadow: 0 8px 0 #B388FF !important;
         color: white !important;
+        border-radius: 40px !important;
+      }
+      html.dark body[data-theme="dopamine"] [class*="bg-gray-200/50"] button [layoutid="activeTab"] {
+        background: #B388FF !important;
+        color: white !important;
+        border-radius: 30px !important;
       }
       body[data-theme="dopamine"] .glass-input,
       body[data-theme="dopamine"] .glass-input {
@@ -1039,19 +1124,39 @@
       }
       body[data-theme="opencode"] .glass-panel,
       body[data-theme="opencode"] .glass,
-      body[data-theme="opencode"] header {
+      body[data-theme="opencode"] header,
+      body[data-theme="opencode"] select,
+      body[data-theme="opencode"] [class*="bg-gray-200/50"],
+      body[data-theme="opencode"] [class*="bg-indigo-50/50"],
+      body[data-theme="opencode"] [class*="bg-gray-100/80"],
+      body[data-theme="opencode"] [class*="bg-white"][class*="dark:bg-zinc-800"] {
         background: #FFFFFF !important;
         border: 1px solid #EAEAEA !important;
         border-radius: 8px !important;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
         backdrop-filter: none !important;
       }
+      body[data-theme="opencode"] [class*="bg-gray-200/50"] button [layoutid="activeTab"] {
+        background: #F5F5F5 !important;
+        border: 1px solid #EAEAEA !important;
+        box-shadow: none !important;
+      }
       html.dark body[data-theme="opencode"] .glass-panel,
       html.dark body[data-theme="opencode"] .glass,
-      html.dark body[data-theme="opencode"] header {
+      html.dark body[data-theme="opencode"] header,
+      html.dark body[data-theme="opencode"] select,
+      html.dark body[data-theme="opencode"] [class*="bg-gray-200/50"],
+      html.dark body[data-theme="opencode"] [class*="dark:bg-zinc-900/80"],
+      html.dark body[data-theme="opencode"] [class*="dark:bg-indigo-900/10"],
+      html.dark body[data-theme="opencode"] [class*="bg-white"][class*="dark:bg-zinc-800"] {
         background: #111111 !important;
         border: 1px solid #333333 !important;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+      }
+      html.dark body[data-theme="opencode"] [class*="bg-gray-200/50"] button [layoutid="activeTab"] {
+        background: #222222 !important;
+        border: 1px solid #444444 !important;
+        box-shadow: none !important;
       }
       body[data-theme="opencode"] .glass-input,
       body[data-theme="opencode"] .glass-input {
@@ -1295,1405 +1400,8 @@
     
       
     
-      /* --- AUTOMATED THEME FIXES --- */
-
-      /* Theme: glassmorphism fixes - LIGHT */
-      body[data-theme="glassmorphism"] [class*="bg-gray-200/50"] {
-        background: rgba(255,255,255,0.4) !important;
-        border: 1px solid rgba(255,255,255,0.6) !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="glassmorphism"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      body[data-theme="glassmorphism"] [class*="bg-gray-200/50"] [class*="bg-white"] {
-        background: rgba(255,255,255,0.8) !important;
-        border: 1px solid rgba(255,255,255,0.9) !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="glassmorphism"] [class*="bg-gray-200/50"] button {
-        color: currentColor !important;
-      }
-      body[data-theme="glassmorphism"] [class*="bg-gray-200/50"] button:hover {
-        opacity: 0.8 !important;
-      }
-
-      body[data-theme="glassmorphism"] [class*="bg-indigo-50/50"] {
-        background: rgba(255,255,255,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.5) !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="glassmorphism"] [class*="bg-gray-100/80"] {
-        background: rgba(255,255,255,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.5) !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="glassmorphism"] select {
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        background-image: none !important;
-      }
-      body[data-theme="glassmorphism"] select:focus {
-        outline: none !important;
-      }
-
-      body[data-theme="glassmorphism"] [class*="bg-white"][class*="border"]:has(select) {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="glassmorphism"] header button {
-        background: rgba(255,255,255,0.5) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-
-      body[data-theme="glassmorphism"] .option-btn {
-        background: rgba(255,255,255,0.3) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      body[data-theme="glassmorphism"] .option-btn.option-selected {
-        background: rgba(255,255,255,0.8) !important;
-        border: 1px solid rgba(255,255,255,0.9) !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
       
-      /* Theme: glassmorphism fixes - DARK */
-      html.dark body[data-theme="glassmorphism"] [class*="dark:bg-zinc-900/80"] {
-        background: rgba(0,0,0,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="glassmorphism"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      html.dark body[data-theme="glassmorphism"] [class*="bg-gray-200/50"] [class*="dark:bg-zinc-700"] {
-        background: rgba(255,255,255,0.1) !important;
-        border: 1px solid rgba(255,255,255,0.3) !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="glassmorphism"] [class*="bg-gray-200/50"] button {
-        color: currentColor !important;
-      }
-
-      html.dark body[data-theme="glassmorphism"] [class*="dark:bg-indigo-900/10"] {
-        background: rgba(0,0,0,0.2) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="glassmorphism"] [class*="dark:bg-zinc-900/80"] {
-        background: rgba(0,0,0,0.2) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="glassmorphism"] select {
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="glassmorphism"] [class*="dark:bg-zinc-800"]:has(select) {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="glassmorphism"] header button {
-        background: rgba(255,255,255,0.1) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-
-      html.dark body[data-theme="glassmorphism"] .option-btn {
-        background: rgba(0,0,0,0.2) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      html.dark body[data-theme="glassmorphism"] .option-btn.option-selected {
-        background: rgba(255,255,255,0.1) !important;
-        border: 1px solid rgba(255,255,255,0.3) !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-  
-      /* Theme: ios fixes - LIGHT */
-      body[data-theme="ios"] [class*="bg-gray-200/50"] {
-        background: rgba(255,255,255,0.7) !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="ios"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      body[data-theme="ios"] [class*="bg-gray-200/50"] [class*="bg-white"] {
-        background: #ffffff !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="ios"] [class*="bg-gray-200/50"] button {
-        color: #000 !important !important;
-      }
-      body[data-theme="ios"] [class*="bg-gray-200/50"] button:hover {
-        opacity: 0.8 !important;
-      }
-
-      body[data-theme="ios"] [class*="bg-indigo-50/50"] {
-        background: rgba(255,255,255,0.5) !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="ios"] [class*="bg-gray-100/80"] {
-        background: rgba(255,255,255,0.5) !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="ios"] select {
-        background-color: rgba(255,255,255,0.7) !important;
-        border: none !important;
-        box-shadow: none !important;
-        background-image: none !important;
-      }
-      body[data-theme="ios"] select:focus {
-        outline: none !important;
-      }
-
-      body[data-theme="ios"] [class*="bg-white"][class*="border"]:has(select) {
-        background: rgba(255,255,255,0.7) !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="ios"] header button {
-        background: rgba(255,255,255,0.8) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: #000 !important !important;
-      }
-
-      body[data-theme="ios"] .option-btn {
-        background: rgba(255,255,255,0.5) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      body[data-theme="ios"] .option-btn.option-selected {
-        background: #ffffff !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: #000 !important !important;
-      }
-      
-      /* Theme: ios fixes - DARK */
-      html.dark body[data-theme="ios"] [class*="dark:bg-zinc-900/80"] {
-        background: rgba(0,0,0,0.5) !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="ios"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      html.dark body[data-theme="ios"] [class*="bg-gray-200/50"] [class*="dark:bg-zinc-700"] {
-        background: #333333 !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="ios"] [class*="bg-gray-200/50"] button {
-        color: #ffffff !important !important;
-      }
-
-      html.dark body[data-theme="ios"] [class*="dark:bg-indigo-900/10"] {
-        background: rgba(0,0,0,0.4) !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="ios"] [class*="dark:bg-zinc-900/80"] {
-        background: rgba(0,0,0,0.4) !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="ios"] select {
-        background-color: rgba(255,255,255,0.1) !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="ios"] [class*="dark:bg-zinc-800"]:has(select) {
-        background: rgba(255,255,255,0.1) !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="ios"] header button {
-        background: rgba(255,255,255,0.1) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: #fff !important !important;
-      }
-
-      html.dark body[data-theme="ios"] .option-btn {
-        background: rgba(0,0,0,0.4) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      html.dark body[data-theme="ios"] .option-btn.option-selected {
-        background: #333333 !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: #ffffff !important !important;
-      }
-  
-      /* Theme: neumorphism fixes - LIGHT */
-      body[data-theme="neumorphism"] [class*="bg-gray-200/50"] {
-        background: rgba(255,255,255,0.4) !important;
-        border: 1px solid rgba(255,255,255,0.6) !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="neumorphism"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      body[data-theme="neumorphism"] [class*="bg-gray-200/50"] [class*="bg-white"] {
-        background: rgba(255,255,255,0.8) !important;
-        border: 1px solid rgba(255,255,255,0.9) !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="neumorphism"] [class*="bg-gray-200/50"] button {
-        color: currentColor !important;
-      }
-      body[data-theme="neumorphism"] [class*="bg-gray-200/50"] button:hover {
-        opacity: 0.8 !important;
-      }
-
-      body[data-theme="neumorphism"] [class*="bg-indigo-50/50"] {
-        background: rgba(255,255,255,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.5) !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="neumorphism"] [class*="bg-gray-100/80"] {
-        background: rgba(255,255,255,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.5) !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="neumorphism"] select {
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        background-image: none !important;
-      }
-      body[data-theme="neumorphism"] select:focus {
-        outline: none !important;
-      }
-
-      body[data-theme="neumorphism"] [class*="bg-white"][class*="border"]:has(select) {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="neumorphism"] header button {
-        background: rgba(255,255,255,0.5) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-
-      body[data-theme="neumorphism"] .option-btn {
-        background: rgba(255,255,255,0.3) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      body[data-theme="neumorphism"] .option-btn.option-selected {
-        background: rgba(255,255,255,0.8) !important;
-        border: 1px solid rgba(255,255,255,0.9) !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      
-      /* Theme: neumorphism fixes - DARK */
-      html.dark body[data-theme="neumorphism"] [class*="dark:bg-zinc-900/80"] {
-        background: rgba(0,0,0,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="neumorphism"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      html.dark body[data-theme="neumorphism"] [class*="bg-gray-200/50"] [class*="dark:bg-zinc-700"] {
-        background: rgba(255,255,255,0.1) !important;
-        border: 1px solid rgba(255,255,255,0.3) !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="neumorphism"] [class*="bg-gray-200/50"] button {
-        color: currentColor !important;
-      }
-
-      html.dark body[data-theme="neumorphism"] [class*="dark:bg-indigo-900/10"] {
-        background: rgba(0,0,0,0.2) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="neumorphism"] [class*="dark:bg-zinc-900/80"] {
-        background: rgba(0,0,0,0.2) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="neumorphism"] select {
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="neumorphism"] [class*="dark:bg-zinc-800"]:has(select) {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="neumorphism"] header button {
-        background: rgba(255,255,255,0.1) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-
-      html.dark body[data-theme="neumorphism"] .option-btn {
-        background: rgba(0,0,0,0.2) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      html.dark body[data-theme="neumorphism"] .option-btn.option-selected {
-        background: rgba(255,255,255,0.1) !important;
-        border: 1px solid rgba(255,255,255,0.3) !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-  
-      /* Theme: claymorphism fixes - LIGHT */
-      body[data-theme="claymorphism"] [class*="bg-gray-200/50"] {
-        background: rgba(255,255,255,0.4) !important;
-        border: 1px solid rgba(255,255,255,0.6) !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="claymorphism"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      body[data-theme="claymorphism"] [class*="bg-gray-200/50"] [class*="bg-white"] {
-        background: rgba(255,255,255,0.8) !important;
-        border: 1px solid rgba(255,255,255,0.9) !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="claymorphism"] [class*="bg-gray-200/50"] button {
-        color: currentColor !important;
-      }
-      body[data-theme="claymorphism"] [class*="bg-gray-200/50"] button:hover {
-        opacity: 0.8 !important;
-      }
-
-      body[data-theme="claymorphism"] [class*="bg-indigo-50/50"] {
-        background: rgba(255,255,255,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.5) !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="claymorphism"] [class*="bg-gray-100/80"] {
-        background: rgba(255,255,255,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.5) !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="claymorphism"] select {
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        background-image: none !important;
-      }
-      body[data-theme="claymorphism"] select:focus {
-        outline: none !important;
-      }
-
-      body[data-theme="claymorphism"] [class*="bg-white"][class*="border"]:has(select) {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="claymorphism"] header button {
-        background: rgba(255,255,255,0.5) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-
-      body[data-theme="claymorphism"] .option-btn {
-        background: rgba(255,255,255,0.3) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      body[data-theme="claymorphism"] .option-btn.option-selected {
-        background: rgba(255,255,255,0.8) !important;
-        border: 1px solid rgba(255,255,255,0.9) !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      
-      /* Theme: claymorphism fixes - DARK */
-      html.dark body[data-theme="claymorphism"] [class*="dark:bg-zinc-900/80"] {
-        background: rgba(0,0,0,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="claymorphism"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      html.dark body[data-theme="claymorphism"] [class*="bg-gray-200/50"] [class*="dark:bg-zinc-700"] {
-        background: rgba(255,255,255,0.1) !important;
-        border: 1px solid rgba(255,255,255,0.3) !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="claymorphism"] [class*="bg-gray-200/50"] button {
-        color: currentColor !important;
-      }
-
-      html.dark body[data-theme="claymorphism"] [class*="dark:bg-indigo-900/10"] {
-        background: rgba(0,0,0,0.2) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="claymorphism"] [class*="dark:bg-zinc-900/80"] {
-        background: rgba(0,0,0,0.2) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="claymorphism"] select {
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="claymorphism"] [class*="dark:bg-zinc-800"]:has(select) {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="claymorphism"] header button {
-        background: rgba(255,255,255,0.1) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-
-      html.dark body[data-theme="claymorphism"] .option-btn {
-        background: rgba(0,0,0,0.2) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      html.dark body[data-theme="claymorphism"] .option-btn.option-selected {
-        background: rgba(255,255,255,0.1) !important;
-        border: 1px solid rgba(255,255,255,0.3) !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-  
-      /* Theme: auroramorphism fixes - LIGHT */
-      body[data-theme="auroramorphism"] [class*="bg-gray-200/50"] {
-        background: rgba(255,255,255,0.4) !important;
-        border: 1px solid rgba(255,255,255,0.6) !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="auroramorphism"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      body[data-theme="auroramorphism"] [class*="bg-gray-200/50"] [class*="bg-white"] {
-        background: rgba(255,255,255,0.8) !important;
-        border: 1px solid rgba(255,255,255,0.9) !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="auroramorphism"] [class*="bg-gray-200/50"] button {
-        color: currentColor !important;
-      }
-      body[data-theme="auroramorphism"] [class*="bg-gray-200/50"] button:hover {
-        opacity: 0.8 !important;
-      }
-
-      body[data-theme="auroramorphism"] [class*="bg-indigo-50/50"] {
-        background: rgba(255,255,255,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.5) !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="auroramorphism"] [class*="bg-gray-100/80"] {
-        background: rgba(255,255,255,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.5) !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="auroramorphism"] select {
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        background-image: none !important;
-      }
-      body[data-theme="auroramorphism"] select:focus {
-        outline: none !important;
-      }
-
-      body[data-theme="auroramorphism"] [class*="bg-white"][class*="border"]:has(select) {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="auroramorphism"] header button {
-        background: rgba(255,255,255,0.5) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-
-      body[data-theme="auroramorphism"] .option-btn {
-        background: rgba(255,255,255,0.3) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      body[data-theme="auroramorphism"] .option-btn.option-selected {
-        background: rgba(255,255,255,0.8) !important;
-        border: 1px solid rgba(255,255,255,0.9) !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      
-      /* Theme: auroramorphism fixes - DARK */
-      html.dark body[data-theme="auroramorphism"] [class*="dark:bg-zinc-900/80"] {
-        background: rgba(0,0,0,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="auroramorphism"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      html.dark body[data-theme="auroramorphism"] [class*="bg-gray-200/50"] [class*="dark:bg-zinc-700"] {
-        background: rgba(255,255,255,0.1) !important;
-        border: 1px solid rgba(255,255,255,0.3) !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="auroramorphism"] [class*="bg-gray-200/50"] button {
-        color: currentColor !important;
-      }
-
-      html.dark body[data-theme="auroramorphism"] [class*="dark:bg-indigo-900/10"] {
-        background: rgba(0,0,0,0.2) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="auroramorphism"] [class*="dark:bg-zinc-900/80"] {
-        background: rgba(0,0,0,0.2) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="auroramorphism"] select {
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="auroramorphism"] [class*="dark:bg-zinc-800"]:has(select) {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="auroramorphism"] header button {
-        background: rgba(255,255,255,0.1) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-
-      html.dark body[data-theme="auroramorphism"] .option-btn {
-        background: rgba(0,0,0,0.2) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      html.dark body[data-theme="auroramorphism"] .option-btn.option-selected {
-        background: rgba(255,255,255,0.1) !important;
-        border: 1px solid rgba(255,255,255,0.3) !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-  
-      /* Theme: neo-brutalism fixes - LIGHT */
-      body[data-theme="neo-brutalism"] [class*="bg-gray-200/50"] {
-        background: #ffffff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-      }
-      body[data-theme="neo-brutalism"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      body[data-theme="neo-brutalism"] [class*="bg-gray-200/50"] [class*="bg-white"] {
-        background: #ff90e8 !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-      }
-      body[data-theme="neo-brutalism"] [class*="bg-gray-200/50"] button {
-        color: #000 !important !important;
-      }
-      body[data-theme="neo-brutalism"] [class*="bg-gray-200/50"] button:hover {
-        opacity: 0.8 !important;
-      }
-
-      body[data-theme="neo-brutalism"] [class*="bg-indigo-50/50"] {
-        background: #ffc900 !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-      }
-
-      body[data-theme="neo-brutalism"] [class*="bg-gray-100/80"] {
-        background: #f4f4f4 !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-      }
-
-      body[data-theme="neo-brutalism"] select {
-        background-color: #fff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-        background-image: none !important;
-      }
-      body[data-theme="neo-brutalism"] select:focus {
-        outline: none !important;
-      }
-
-      body[data-theme="neo-brutalism"] [class*="bg-white"][class*="border"]:has(select) {
-        background: #fff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-      }
-
-      body[data-theme="neo-brutalism"] header button {
-        background: #fff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-        color: #000 !important !important;
-      }
-
-      body[data-theme="neo-brutalism"] .option-btn {
-        background: #f4f4f4 !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-        color: inherit !important;
-      }
-      body[data-theme="neo-brutalism"] .option-btn.option-selected {
-        background: #ff90e8 !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-        color: #000 !important !important;
-      }
-      
-      /* Theme: neo-brutalism fixes - DARK */
-      html.dark body[data-theme="neo-brutalism"] [class*="dark:bg-zinc-900/80"] {
-        background: #ffffff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-      }
-      html.dark body[data-theme="neo-brutalism"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      html.dark body[data-theme="neo-brutalism"] [class*="bg-gray-200/50"] [class*="dark:bg-zinc-700"] {
-        background: #ff90e8 !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-      }
-      html.dark body[data-theme="neo-brutalism"] [class*="bg-gray-200/50"] button {
-        color: #000 !important !important;
-      }
-
-      html.dark body[data-theme="neo-brutalism"] [class*="dark:bg-indigo-900/10"] {
-        background: #ffc900 !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-      }
-
-      html.dark body[data-theme="neo-brutalism"] [class*="dark:bg-zinc-900/80"] {
-        background: #f4f4f4 !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-      }
-
-      html.dark body[data-theme="neo-brutalism"] select {
-        background-color: #fff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-      }
-
-      html.dark body[data-theme="neo-brutalism"] [class*="dark:bg-zinc-800"]:has(select) {
-        background: #fff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-      }
-
-      html.dark body[data-theme="neo-brutalism"] header button {
-        background: #fff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-        color: #000 !important !important;
-      }
-
-      html.dark body[data-theme="neo-brutalism"] .option-btn {
-        background: #f4f4f4 !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-        color: inherit !important;
-      }
-      html.dark body[data-theme="neo-brutalism"] .option-btn.option-selected {
-        background: #ff90e8 !important;
-        border: 2px solid #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-        color: #000 !important !important;
-      }
-  
-      /* Theme: bento-grid fixes - LIGHT */
-      body[data-theme="bento-grid"] [class*="bg-gray-200/50"] {
-        background: rgba(255,255,255,0.4) !important;
-        border: 1px solid rgba(255,255,255,0.6) !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="bento-grid"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      body[data-theme="bento-grid"] [class*="bg-gray-200/50"] [class*="bg-white"] {
-        background: rgba(255,255,255,0.8) !important;
-        border: 1px solid rgba(255,255,255,0.9) !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="bento-grid"] [class*="bg-gray-200/50"] button {
-        color: currentColor !important;
-      }
-      body[data-theme="bento-grid"] [class*="bg-gray-200/50"] button:hover {
-        opacity: 0.8 !important;
-      }
-
-      body[data-theme="bento-grid"] [class*="bg-indigo-50/50"] {
-        background: rgba(255,255,255,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.5) !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="bento-grid"] [class*="bg-gray-100/80"] {
-        background: rgba(255,255,255,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.5) !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="bento-grid"] select {
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        background-image: none !important;
-      }
-      body[data-theme="bento-grid"] select:focus {
-        outline: none !important;
-      }
-
-      body[data-theme="bento-grid"] [class*="bg-white"][class*="border"]:has(select) {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="bento-grid"] header button {
-        background: rgba(255,255,255,0.5) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-
-      body[data-theme="bento-grid"] .option-btn {
-        background: rgba(255,255,255,0.3) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      body[data-theme="bento-grid"] .option-btn.option-selected {
-        background: rgba(255,255,255,0.8) !important;
-        border: 1px solid rgba(255,255,255,0.9) !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      
-      /* Theme: bento-grid fixes - DARK */
-      html.dark body[data-theme="bento-grid"] [class*="dark:bg-zinc-900/80"] {
-        background: rgba(0,0,0,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="bento-grid"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      html.dark body[data-theme="bento-grid"] [class*="bg-gray-200/50"] [class*="dark:bg-zinc-700"] {
-        background: rgba(255,255,255,0.1) !important;
-        border: 1px solid rgba(255,255,255,0.3) !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="bento-grid"] [class*="bg-gray-200/50"] button {
-        color: currentColor !important;
-      }
-
-      html.dark body[data-theme="bento-grid"] [class*="dark:bg-indigo-900/10"] {
-        background: rgba(0,0,0,0.2) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="bento-grid"] [class*="dark:bg-zinc-900/80"] {
-        background: rgba(0,0,0,0.2) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="bento-grid"] select {
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="bento-grid"] [class*="dark:bg-zinc-800"]:has(select) {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="bento-grid"] header button {
-        background: rgba(255,255,255,0.1) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-
-      html.dark body[data-theme="bento-grid"] .option-btn {
-        background: rgba(0,0,0,0.2) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      html.dark body[data-theme="bento-grid"] .option-btn.option-selected {
-        background: rgba(255,255,255,0.1) !important;
-        border: 1px solid rgba(255,255,255,0.3) !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-  
-      /* Theme: skeuomorphism fixes - LIGHT */
-      body[data-theme="skeuomorphism"] [class*="bg-gray-200/50"] {
-        background: rgba(255,255,255,0.4) !important;
-        border: 1px solid rgba(255,255,255,0.6) !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="skeuomorphism"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      body[data-theme="skeuomorphism"] [class*="bg-gray-200/50"] [class*="bg-white"] {
-        background: rgba(255,255,255,0.8) !important;
-        border: 1px solid rgba(255,255,255,0.9) !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="skeuomorphism"] [class*="bg-gray-200/50"] button {
-        color: currentColor !important;
-      }
-      body[data-theme="skeuomorphism"] [class*="bg-gray-200/50"] button:hover {
-        opacity: 0.8 !important;
-      }
-
-      body[data-theme="skeuomorphism"] [class*="bg-indigo-50/50"] {
-        background: rgba(255,255,255,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.5) !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="skeuomorphism"] [class*="bg-gray-100/80"] {
-        background: rgba(255,255,255,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.5) !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="skeuomorphism"] select {
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        background-image: none !important;
-      }
-      body[data-theme="skeuomorphism"] select:focus {
-        outline: none !important;
-      }
-
-      body[data-theme="skeuomorphism"] [class*="bg-white"][class*="border"]:has(select) {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="skeuomorphism"] header button {
-        background: rgba(255,255,255,0.5) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-
-      body[data-theme="skeuomorphism"] .option-btn {
-        background: rgba(255,255,255,0.3) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      body[data-theme="skeuomorphism"] .option-btn.option-selected {
-        background: rgba(255,255,255,0.8) !important;
-        border: 1px solid rgba(255,255,255,0.9) !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      
-      /* Theme: skeuomorphism fixes - DARK */
-      html.dark body[data-theme="skeuomorphism"] [class*="dark:bg-zinc-900/80"] {
-        background: rgba(0,0,0,0.3) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="skeuomorphism"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      html.dark body[data-theme="skeuomorphism"] [class*="bg-gray-200/50"] [class*="dark:bg-zinc-700"] {
-        background: rgba(255,255,255,0.1) !important;
-        border: 1px solid rgba(255,255,255,0.3) !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="skeuomorphism"] [class*="bg-gray-200/50"] button {
-        color: currentColor !important;
-      }
-
-      html.dark body[data-theme="skeuomorphism"] [class*="dark:bg-indigo-900/10"] {
-        background: rgba(0,0,0,0.2) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="skeuomorphism"] [class*="dark:bg-zinc-900/80"] {
-        background: rgba(0,0,0,0.2) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="skeuomorphism"] select {
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="skeuomorphism"] [class*="dark:bg-zinc-800"]:has(select) {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="skeuomorphism"] header button {
-        background: rgba(255,255,255,0.1) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-
-      html.dark body[data-theme="skeuomorphism"] .option-btn {
-        background: rgba(0,0,0,0.2) !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      html.dark body[data-theme="skeuomorphism"] .option-btn.option-selected {
-        background: rgba(255,255,255,0.1) !important;
-        border: 1px solid rgba(255,255,255,0.3) !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-  
-      /* Theme: y2k fixes - LIGHT */
-      body[data-theme="y2k"] [class*="bg-gray-200/50"] {
-        background: #ff00ff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-      }
-      body[data-theme="y2k"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      body[data-theme="y2k"] [class*="bg-gray-200/50"] [class*="bg-white"] {
-        background: #00ffff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-      }
-      body[data-theme="y2k"] [class*="bg-gray-200/50"] button {
-        color: #000 !important !important;
-      }
-      body[data-theme="y2k"] [class*="bg-gray-200/50"] button:hover {
-        opacity: 0.8 !important;
-      }
-
-      body[data-theme="y2k"] [class*="bg-indigo-50/50"] {
-        background: #ffff00 !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-      }
-
-      body[data-theme="y2k"] [class*="bg-gray-100/80"] {
-        background: #ff00ff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-      }
-
-      body[data-theme="y2k"] select {
-        background-color: #ffffff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-        background-image: none !important;
-      }
-      body[data-theme="y2k"] select:focus {
-        outline: none !important;
-      }
-
-      body[data-theme="y2k"] [class*="bg-white"][class*="border"]:has(select) {
-        background: #ffffff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-      }
-
-      body[data-theme="y2k"] header button {
-        background: #00ffff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-        color: #000 !important !important;
-      }
-
-      body[data-theme="y2k"] .option-btn {
-        background: #ff00ff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-        color: inherit !important;
-      }
-      body[data-theme="y2k"] .option-btn.option-selected {
-        background: #00ffff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-        color: #000 !important !important;
-      }
-      
-      /* Theme: y2k fixes - DARK */
-      html.dark body[data-theme="y2k"] [class*="dark:bg-zinc-900/80"] {
-        background: #ff00ff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-      }
-      html.dark body[data-theme="y2k"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      html.dark body[data-theme="y2k"] [class*="bg-gray-200/50"] [class*="dark:bg-zinc-700"] {
-        background: #00ffff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-      }
-      html.dark body[data-theme="y2k"] [class*="bg-gray-200/50"] button {
-        color: #000 !important !important;
-      }
-
-      html.dark body[data-theme="y2k"] [class*="dark:bg-indigo-900/10"] {
-        background: #ffff00 !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-      }
-
-      html.dark body[data-theme="y2k"] [class*="dark:bg-zinc-900/80"] {
-        background: #ff00ff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-      }
-
-      html.dark body[data-theme="y2k"] select {
-        background-color: #ffffff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-      }
-
-      html.dark body[data-theme="y2k"] [class*="dark:bg-zinc-800"]:has(select) {
-        background: #ffffff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-      }
-
-      html.dark body[data-theme="y2k"] header button {
-        background: #00ffff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-        color: #000 !important !important;
-      }
-
-      html.dark body[data-theme="y2k"] .option-btn {
-        background: #ff00ff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-        color: inherit !important;
-      }
-      html.dark body[data-theme="y2k"] .option-btn.option-selected {
-        background: #00ffff !important;
-        border: 2px solid #000 !important;
-        box-shadow: 2px 2px 0px #000 !important;
-        color: #000 !important !important;
-      }
-  
-      /* Theme: dopamine fixes - LIGHT */
-      body[data-theme="dopamine"] [class*="bg-gray-200/50"] {
-        background: #ffffff !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="dopamine"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      body[data-theme="dopamine"] [class*="bg-gray-200/50"] [class*="bg-white"] {
-        background: #FF3B30 !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="dopamine"] [class*="bg-gray-200/50"] button {
-        color: #000 !important !important;
-      }
-      body[data-theme="dopamine"] [class*="bg-gray-200/50"] button:hover {
-        opacity: 0.8 !important;
-      }
-
-      body[data-theme="dopamine"] [class*="bg-indigo-50/50"] {
-        background: #ffc900 !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="dopamine"] [class*="bg-gray-100/80"] {
-        background: #f4f4f4 !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="dopamine"] select {
-        background-color: #fff !important;
-        border: none !important;
-        box-shadow: none !important;
-        background-image: none !important;
-      }
-      body[data-theme="dopamine"] select:focus {
-        outline: none !important;
-      }
-
-      body[data-theme="dopamine"] [class*="bg-white"][class*="border"]:has(select) {
-        background: #fff !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="dopamine"] header button {
-        background: #fff !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: #000 !important !important;
-      }
-
-      body[data-theme="dopamine"] .option-btn {
-        background: #f4f4f4 !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      body[data-theme="dopamine"] .option-btn.option-selected {
-        background: #FF3B30 !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: #000 !important !important;
-      }
-      
-      /* Theme: dopamine fixes - DARK */
-      html.dark body[data-theme="dopamine"] [class*="dark:bg-zinc-900/80"] {
-        background: #ffffff !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="dopamine"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      html.dark body[data-theme="dopamine"] [class*="bg-gray-200/50"] [class*="dark:bg-zinc-700"] {
-        background: #FF3B30 !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="dopamine"] [class*="bg-gray-200/50"] button {
-        color: #000 !important !important;
-      }
-
-      html.dark body[data-theme="dopamine"] [class*="dark:bg-indigo-900/10"] {
-        background: #ffc900 !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="dopamine"] [class*="dark:bg-zinc-900/80"] {
-        background: #f4f4f4 !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="dopamine"] select {
-        background-color: #fff !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="dopamine"] [class*="dark:bg-zinc-800"]:has(select) {
-        background: #fff !important;
-        border: none !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="dopamine"] header button {
-        background: #fff !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: #000 !important !important;
-      }
-
-      html.dark body[data-theme="dopamine"] .option-btn {
-        background: #f4f4f4 !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      html.dark body[data-theme="dopamine"] .option-btn.option-selected {
-        background: #FF3B30 !important;
-        border: none !important;
-        box-shadow: none !important;
-        color: #000 !important !important;
-      }
-  
-      /* Theme: opencode fixes - LIGHT */
-      body[data-theme="opencode"] [class*="bg-gray-200/50"] {
-        background: #1e1e1e !important !important;
-        border: 1px solid #333 !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="opencode"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      body[data-theme="opencode"] [class*="bg-gray-200/50"] [class*="bg-white"] {
-        background: #2d2d2d !important;
-        border: 1px solid #666 !important;
-        box-shadow: none !important;
-      }
-      body[data-theme="opencode"] [class*="bg-gray-200/50"] button {
-        color: #569CD6 !important !important;
-      }
-      body[data-theme="opencode"] [class*="bg-gray-200/50"] button:hover {
-        opacity: 0.8 !important;
-      }
-
-      body[data-theme="opencode"] [class*="bg-indigo-50/50"] {
-        background: #1e1e1e !important;
-        border: 1px dotted #555 !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="opencode"] [class*="bg-gray-100/80"] {
-        background: #1e1e1e !important;
-        border: 1px solid #333 !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="opencode"] select {
-        background-color: #1e1e1e !important;
-        border: 1px solid #555 !important;
-        box-shadow: none !important;
-        background-image: none !important;
-      }
-      body[data-theme="opencode"] select:focus {
-        outline: none !important;
-      }
-
-      body[data-theme="opencode"] [class*="bg-white"][class*="border"]:has(select) {
-        background: #1e1e1e !important;
-        border: 1px solid #555 !important;
-        box-shadow: none !important;
-      }
-
-      body[data-theme="opencode"] header button {
-        background: #1e1e1e !important;
-        border: 1px solid #555 !important;
-        box-shadow: none !important;
-        color: #d4d4d4 !important !important;
-      }
-
-      body[data-theme="opencode"] .option-btn {
-        background: #1e1e1e !important;
-        border: 1px solid #555 !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      body[data-theme="opencode"] .option-btn.option-selected {
-        background: #2d2d2d !important;
-        border: 1px solid #666 !important;
-        box-shadow: none !important;
-        color: #569CD6 !important !important;
-      }
-      
-      /* Theme: opencode fixes - DARK */
-      html.dark body[data-theme="opencode"] [class*="dark:bg-zinc-900/80"] {
-        background: #1e1e1e !important !important;
-        border: 1px solid #333 !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="opencode"] [class*="bg-gray-200/50"] button [layoutid="activeTab"],
-      html.dark body[data-theme="opencode"] [class*="bg-gray-200/50"] [class*="dark:bg-zinc-700"] {
-        background: #2d2d2d !important;
-        border: 1px solid #666 !important;
-        box-shadow: none !important;
-      }
-      html.dark body[data-theme="opencode"] [class*="bg-gray-200/50"] button {
-        color: #569CD6 !important !important;
-      }
-
-      html.dark body[data-theme="opencode"] [class*="dark:bg-indigo-900/10"] {
-        background: #1e1e1e !important;
-        border: 1px dotted #555 !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="opencode"] [class*="dark:bg-zinc-900/80"] {
-        background: #1e1e1e !important;
-        border: 1px solid #333 !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="opencode"] select {
-        background-color: #1e1e1e !important;
-        border: 1px solid #555 !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="opencode"] [class*="dark:bg-zinc-800"]:has(select) {
-        background: #1e1e1e !important;
-        border: 1px solid #555 !important;
-        box-shadow: none !important;
-      }
-
-      html.dark body[data-theme="opencode"] header button {
-        background: #1e1e1e !important;
-        border: 1px solid #555 !important;
-        box-shadow: none !important;
-        color: #d4d4d4 !important !important;
-      }
-
-      html.dark body[data-theme="opencode"] .option-btn {
-        background: #1e1e1e !important;
-        border: 1px solid #555 !important;
-        box-shadow: none !important;
-        color: inherit !important;
-      }
-      html.dark body[data-theme="opencode"] .option-btn.option-selected {
-        background: #2d2d2d !important;
-        border: 1px solid #666 !important;
-        box-shadow: none !important;
-        color: #569CD6 !important !important;
-      }
-  </style>
+    </style>
   <script type="importmap">
 {
   "imports": {
