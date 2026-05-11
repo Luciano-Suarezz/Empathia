@@ -134,36 +134,39 @@ export const streamTransformText = async (
         // Reglas para Closing Final (Survey / Rejection / Timeout)
         closingRules = `
         PASO FINAL: CIERRE DE TICKET (MODO FINAL ACTIVADO)
-        Analiza el contenido de la resolución que has generado y selecciona AUTOMÁTICAMENTE uno de los siguientes cierres. Tienes que adaptarlo EXACTAMENTE al IDIOMA DE SALIDA SELECCIONADO o al idioma de la resolución. ¡NUNCA dejes la despedida en inglés si el resto del texto no está en inglés!
+        Analiza el contenido de la resolución que has generado y selecciona AUTOMÁTICAMENTE uno de los siguientes cierres. DEBES TRADUCIRLO OBLIGATORIAMENTE al idioma de salida:
         
-        Escenario A: Resolución Positiva (Problema arreglado/solucionado/ayuda completada). Elige uno al azar y TRADÚCELO AL IDIOMA FINAL:
+        Escenario A: Resolución Positiva (Problema arreglado/solucionado/ayuda completada). Elige uno al azar y TRADÚCELO:
            1. "We’re glad to hear the issue has been resolved! Your feedback is invaluable to us, so we’d appreciate it if you could take a moment to complete a brief survey."
            2. "We’re happy to hear the issue has been resolved! Your feedback means a lot to us, so we’d greatly appreciate it if you could share your thoughts in a brief survey to help us improve."
            3. "We’re glad we could assist you today. Your feedback is important to us, so we’d appreciate it if you could share your thoughts in a brief survey."
 
-        Escenario B: Resolución Negativa (No es lo que el usuario quería, pero se dio claridad/explicación final) - TRADÚCELO AL IDIOMA FINAL:
+        Escenario B: Resolución Negativa (No es lo que el usuario quería, pero se dio claridad/explicación final) - TRADÚCELO:
            "We understand this may not be the resolution you were hoping for, but we hope our explanation has provided clarity. We’ll proceed to close this ticket for now. If you have any other questions or need further assistance with a different matter, please feel free to reach out. Thank you for your understanding."
 
-        Escenario C: Cierre por falta de información / Usuario no responde (Timeout) - TRADÚCELO AL IDIOMA FINAL:
+        Escenario C: Cierre por falta de información / Usuario no responde (Timeout) - TRADÚCELO:
            "Despite multiple follow-ups, we haven’t received any additional information to proceed with a re-evaluation. As such, we’ll be closing this ticket for now. If you’re able to provide the necessary details in the future, feel free to reach out again and we’ll be happy to assist. Thank you for your understanding."
         
+        REGLA CRÍTICA: ¡NUNCA dejes la despedida en inglés si el resto del texto no está en inglés! La traducción debe ser natural y profesional.
         NO añadas ninguna otra firma o despedida después de esto.
         `;
     } else {
         // Reglas de cierre estándar (Abierto)
         closingRules = `
         PASO FINAL: CIERRE (OBLIGATORIO)
-        Debes finalizar el mensaje EXCLUSIVAMENTE con una de las siguientes opciones (DEBES TRADUCIRLAS AL IDIOMA DE SALIDA, ¡NUNCA en inglés si el idioma de salida es otro!).
+        Debes finalizar el mensaje EXCLUSIVAMENTE con una de las siguientes opciones. DEBES TRADUCIRLAS AL IDIOMA DE SALIDA (obligatorio si no es inglés).
         
         CRÍTICO / PROHIBIDO:
         - NO uses "Best regards", "Sincerely", "Cheers", etc.
         - NO escribas ninguna firma como "TikTok LIVE Support", "TikTok Team", ni tu nombre.
         - TU RESPUESTA DEBE TERMINAR INMEDIATAMENTE DESPUÉS DE LA FRASE DE CIERRE.
 
-        Opciones permitidas (Elige una y TRADÚCELA AL MODO U IDIOMA CORRESPONDIENTE):
+        Opciones permitidas (Elige una y TRADÚCELA):
            1) "If you have any further questions, don't hesitate to get in touch. Thank you and have a great day!"
            2) "If there’s anything else we can assist you with, please don’t hesitate to let us know. Thank you, and have a wonderful day ahead."
            3) "If you have any further questions, feel free to let us know. Thank you, and have a wonderful day!"
+        
+        REGLA CRÍTICA: ¡NUNCA dejes el cierre en inglés si el resto del texto no está en inglés!
         `;
     }
 
@@ -186,20 +189,22 @@ export const streamTransformText = async (
       macroInstruction = `
         - TIPO: PRIMER MENSAJE.
         - FORMATO OBLIGATORIO:
-           1. SALUDO + ACKNOWLEDGE
+           1. SALUDO + ACKNOWLEDGE (Traducido al idioma de salida)
            2. RESOLUCIÓN (Cuerpo transformado)
-           3. DESPEDIDA (Según reglas abajo)
+           3. DESPEDIDA (Según reglas abajo, traducida al idioma de salida)
 
-        PASO 1: SALUDO + ACKNOWLEDGE
+        PASO 1: SALUDO + ACKNOWLEDGE (TRADUCCIÓN OBLIGATORIA)
         MANTÉN SIEMPRE LA PERSPECTIVA PLURAL ('We', 'Nosotros').
         Genera un saludo inicial agradeciendo por contactar a TikTok LIVE y un "Acknowledge" (reconocimiento del problema).
         ${issueInstruction}
         Asegúrate de adaptar la gramática correctamente al idioma de salida. Usa un fraseo natural de soporte técnico.
         
-        EJEMPLOS DE ESTILO BASE (ADÁPTALOS AL IDIOMA Y AL TEMA EXACTO):
+        EJEMPLOS DE ESTILO BASE (TRADÚCELOS OBLIGATORIAMENTE AL IDIOMA DE SALIDA):
            - "Hi there,\n\nThank you for contacting TikTok LIVE. We understand you're reaching out regarding [TEMA NATURAL], and we're here to help."
            - "Hello there,\n\nThank you for reaching out to TikTok LIVE. We're here to assist you with your inquiry about [TEMA NATURAL]."
            - (Si el cuerpo de la resolución pide información): "Hi there,\n\nThank you for reaching out to TikTok LIVE. To better assist you with [TEMA NATURAL], could you please provide more details?"
+
+        REGLA CRÍTICA: ¡NUNCA dejes el saludo en inglés si el idioma de salida es otro!
 
         PASO 2: RESOLUCIÓN (CUERPO)
         Toma el "Texto Original" del usuario y aplícale los tonos y longitud solicitados. Esta es la parte central del mensaje.
@@ -209,10 +214,13 @@ export const streamTransformText = async (
     } else if (macroType === MacroType.SECOND) {
       macroInstruction = `
         - TIPO: SEGUNDO MENSAJE (Continuity).
-        - ESTRUCTURA: Saludo de continuidad + Cuerpo transformado + Cierre Obligatorio.
-        - SALUDO: Antepón una de estas opciones al cuerpo y ADÁPTALA al idioma correcto:
+        - ESTRUCTURA: Saludo de continuidad (TRADUCIDO) + Cuerpo transformado + Cierre Obligatorio (TRADUCIDO).
+        - SALUDO: Traduce obligatoriamente al idioma de salida una de estas opciones y anteponla al cuerpo:
            A: "Hi there,\n\nThanks for your reply."
            B: "Hello there,\n\nWe appreciate your swift response."
+        
+        REGLA CRÍTICA: ¡Es inaceptable dejar el saludo o agradecimientos como "swift response" o "thanks for your reply" en inglés si el resto del texto está en otro idioma! 
+        Debes traducirlos de forma natural (ej. en español: "Agradecemos tu pronta respuesta" o "Gracias por responder").
         
         ${closingRules}
       `;
