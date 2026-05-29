@@ -56,7 +56,8 @@ export enum OutputLanguage {
 
 export enum ModelOption {
   FLASH = 'gemini-3-flash-preview',
-  LITE = 'gemini-3.1-flash-lite-preview'
+  LITE = 'gemini-3.1-flash-lite-preview',
+  GPT_NANO = 'gpt-5.4-nano'
 }
 
 export interface InternalNote {

@@ -1,7 +1,33 @@
 import { GoogleGenAI } from "@google/genai";
 import { ToneOption, OutputLanguage, MacroType, LengthOption, ModelOption } from "../types";
+import OpenAI from "openai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+let geminiClient: GoogleGenAI | null = null;
+const getGeminiClient = (): GoogleGenAI => {
+  if (!geminiClient) {
+    const key = process.env.API_KEY || process.env.GEMINI_API_KEY || "";
+    if (!key) {
+      throw new Error("No se ha configurado la API Key de Gemini (GEMINI_API_KEY).");
+    }
+    geminiClient = new GoogleGenAI({ apiKey: key });
+  }
+  return geminiClient;
+};
+
+let openaiClient: OpenAI | null = null;
+const getOpenAIClient = (): OpenAI => {
+  if (!openaiClient) {
+    const key = process.env.OPENAI_API_KEY || "";
+    if (!key) {
+      throw new Error("No se ha configurado la API Key de OpenAI (OPENAI_API_KEY). Por favor, agrégala en la configuración del proyecto o archivo .env.");
+    }
+    openaiClient = new OpenAI({
+      apiKey: key,
+      dangerouslyAllowBrowser: true,
+    });
+  }
+  return openaiClient;
+};
 
 interface TransformParams {
   text: string;
@@ -256,28 +282,49 @@ export const streamTransformText = async (
 
   // --- Ejecución Streaming ---
   try {
-    const result = await ai.models.generateContentStream({
-      model: model, // Usamos el modelo seleccionado
-      contents: prompt,
-      config: {
-        temperature: 0.4, 
-        topK: 40,
-        topP: 0.95,
-      }
-    });
+    if (model === ModelOption.GPT_NANO) {
+      const openai = getOpenAIClient();
+      const responseStream = await openai.chat.completions.create({
+        model: "gpt-5.4-nano",
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.4,
+        stream: true,
+      });
 
-    let fullText = '';
-    for await (const chunk of result) {
-      const chunkText = chunk.text;
-      if (chunkText) {
-        fullText += chunkText;
-        onChunk(fullText);
+      let fullText = "";
+      for await (const chunk of responseStream) {
+        const chunkText = chunk.choices[0]?.delta?.content || "";
+        if (chunkText) {
+          fullText += chunkText;
+          onChunk(fullText);
+        }
       }
+      return fullText;
+    } else {
+      const ai = getGeminiClient();
+      const result = await ai.models.generateContentStream({
+        model: model, // Usamos el modelo seleccionado
+        contents: prompt,
+        config: {
+          temperature: 0.4, 
+          topK: 40,
+          topP: 0.95,
+        }
+      });
+
+      let fullText = '';
+      for await (const chunk of result) {
+        const chunkText = chunk.text;
+        if (chunkText) {
+          fullText += chunkText;
+          onChunk(fullText);
+        }
+      }
+      return fullText;
     }
-    return fullText;
 
   } catch (error: any) {
-    console.error("Gemini Error:", error);
-    throw new Error(`Error Gemini: ${error.message}`);
+    console.error("AI Service Error:", error);
+    throw new Error(`Error de IA: ${error.message}`);
   }
 };

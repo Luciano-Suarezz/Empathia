@@ -1,6 +1,6 @@
 import React from 'react';
 import { ModelOption } from '../types';
-import { Zap, Feather } from 'lucide-react';
+import { Zap, Feather, Sparkles } from 'lucide-react';
 
 interface ModelSelectorProps {
   selectedModel: ModelOption;
@@ -14,6 +14,8 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({ selectedModel, onC
       <div className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-full shadow-sm hover:border-indigo-300 dark:hover:border-indigo-500 transition-colors group">
         {selectedModel === ModelOption.FLASH ? (
             <Zap className="w-4 h-4 text-gray-400 dark:text-zinc-500" />
+        ) : selectedModel === ModelOption.GPT_NANO ? (
+            <Sparkles className="w-4 h-4 text-indigo-500 group-hover:text-indigo-600 animate-pulse" />
         ) : (
             <Feather className="w-4 h-4 text-emerald-500 group-hover:text-emerald-600" />
         )}
@@ -26,6 +28,7 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({ selectedModel, onC
           style={{ backgroundImage: 'none' }}
         >
           <option value={ModelOption.LITE} className="bg-white dark:bg-zinc-800">Flash Lite</option>
+          <option value={ModelOption.GPT_NANO} className="bg-white dark:bg-zinc-800">GPT-5.4 Nano</option>
           <option value={ModelOption.FLASH} disabled className="bg-white dark:bg-zinc-800 text-gray-400">Flash 3 (No disponible)</option>
         </select>
         
